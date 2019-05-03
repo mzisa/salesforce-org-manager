@@ -1,0 +1,36 @@
+{
+	"loginGroups": {
+		"Group1": [
+			{
+				"username": "user1",
+				"password": "password1",
+				"token": "token1",
+				"default": true,
+				"sandbox": true
+			},
+			{
+				"username": "user2",
+				"password": "password2",
+				"token": "token2",
+				"default": false,
+				"sandbox": true
+			}
+		],
+		"Group2": [
+			{
+				"username": "user3",
+				"password": "password3",
+				"token": "token3",
+				"default": false,
+				"sandbox": true
+			},
+			{
+				"username": "user4",
+				"password": "password4",
+				"token": "token4",
+				"default": false,
+				"sandbox": true
+			}
+		]
+	}
+}

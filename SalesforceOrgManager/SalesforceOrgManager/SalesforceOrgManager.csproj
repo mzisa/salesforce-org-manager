@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{146A75B0-98DF-4FD1-9525-5D6DD1C9AF79}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SalesforceOrgManager</RootNamespace>
+    <AssemblyName>SalesforceOrgManager</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8_share_100_llY_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SfMetadata, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExternalDll\SfMetadata.dll</HintPath>
+    </Reference>
+    <Reference Include="SfTooling, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExternalDll\SfTooling.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CryptoHelper.cs" />
+    <Compile Include="Model\ApexDebugLog.cs" />
+    <Compile Include="Model\ApexExecutionResult.cs" />
+    <Compile Include="Model\LightningItemStub.cs" />
+    <Compile Include="Model\LightningWebComponent.cs" />
+    <Compile Include="Model\TestOutcome.cs" />
+    <Compile Include="Model\UsageLimit.cs" />
+    <Compile Include="View\BoxApiUsage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxApiUsage.Designer.cs">
+      <DependentUpon>BoxApiUsage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneLightning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneLightning.Designer.cs">
+      <DependentUpon>BoxCreazioneLightning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneLwc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneLwc.Designer.cs">
+      <DependentUpon>BoxCreazioneLwc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneRisorsaStatica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneRisorsaStatica.Designer.cs">
+      <DependentUpon>BoxCreazioneRisorsaStatica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneTrigger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneTrigger.Designer.cs">
+      <DependentUpon>BoxCreazioneTrigger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneVisualforce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneVisualforce.Designer.cs">
+      <DependentUpon>BoxCreazioneVisualforce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxCreazioneClasse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxCreazioneClasse.Designer.cs">
+      <DependentUpon>BoxCreazioneClasse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ApexClassStub.cs" />
+    <Compile Include="Model\ApexPageStub.cs" />
+    <Compile Include="View\BoxDeployToServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxDeployToServer.Designer.cs">
+      <DependentUpon>BoxDeployToServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxExecuteAnonymous.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxExecuteAnonymous.Designer.cs">
+      <DependentUpon>BoxExecuteAnonymous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxSettings.Designer.cs">
+      <DependentUpon>BoxSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxShowLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxShowLogs.Designer.cs">
+      <DependentUpon>BoxShowLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ApexStaticResources.cs" />
+    <Compile Include="Model\ApexTriggerStub.cs" />
+    <Compile Include="View\OrgTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\OrgTree.Designer.cs">
+      <DependentUpon>OrgTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Principale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Principale.Designer.cs">
+      <DependentUpon>Principale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\ShoppingList.cs" />
+    <Compile Include="View\TestManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TestManager.Designer.cs">
+      <DependentUpon>TestManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\BoxApiUsage.resx">
+      <DependentUpon>BoxApiUsage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneLightning.resx">
+      <DependentUpon>BoxCreazioneLightning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneLwc.resx">
+      <DependentUpon>BoxCreazioneLwc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneRisorsaStatica.resx">
+      <DependentUpon>BoxCreazioneRisorsaStatica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneTrigger.resx">
+      <DependentUpon>BoxCreazioneTrigger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneVisualforce.resx">
+      <DependentUpon>BoxCreazioneVisualforce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxCreazioneClasse.resx">
+      <DependentUpon>BoxCreazioneClasse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxDeployToServer.resx">
+      <DependentUpon>BoxDeployToServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxExecuteAnonymous.resx">
+      <DependentUpon>BoxExecuteAnonymous.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxSettings.resx">
+      <DependentUpon>BoxSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxShowLogs.resx">
+      <DependentUpon>BoxShowLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\OrgTree.resx">
+      <DependentUpon>OrgTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Principale.resx">
+      <DependentUpon>Principale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\TestManager.resx">
+      <DependentUpon>TestManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="logins.json" />
+    <None Include="orgConfig.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExternalDll\SfMetadata.dll" />
+    <Content Include="ExternalDll\SfTooling.dll" />
+    <Content Include="icons8_share_100_llY_icon.ico" />
+    <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\auth.ico" />
+    <Content Include="img\checklist.ico" />
+    <Content Include="img\cloud-computing.png" />
+    <Content Include="img\cloudico.ico" />
+    <Content Include="img\cluods.ico" />
+    <Content Include="img\deployToServer.ico" />
+    <Content Include="img\deployToServer.png" />
+    <Content Include="img\executeAnonymous.ico" />
+    <Content Include="img\generalSettings.ico" />
+    <Content Include="img\icons8_share_100_llY_icon.ico" />
+    <Content Include="img\newApexClass.png" />
+    <Content Include="img\newLightningApp.png" />
+    <Content Include="img\newLightningComponent.png" />
+    <Content Include="img\newLightningEvent.png" />
+    <Content Include="img\newLightningInterface.png" />
+    <Content Include="img\newProject.png" />
+    <Content Include="img\newStaticResource.png" />
+    <Content Include="img\newTrigger.png" />
+    <Content Include="img\newVisualforce.png" />
+    <Content Include="img\openProject.png" />
+    <Content Include="img\settings.png" />
+    <Content Include="img\shopping.ico" />
+    <Content Include="img\testicon.ico" />
+    <Content Include="img\viewApiUsage.png" />
+    <Content Include="img\viewDebugLogs.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)\orgConfig.json $(ProjectDir)$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

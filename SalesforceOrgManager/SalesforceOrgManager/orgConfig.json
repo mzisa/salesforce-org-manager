@@ -1,0 +1,12 @@
+﻿{
+  "workspaces": [
+  ],
+  "apiVersion": "43",
+  "defaultProjectContent": [
+    "ApexClass",
+    "ApexComponent",
+    "ApexPage",
+    "ApexTrigger",
+    "StaticResource"
+  ]
+}
