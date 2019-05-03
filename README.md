@@ -12,7 +12,7 @@ The purpose of this tool is to offer **a comfortable alternative to create and e
 
 ![Readme](https://user-images.githubusercontent.com/49475604/56508198-e57dd300-6523-11e9-96f8-6c9f91578f34.png)
 
-Get to the [Getting Started](https://github.com/mzisa/saleforce-org-manager/wiki/01-Getting-started) page to find out!
+Get to the [Getting Started](https://github.com/mzisa/salesforce-org-manager/wiki/01-Getting-started) page to find out!
 
 ## Contribute
 Please do contribute! Issues and pull requests are welcome.
