@@ -10,18 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create new ligthtning web component functionality
 - Give the chance to navigate back to the main form from the org tree form
 
+## [1.3.0] - 2019-05-03
+### Changed
+- Added recent API number for new trigger creation
+- Put masking on text input fields for both passord and security token in Settings form
+- Other minor fixes
+
 ## Added new pages to WIKI documentation - 2019-04-30
 ### Added
 - How to create a new lightning app
 - How to create a new lightning component
 - How to create a new lightning event
 - How to create a new lightning interface
-
-## [1.3.0] - 2019-05-03
-### Changed
-- Added recent API number for new trigger creation
-- Put masking on text input fields for both passord and security token in Settings form
-- Other minor fixes
 
 ## [1.2.1] - 2019-04-30
 ### Changed
