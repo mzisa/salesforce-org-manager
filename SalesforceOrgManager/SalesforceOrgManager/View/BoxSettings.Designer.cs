@@ -69,6 +69,8 @@
             this.cmdCreateNewLoginGroup = new System.Windows.Forms.Button();
             this.cmbLoginGroup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnSelectPath = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,11 +91,11 @@
             // 
             // txtItemName
             // 
-            this.txtItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtItemName.Location = new System.Drawing.Point(133, 18);
+            this.txtItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtItemName.Location = new System.Drawing.Point(133, 22);
             this.txtItemName.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(344, 26);
+            this.txtItemName.Size = new System.Drawing.Size(294, 20);
             this.txtItemName.TabIndex = 1;
             // 
             // lstWorkspace
@@ -197,6 +199,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSelectPath);
             this.groupBox2.Controls.Add(this.txtItemName);
             this.groupBox2.Controls.Add(this.groupBox1);
             this.groupBox2.Controls.Add(this.label1);
@@ -546,6 +549,20 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "-OR-";
             // 
+            // btnSelectPath
+            // 
+            this.btnSelectPath.Location = new System.Drawing.Point(433, 22);
+            this.btnSelectPath.Name = "btnSelectPath";
+            this.btnSelectPath.Size = new System.Drawing.Size(42, 23);
+            this.btnSelectPath.TabIndex = 11;
+            this.btnSelectPath.Text = "-->";
+            this.btnSelectPath.UseVisualStyleBackColor = true;
+            this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.UserProfile;
+            // 
             // BoxSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -613,5 +630,7 @@
         public System.Windows.Forms.TextBox txtEncryptKey;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkIsSandbox;
+        private System.Windows.Forms.Button btnSelectPath;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

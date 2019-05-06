@@ -461,5 +461,17 @@ namespace SalesforceOrgManager.View
                 MessageBox.Show("Warning: your credentials will be stored unencrypted", "Workspace manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        private void btnSelectPath_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    txtItemName.Text = fbd.SelectedPath;
+                }
+            }
+        }
     }
 }

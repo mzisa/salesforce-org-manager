@@ -1474,6 +1474,12 @@ namespace SalesforceOrgManager
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
             jss.MaxJsonLength = Int32.MaxValue;
+
+            // Prevents application failure in case login.json or orgConfig.json file does not exist by creating a default empty *.json
+            if (!File.Exists(Application.StartupPath + "\\" + strRecordName + ".json"))
+            {
+                File.Copy(Application.StartupPath + "\\" + strRecordName + "Min.json", Application.StartupPath + "\\" + strRecordName + ".json");
+            }
             Dictionary<string, object> configRecord = (Dictionary<string, object>)jss.DeserializeObject(File.ReadAllText(Application.StartupPath + "\\" + strRecordName + ".json"));
 
             if (encryptAgain) {
