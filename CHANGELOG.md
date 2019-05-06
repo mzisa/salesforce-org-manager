@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement local cache for metadata to boost performance on large ORGs
 - Create new ligthtning web component functionality
 - Give the chance to navigate back to the main form from the org tree form
+- Settings: Workspace path input should give the chance to select the path by browsing the local filesystem instead of write down the entire path manually
+- Settings: while adding a new Workspace, the application should be able to create the related folder if it does not exist yet
+- UPDATE PROJECT feature should warn the user whether any metadata he is going to replace on the target Org are newer then the ones on the local project (i.e. just in case the metadata were updated by someone else...)
+- The application should be able to generate the login.json file if it does not exist
+
+## [Updated changelog] - 2019-05-06
+- Updated changelog with further unreleased steps
+- Added .gitignore file
+- Untrack of non-significant files
 
 ## [1.3.0] - 2019-05-03
 ### Changed
