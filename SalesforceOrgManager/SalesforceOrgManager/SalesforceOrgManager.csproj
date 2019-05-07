@@ -221,8 +221,6 @@
     <EmbeddedResource Include="View\TestManager.resx">
       <DependentUpon>TestManager.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="logins.json" />
-    <None Include="orgConfig.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
