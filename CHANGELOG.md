@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement local cache for metadata to boost performance on large ORGs
 - Create new ligthtning web component functionality
 
+## [1.4.1] - 2019-05-07
+- Untrack of non-significant files
+- Added new pages to WIKI documentation
+
 ## [1.4.0] - 2019-05-06
 ### Added
 - The application now can generate both login.json and orgConfig.json file if they do not exist
@@ -32,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Put masking on text input fields for both passord and security token in Settings form
 - Other minor fixes
 
-## Added new pages to WIKI documentation - 2019-04-30
+## [Added new pages to WIKI documentation] - 2019-04-30
 ### Added
 - How to create a new lightning app
 - How to create a new lightning component
