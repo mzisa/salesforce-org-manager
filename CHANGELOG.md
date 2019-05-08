@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement local cache for metadata to boost performance on large ORGs
 - Create new ligthtning web component functionality
 
+## [1.4.2] - 2019-05-08
+### Changed
+- Added new pages to WIKI documentation
+- Minor fixes
+
 ## [1.4.1] - 2019-05-07
+### Changed
 - Untrack of non-significant files
 - Added new pages to WIKI documentation
 
