@@ -63,7 +63,7 @@
             this.btnCreateItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateItem.Name = "btnCreateItem";
             this.btnCreateItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCreateItem.TabIndex = 4;
+            this.btnCreateItem.TabIndex = 1;
             this.btnCreateItem.Text = "CREATE";
             this.btnCreateItem.UseVisualStyleBackColor = false;
             this.btnCreateItem.Click += new System.EventHandler(this.btnCreateItem_Click);
@@ -74,7 +74,7 @@
             this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelItem.Name = "btnCancelItem";
             this.btnCancelItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCancelItem.TabIndex = 5;
+            this.btnCancelItem.TabIndex = 2;
             this.btnCancelItem.Text = "CANCEL";
             this.btnCancelItem.UseVisualStyleBackColor = true;
             this.btnCancelItem.Click += new System.EventHandler(this.btnCancelItem_Click);
@@ -87,7 +87,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(422, 71);
-            this.txtLog.TabIndex = 6;
+            this.txtLog.TabIndex = 3;
             // 
             // BoxCreazioneClasse
             // 

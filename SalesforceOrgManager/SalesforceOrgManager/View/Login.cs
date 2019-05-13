@@ -48,6 +48,7 @@ namespace SalesforceOrgManager.View
                         Username = loginOccurrence["username"].ToString();
                         Password = loginOccurrence["password"].ToString() + loginOccurrence["token"].ToString();
                         Sandbox = (bool) loginOccurrence["sandbox"];
+                        groupBox1.Visible = false;
                         btnLogin_Click(this, null);
                     }
                 }
@@ -69,6 +70,7 @@ namespace SalesforceOrgManager.View
             }
             else
             {
+                groupBox1.Visible = true;
                 endAnimation();
                 lblLoginFailed.Show();
             }

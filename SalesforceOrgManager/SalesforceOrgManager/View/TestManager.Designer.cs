@@ -51,11 +51,11 @@
             this.dataGridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridResults.Location = new System.Drawing.Point(5, 6);
-            this.dataGridResults.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridResults.Location = new System.Drawing.Point(4, 5);
+            this.dataGridResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridResults.Name = "dataGridResults";
             this.dataGridResults.RowTemplate.Height = 24;
-            this.dataGridResults.Size = new System.Drawing.Size(1184, 329);
+            this.dataGridResults.Size = new System.Drawing.Size(888, 267);
             this.dataGridResults.TabIndex = 0;
             // 
             // tabControlResults
@@ -63,21 +63,21 @@
             this.tabControlResults.Controls.Add(this.tabPage1);
             this.tabControlResults.Controls.Add(this.tabPage2);
             this.tabControlResults.Controls.Add(this.tabPage3);
-            this.tabControlResults.Location = new System.Drawing.Point(4, 4);
-            this.tabControlResults.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabControlResults.Location = new System.Drawing.Point(3, 3);
+            this.tabControlResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControlResults.Name = "tabControlResults";
             this.tabControlResults.SelectedIndex = 0;
-            this.tabControlResults.Size = new System.Drawing.Size(1219, 385);
-            this.tabControlResults.TabIndex = 1;
+            this.tabControlResults.Size = new System.Drawing.Size(914, 313);
+            this.tabControlResults.TabIndex = 3;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridResults);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1211, 356);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(906, 287);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TEST RESULTS";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -85,11 +85,11 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridClassCoverage);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1211, 356);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(906, 287);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CLASS COVERAGE";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -100,20 +100,20 @@
             this.dataGridClassCoverage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridClassCoverage.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridClassCoverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridClassCoverage.Location = new System.Drawing.Point(5, 6);
-            this.dataGridClassCoverage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridClassCoverage.Location = new System.Drawing.Point(4, 5);
+            this.dataGridClassCoverage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridClassCoverage.Name = "dataGridClassCoverage";
             this.dataGridClassCoverage.RowTemplate.Height = 24;
-            this.dataGridClassCoverage.Size = new System.Drawing.Size(1004, 306);
+            this.dataGridClassCoverage.Size = new System.Drawing.Size(753, 249);
             this.dataGridClassCoverage.TabIndex = 1;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridTriggerCoverage);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1211, 356);
+            this.tabPage3.Size = new System.Drawing.Size(906, 287);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TRIGGER COVERAGE";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -124,21 +124,21 @@
             this.dataGridTriggerCoverage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridTriggerCoverage.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridTriggerCoverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTriggerCoverage.Location = new System.Drawing.Point(4, 2);
-            this.dataGridTriggerCoverage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridTriggerCoverage.Location = new System.Drawing.Point(3, 2);
+            this.dataGridTriggerCoverage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridTriggerCoverage.Name = "dataGridTriggerCoverage";
             this.dataGridTriggerCoverage.RowTemplate.Height = 24;
-            this.dataGridTriggerCoverage.Size = new System.Drawing.Size(997, 326);
+            this.dataGridTriggerCoverage.Size = new System.Drawing.Size(748, 265);
             this.dataGridTriggerCoverage.TabIndex = 2;
             // 
             // TestManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 399);
+            this.ClientSize = new System.Drawing.Size(920, 324);
             this.Controls.Add(this.tabControlResults);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TestManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestManager";

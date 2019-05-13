@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Fix DEPLOY TO SERVER functionality
 - Implement local cache for metadata to boost performance on large ORGs
+- Improve static resources management
+- New lightning web component should allow target and target config selections
+
+
+## [1.5.0] - 2019-05-13
+### Added
 - Create new ligthtning web component functionality
+- Added WIKI page to explain how to create a new ligthtning web component
+
+### Changed
+- Fixed TabIndex on creation forms
+- Fixed encoding on xml manifest files: from UTF-8 BOM to UTF-8 (without BOM)
 
 ## [1.4.2] - 2019-05-08
 ### Changed

@@ -48,7 +48,7 @@
             this.txtExecuteAnonymous.Multiline = true;
             this.txtExecuteAnonymous.Name = "txtExecuteAnonymous";
             this.txtExecuteAnonymous.Size = new System.Drawing.Size(488, 204);
-            this.txtExecuteAnonymous.TabIndex = 7;
+            this.txtExecuteAnonymous.TabIndex = 1;
             this.txtExecuteAnonymous.Text = "Execute Anonymous";
             // 
             // txtExecutionResult
@@ -61,7 +61,7 @@
             this.txtExecutionResult.Name = "txtExecutionResult";
             this.txtExecutionResult.ReadOnly = true;
             this.txtExecutionResult.Size = new System.Drawing.Size(491, 224);
-            this.txtExecutionResult.TabIndex = 8;
+            this.txtExecutionResult.TabIndex = 2;
             // 
             // label1
             // 
@@ -80,7 +80,7 @@
             this.btnRunApex.Margin = new System.Windows.Forms.Padding(2);
             this.btnRunApex.Name = "btnRunApex";
             this.btnRunApex.Size = new System.Drawing.Size(998, 62);
-            this.btnRunApex.TabIndex = 10;
+            this.btnRunApex.TabIndex = 0;
             this.btnRunApex.Text = "RUN";
             this.btnRunApex.UseVisualStyleBackColor = false;
             this.btnRunApex.Click += new System.EventHandler(this.btnRunApex_Click);
@@ -96,7 +96,7 @@
             this.txtExecutionLog.ReadOnly = true;
             this.txtExecutionLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtExecutionLog.Size = new System.Drawing.Size(488, 454);
-            this.txtExecutionLog.TabIndex = 11;
+            this.txtExecutionLog.TabIndex = 3;
             this.txtExecutionLog.Text = "execute anonymous";
             // 
             // label2

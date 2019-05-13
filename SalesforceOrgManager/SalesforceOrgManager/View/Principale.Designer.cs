@@ -123,7 +123,7 @@
             this.cmbWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.cmbWorkspace.Name = "cmbWorkspace";
             this.cmbWorkspace.Size = new System.Drawing.Size(709, 33);
-            this.cmbWorkspace.TabIndex = 7;
+            this.cmbWorkspace.TabIndex = 0;
             this.cmbWorkspace.Text = "Select Workspace";
             this.cmbWorkspace.Visible = false;
             this.cmbWorkspace.SelectedIndexChanged += new System.EventHandler(this.cmbWorkspace_SelectedIndexChanged);
@@ -149,7 +149,7 @@
             this.btnOpenProject.Margin = new System.Windows.Forms.Padding(2);
             this.btnOpenProject.Name = "btnOpenProject";
             this.btnOpenProject.Size = new System.Drawing.Size(710, 62);
-            this.btnOpenProject.TabIndex = 9;
+            this.btnOpenProject.TabIndex = 2;
             this.btnOpenProject.Text = "OPEN";
             this.btnOpenProject.UseVisualStyleBackColor = true;
             this.btnOpenProject.Visible = false;
@@ -204,7 +204,7 @@
             this.txtProjectName.Location = new System.Drawing.Point(4, 249);
             this.txtProjectName.Name = "txtProjectName";
             this.txtProjectName.Size = new System.Drawing.Size(709, 38);
-            this.txtProjectName.TabIndex = 13;
+            this.txtProjectName.TabIndex = 1;
             this.txtProjectName.Text = "Project name...";
             this.txtProjectName.Visible = false;
             // 
@@ -227,7 +227,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Salesforce Org Manager v. 1.4.2";
+            this.Text = "Salesforce Org Manager v. 1.5.0";
             this.Load += new System.EventHandler(this.Principale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picNewProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenProject)).EndInit();

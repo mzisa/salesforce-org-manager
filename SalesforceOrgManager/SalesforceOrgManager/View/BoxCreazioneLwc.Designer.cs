@@ -56,7 +56,7 @@
             this.txtItemDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemDescription.Name = "txtItemDescription";
             this.txtItemDescription.Size = new System.Drawing.Size(328, 26);
-            this.txtItemDescription.TabIndex = 19;
+            this.txtItemDescription.TabIndex = 1;
             // 
             // txtLog
             // 
@@ -66,7 +66,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(422, 71);
-            this.txtLog.TabIndex = 18;
+            this.txtLog.TabIndex = 4;
             // 
             // btnCancelItem
             // 
@@ -74,9 +74,10 @@
             this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelItem.Name = "btnCancelItem";
             this.btnCancelItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCancelItem.TabIndex = 17;
+            this.btnCancelItem.TabIndex = 3;
             this.btnCancelItem.Text = "CANCEL";
             this.btnCancelItem.UseVisualStyleBackColor = true;
+            this.btnCancelItem.Click += new System.EventHandler(this.btnCancelItem_Click);
             // 
             // btnCreateItem
             // 
@@ -85,9 +86,10 @@
             this.btnCreateItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateItem.Name = "btnCreateItem";
             this.btnCreateItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCreateItem.TabIndex = 16;
+            this.btnCreateItem.TabIndex = 2;
             this.btnCreateItem.Text = "CREATE";
             this.btnCreateItem.UseVisualStyleBackColor = false;
+            this.btnCreateItem.Click += new System.EventHandler(this.btnCreateItem_Click);
             // 
             // label1
             // 
@@ -107,7 +109,7 @@
             this.txtItemName.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(329, 26);
-            this.txtItemName.TabIndex = 14;
+            this.txtItemName.TabIndex = 0;
             // 
             // BoxCreazioneLwc
             // 

@@ -45,7 +45,7 @@
             // 
             this.txtItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtItemName.Location = new System.Drawing.Point(88, 10);
-            this.txtItemName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtItemName.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(344, 26);
             this.txtItemName.TabIndex = 0;
@@ -65,7 +65,7 @@
             // 
             this.btnCreateItem.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnCreateItem.Location = new System.Drawing.Point(10, 360);
-            this.btnCreateItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCreateItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateItem.Name = "btnCreateItem";
             this.btnCreateItem.Size = new System.Drawing.Size(209, 59);
             this.btnCreateItem.TabIndex = 4;
@@ -76,7 +76,7 @@
             // btnCancelItem
             // 
             this.btnCancelItem.Location = new System.Drawing.Point(224, 360);
-            this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelItem.Name = "btnCancelItem";
             this.btnCancelItem.Size = new System.Drawing.Size(209, 59);
             this.btnCancelItem.TabIndex = 5;
@@ -88,7 +88,7 @@
             // 
             this.txtLog.BackColor = System.Drawing.Color.Gold;
             this.txtLog.Location = new System.Drawing.Point(10, 424);
-            this.txtLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLog.Margin = new System.Windows.Forms.Padding(2);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(422, 71);
@@ -102,7 +102,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 57);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(421, 270);
-            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "triggered events";
             // 
@@ -122,7 +122,7 @@
             this.cmbObjects.Location = new System.Drawing.Point(12, 233);
             this.cmbObjects.Name = "cmbObjects";
             this.cmbObjects.Size = new System.Drawing.Size(397, 28);
-            this.cmbObjects.TabIndex = 1;
+            this.cmbObjects.TabIndex = 3;
             this.cmbObjects.Text = "Referring object...";
             // 
             // chkEvents
@@ -141,7 +141,7 @@
             this.chkEvents.Location = new System.Drawing.Point(12, 20);
             this.chkEvents.Name = "chkEvents";
             this.chkEvents.Size = new System.Drawing.Size(397, 151);
-            this.chkEvents.TabIndex = 0;
+            this.chkEvents.TabIndex = 2;
             // 
             // BoxCreazioneTrigger
             // 
@@ -155,7 +155,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtItemName);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BoxCreazioneTrigger";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Apex Trigger";

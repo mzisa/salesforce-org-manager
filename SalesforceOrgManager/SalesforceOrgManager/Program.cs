@@ -10,6 +10,7 @@ using System.Xml;
 using System.Threading.Tasks;
 using System.Linq;
 using System.IO.Compression;
+using System.Text;
 
 namespace SalesforceOrgManager
 {
@@ -85,12 +86,12 @@ namespace SalesforceOrgManager
             // Put all the stuff in the Shopping List
             foreach (XmlNode node in classNodeList) {ShoppingList.projectClasses.Add(node.InnerText);}
             foreach (XmlNode node in pageNodeList) {ShoppingList.projectPages.Add(node.InnerText);}
-            foreach (XmlNode node in triggerNodeList) { ShoppingList.projectTriggers.Add(node.InnerText); }
+            foreach (XmlNode node in triggerNodeList) {ShoppingList.projectTriggers.Add(node.InnerText);}
             foreach (XmlNode node in staticResourceNodeList) {ShoppingList.projectStaticResources.Add(node.InnerText);}
             foreach (XmlNode node in bundleNodeList) {ShoppingList.projectLightningItems.Add(node.InnerText);}
-            foreach (XmlNode node in lwcNodeList) { ShoppingList.projectLwcItems.Add(node.InnerText); }
+            foreach (XmlNode node in lwcNodeList) {ShoppingList.projectLwcItems.Add(node.InnerText);}
         }
-        public static void updateCurrentProject(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponent> lwcs)
+        public static void updateCurrentProject(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponentStub> lwcs)
         {
             if (!Directory.Exists(ShoppingList.classesRootDir)) {Directory.CreateDirectory(ShoppingList.classesRootDir);}
             if (!Directory.Exists(ShoppingList.pagesRootDir)) {Directory.CreateDirectory(ShoppingList.pagesRootDir);}
@@ -116,8 +117,8 @@ namespace SalesforceOrgManager
             foreach (string f in staticResourceDirs) {Directory.Delete(f, true);}
             foreach (string f in bundleFiles) {File.Delete(f);}
             foreach (string f in bundleDirs) {Directory.Delete(f, true);}
-            foreach (string f in lwcFiles) { File.Delete(f); }
-            foreach (string f in lwcDirs) { Directory.Delete(f, true); }
+            foreach (string f in lwcFiles) {File.Delete(f);}
+            foreach (string f in lwcDirs) {Directory.Delete(f, true);}
 
             if (classes!=null)
             {
@@ -279,26 +280,40 @@ namespace SalesforceOrgManager
             }
             if (lwcs != null)
             {
-                foreach (LightningWebComponent lwc in lwcs)
+                foreach (LightningWebComponentStub lwc in lwcs)
                 {
-                    LightningWebComponent.LwcResource resource = lwc.lwcResources.Where(x => x.FilePath.Contains("js-meta.xml")).ToList<LightningWebComponent.LwcResource>()[0];
-                    string lwcMetadataTemplate = resource.Source;
+                    LightningWebComponentStub.LwcResourceStub resource = null;
+                    try
+                    {
+                        resource = lwc.lwcResources.Where(x => x.filePath.Contains("js-meta.xml")).ToList<LightningWebComponentStub.LwcResourceStub>()[0];
+                    }
+                    catch(Exception ex)
+                    {
+                        resource = new LightningWebComponentStub.LwcResourceStub("lwc/" + lwc.masterLabel +
+                            "/" + lwc.masterLabel + ".js-meta.xml", 
+                            System.Text.Encoding.UTF8.GetBytes(createDefaultJsMetaForLwc(lwc.masterLabel)), 
+                            createDefaultJsMetaForLwc(lwc.masterLabel));
+                    }
+                    string lwcMetadataTemplate = resource.resourceText;
 
-                    if (!Directory.Exists(ShoppingList.lwcRootDir + "\\" + lwc.MasterLabel))
+                    if (!Directory.Exists(ShoppingList.lwcRootDir + "\\" + lwc.masterLabel))
                     {
-                        Directory.CreateDirectory(ShoppingList.lwcRootDir + "\\" + lwc.MasterLabel);
+                        Directory.CreateDirectory(ShoppingList.lwcRootDir + "\\" + lwc.masterLabel);
                     }
-                    foreach (LightningWebComponent.LwcResource lwcr in lwc.lwcResources)
+                    foreach (LightningWebComponentStub.LwcResourceStub lwcr in lwc.lwcResources)
                     {
-                        string[] extT = lwcr.FilePath.Split('.');
-                        string ext = extT[extT.Length - 1];
-                        Program.createLightningMetafile(ShoppingList.lwcRootDir, lwc.MasterLabel, ext, lwcMetadataTemplate);
-                        Program.createLightningItemFile(ShoppingList.lwcRootDir, lwc.MasterLabel, lwc.MasterLabel, ext, lwcr.Source);
+                        if (!lwcr.filePath.Contains(".js-meta.xml"))
+                        {
+                            string[] extT = lwcr.filePath.Split('.');
+                            string ext = extT[extT.Length - 1];
+                            Program.createLightningItemFile(ShoppingList.lwcRootDir, lwc.masterLabel, lwc.masterLabel, ext, lwcr.resourceText);
+                        }
                     }
+                    Program.createLightningMetafile(ShoppingList.lwcRootDir, lwc.masterLabel, "js", lwcMetadataTemplate);
                 }
             }
         }
-        public static void updateManifestFile(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponent> lwcs)
+        public static void updateManifestFile(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponentStub> lwcs)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(ShoppingList.orgManifest);
@@ -415,12 +430,12 @@ namespace SalesforceOrgManager
             // Add lightning web component nodes
             if (lwcs != null)
             {
-                foreach (LightningWebComponent stub in lwcs)
+                foreach (LightningWebComponentStub stub in lwcs)
                 {
                     XmlNode nodeMembers = xmlDocument.CreateNode(XmlNodeType.Element, "members", "");
-                    nodeMembers.InnerText = stub.MasterLabel;
+                    nodeMembers.InnerText = stub.masterLabel;
                     lwcRoot.AppendChild(nodeMembers);
-                    ShoppingList.projectLwcItems.Add(stub.MasterLabel);
+                    ShoppingList.projectLwcItems.Add(stub.masterLabel);
                 }
                 XmlNode lwcNodeName = xmlDocument.CreateNode(XmlNodeType.Element, "name", "");
                 lwcNodeName.InnerText = "LightningComponentBundle";
@@ -428,7 +443,11 @@ namespace SalesforceOrgManager
             }
             // Save changes to manifest file
             xmlDocument.InnerXml = xmlDocument.InnerXml.Replace(" xmlns=\"\"", "");
-            xmlDocument.Save(ShoppingList.orgManifest);
+            using (var writer = new XmlTextWriter(ShoppingList.orgManifest, new UTF8Encoding(false)))
+            {
+                writer.Formatting = Formatting.Indented;
+                xmlDocument.Save(writer);
+            }
         }
         //--------- PROJECT RELATED METHODS -- END ----
 
@@ -567,10 +586,10 @@ namespace SalesforceOrgManager
             } while (true);
             return retValue;
         }
-        public static List<LightningWebComponent> retrieveLightningWebComponents()
+        public static List<LightningWebComponentStub> retrieveLightningWebComponents()
         {
-            List<LightningWebComponent> retValue = new List<LightningWebComponent>();
-            string retrieveQuery = "SELECT Id, ApiVersion, DeveloperName, MasterLabel, Description, isExposed, TargetConfigs FROM LightningComponentBundle ORDER BY MasterLabel";
+            List<LightningWebComponentStub> retValue = new List<LightningWebComponentStub>();
+            string retrieveQuery = "SELECT Id, MasterLabel, ApiVersion, Description, IsExposed, TargetConfigs FROM LightningComponentBundle ORDER BY MasterLabel";
             Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
 
             do
@@ -582,30 +601,50 @@ namespace SalesforceOrgManager
                     string id = Convert.ToString(otemp["Id"]);
                     string masterLabel = Convert.ToString(otemp["MasterLabel"]);
                     double apiVersion = Convert.ToDouble(otemp["ApiVersion"]);
-                    string developerName = Convert.ToString(otemp["DeveloperName"]);
                     string description = Convert.ToString(otemp["Description"]);
                     bool isExposed = Convert.ToBoolean(otemp["IsExposed"]);
                     string targetConfigs = Convert.ToString(otemp["TargetConfigs"]);
 
-                    LightningWebComponent lwc = new LightningWebComponent(id, apiVersion, developerName, masterLabel, description, isExposed, targetConfigs);
+                    string retrieveQueryMt = "SELECT Metadata FROM LightningComponentBundle WHERE Id = '" + id + "'";
+                    Dictionary<string, object> queryInformationMt = Program.queryChunk("/query/?q=" + retrieveQueryMt);
+                    object[] records2 = (object[])queryInformationMt["records"];
+                    Dictionary<string, object> otemp2 = (Dictionary<string, object>)records2[0];
+                    Dictionary<string, object> mt = otemp2["Metadata"] as Dictionary<string, object>;
 
-                    string retrieveQuery2 = "SELECT Id, FilePath, Source FROM LightningComponentResource WHERE LightningComponentBundleId = '" + id + "'";
-                    Dictionary<string, object> queryInformation2 = Program.queryChunk("/query/?q=" + retrieveQuery2);
+                    List<object> targets = (mt["targets"] == null) ? null : ((IEnumerable<object>)((Dictionary<string, object>)mt["targets"])["target"]).ToList<object>();
+                    Dictionary<string, object> lwcResources = mt["lwcResources"] as Dictionary<string, object>;
+                    List<object> resources = ((IEnumerable<object>)lwcResources["lwcResource"]).ToList<object>();
+                    List<LwcResource> outResources = new List<LwcResource>();
+                    List<string> outResourcesText = new List<string>();
 
-                    object[] innerRecords = (object[])queryInformation2["records"];
-                    foreach (object o2 in innerRecords)
+                    foreach (object rr in resources)
                     {
-                        Dictionary<string, object> otemp2 = (Dictionary<string, object>)o2;
-                        string id2 = Convert.ToString(otemp2["Id"]);
-                        string filePath = Convert.ToString(otemp2["FilePath"]);
-                        string source = Convert.ToString(otemp2["Source"]);
+                        Dictionary<string, object> tmp1 = (Dictionary<string, object>)rr;
+                        string fPath = Convert.ToString(tmp1["filePath"]);
 
-                        LightningWebComponent.LwcResource lwcResource = new LightningWebComponent.LwcResource();
-                        lwcResource.Id = id2;
-                        lwcResource.FilePath = filePath;
-                        lwcResource.Source = source;
-                        lwc.lwcResources.Add(lwcResource);
+                        if (!fPath.Contains(".js-meta.xml"))
+                        {
+                            string xSource = Convert.ToString(((Dictionary<string, object>)tmp1["source"])["asByteArray"]);
+                            byte[] bSource = System.Convert.FromBase64String(xSource);
+                            string fSource = System.Text.Encoding.UTF8.GetString(bSource);
+                            LwcResource l1 = new LwcResource();
+                            l1.filePath = fPath;
+                            l1.source = bSource;
+                            outResources.Add(l1);
+                            outResourcesText.Add(fSource);
+                        }
+                        else
+                        {
+                            string fSource = createDefaultJsMetaForLwc(masterLabel);
+                            byte[] bSource = System.Text.Encoding.UTF8.GetBytes(fSource);
+                            LwcResource l1 = new LwcResource();
+                            l1.filePath = fPath;
+                            l1.source = bSource;
+                            outResources.Add(l1);
+                            outResourcesText.Add(fSource);
+                        }
                     }
+                    LightningWebComponentStub lwc = new LightningWebComponentStub(id, apiVersion, masterLabel, description, isExposed, targetConfigs, outResources.ToArray(), targets, outResourcesText);
                     retValue.Add(lwc);
                 }
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
@@ -887,13 +926,6 @@ namespace SalesforceOrgManager
 
             if (!errorOccurred)
             {
-                AuraDefinitionBundle1 theAuraBundle = new AuraDefinitionBundle1();
-                theAuraBundle.ApiVersion = Convert.ToDouble(bc.cmbVersions.SelectedItem);
-                theAuraBundle.ApiVersionSpecified = true;
-                theAuraBundle.DeveloperName = Convert.ToString(bc.txtItemName.Text);
-                theAuraBundle.MasterLabel = Convert.ToString(bc.txtItemName.Text);
-                theAuraBundle.Description = Convert.ToString(bc.txtItemDescription.Text);
-
                 ShoppingList.projectLightningItems.Add(bc.txtItemName.Text);
                 LightningItemBundle lim = new LightningItemBundle(result.id, 
                     Convert.ToDouble(bc.cmbVersions.SelectedItem), Convert.ToString(bc.txtItemName.Text),
@@ -905,12 +937,57 @@ namespace SalesforceOrgManager
         }
         public static async Task createLwcAsync(View.BoxCreazioneLwc bc) {
             String operationResult = "";
+
+            LightningComponentBundle metadata = new LightningComponentBundle();
+            metadata.masterLabel = bc.txtItemName.Text;
+            metadata.apiVersion = 45.0;
+            metadata.description = bc.txtItemDescription.Text;
+            metadata.isExposed = true;
+            metadata.targets = new string[] {"lightning__AppPage","lightning__HomePage","lightning__RecordPage"};
+
+            const string htmlContent = "<template></template>";
+            LwcResource lcrHTML = new LwcResource();
+            lcrHTML.source = System.Text.Encoding.UTF8.GetBytes(htmlContent);
+            lcrHTML.filePath = "lwc/" + bc.txtItemName.Text + "/" + bc.txtItemName.Text + ".html";
+
+            string jsContent = "import { LightningElement } from 'lwc';\n\n" +
+                "export default class " + bc.txtItemName.Text + " extends LightningElement { }";
+            LwcResource lcrJs = new LwcResource();
+            lcrJs.source = System.Text.Encoding.UTF8.GetBytes(jsContent);
+            lcrJs.filePath = "lwc/" + bc.txtItemName.Text + "/" + bc.txtItemName.Text + ".js";
+
+            LwcResource[] resources = {lcrHTML, lcrJs};
+            List<string> resourcesText = new List<string>(new string[] { htmlContent, jsContent });
+            metadata.lwcResources = resources;
+
             LightningComponentBundle1 lwc = new LightningComponentBundle1();
-            lwc.MasterLabel = bc.txtItemName.Text;
-            lwc.ApiVersion = 45;
-            lwc.Description = bc.txtItemDescription.Text;
-            lwc.IsExposed = true;
-            //TBD
+            lwc.FullName = bc.txtItemName.Text;
+            lwc.Metadata = metadata;
+
+            LightningComponentBundle1[] lwcBundles = {lwc};
+            ShoppingList.toolingService.Url = ShoppingList.serverUrl;
+            SfTooling.com.salesforce.tooling.SaveResult[] result = ShoppingList.toolingService.create(lwcBundles);
+
+            if (result[0].errors == null)
+            {
+                operationResult += "Lightning web component " + bc.txtItemName.Text + " created successfully!";
+            }
+            else
+            {
+                operationResult += "Error during lightning web component creation\n";
+                operationResult += "Error trace is:" + result[0].errors[0].message;
+            }
+            bc.txtLog.Text = operationResult;
+            await Task.Delay(3000);
+            bc.Close();
+            if (result[0].errors == null)
+            {
+                ShoppingList.projectLwcItems.Add(bc.txtItemName.Text);
+                LightningWebComponentStub lwcc = 
+                    new LightningWebComponentStub(result[0].id, metadata.apiVersion, metadata.masterLabel, metadata.description, 
+                    metadata.isExposed, null, resources, metadata.targets.ToList<object>(), resourcesText);
+                ShoppingList.orgTreePointer.updateProjectProcessReverse(lwcc);
+            }
         }
         private static SfTooling.com.salesforce.tooling.SaveResult createLightningBundle(View.BoxCreazioneLightning bc)
         {
@@ -1002,16 +1079,36 @@ namespace SalesforceOrgManager
         }
         private static void createLightningMetafile(string rootDir, string fileName, string ext, string metadataTemplate)
         {
-            File.AppendAllText(rootDir + "\\" + fileName + "\\" + fileName + "." + ext + "-meta.xml", metadataTemplate);
+            File.AppendAllText(rootDir + "\\" + fileName + "\\" + fileName + "." + ext + "-meta.xml", metadataTemplate, new UTF8Encoding(false));
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(rootDir + "\\" + fileName + "\\" + fileName + "." + ext + "-meta.xml");
             xmlDocument.Save(rootDir + "\\" + fileName + "\\" + fileName + "." + ext + "-meta.xml");
+
+            using (var writer = new XmlTextWriter(rootDir + "\\" + fileName + "\\" + fileName + "." + ext + "-meta.xml", new UTF8Encoding(false)))
+            {
+                writer.Formatting = Formatting.Indented;
+                xmlDocument.Save(writer);
+            }
         }
         private static void createLightningItemFile(string rootDir, string dirName, string fileName, string ext, string content)
         {
-            File.AppendAllText(rootDir + "\\" + dirName + "\\" + fileName + "." + ext, content);
+            File.AppendAllText(rootDir + "\\" + dirName + "\\" + fileName + "." + ext, content, new UTF8Encoding(false));
         }
-
+        private static string createDefaultJsMetaForLwc(string labelName)
+        {
+            string retVal = "";
+            retVal += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            retVal += "\t<LightningComponentBundle xmlns=\"http://soap.sforce.com/2006/04/metadata\" fqn=\"" + labelName + "\">\n";
+            retVal += "\t<apiVersion>45.0</apiVersion>\n";
+            retVal += "\t<isExposed>true</isExposed>\n";
+            retVal += "\t<targets>\n";
+            retVal += "\t<target>lightning__AppPage</target>\n";
+            retVal += "\t<target>lightning__RecordPage</target>\n";
+            retVal += "\t<target>lightning__HomePage</target>\n";
+            retVal += "\t</targets>\n";
+            retVal += "\t</LightningComponentBundle>";
+            return retVal;
+        }
         /*
         public static async Task deleteApexClassAsync(ApexClass1[] classes)
         {

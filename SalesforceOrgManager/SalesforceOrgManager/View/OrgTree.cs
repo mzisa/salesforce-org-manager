@@ -54,37 +54,11 @@ namespace SalesforceOrgManager.View
         }
         private void Scheda_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPage.Name.Equals("tabPage3") || e.TabPage.Name.Equals("tabPage4"))
+            if (treeView.Nodes["mainNode"].Tag.Equals("_TESTCLASSES"))
             {
-                toggleFormButtonsVisibility(false);
+                treeView.Nodes.Clear();
+                refreshMetadataIndex();
             }
-            else
-            {
-                if (treeView.Nodes["mainNode"].Tag.Equals("_TESTCLASSES"))
-                {
-                    treeView.Nodes.Clear();
-                    refreshMetadataIndex();
-                }
-                toggleFormButtonsVisibility(true);
-            }
-        }
-        private void toggleFormButtonsVisibility(bool toset)
-        {
-            treeView.Visible = toset;
-            btnSelectAll.Visible = toset;
-            btnSelectNone.Visible = toset;
-            btnRefreshMetadata.Visible = toset;
-            btnUpdateProject.Visible = toset;
-        }
-        private void toggleProjectButtonsVisibility(bool toset)
-        {
-            btnRefreshMetadata.Visible = toset;
-            btnUpdateProject.Visible = toset;
-        }
-        private void toggleSelectionButtonsVisibility(bool toset)
-        {
-            btnSelectAll.Visible = toset;
-            btnSelectNone.Visible = toset;
         }
         // FORM UI METHODS -- END ----
 
@@ -117,10 +91,7 @@ namespace SalesforceOrgManager.View
             if (allClasses.Count > 0)
             {
                 // Init class nodes
-                TreeNode classRoot = new TreeNode();
-                classRoot.Name = "ApexClass";
-                classRoot.Text = "ApexClass";
-                classRoot.ForeColor = (ShoppingList.projectClasses.Count > 0) ? Color.Blue : classRoot.ForeColor;
+                TreeNode classRoot = initApexClassRootNode();
                 root.Nodes.Add(classRoot);
 
                 foreach (ApexClassStub stub in allClasses)
@@ -139,10 +110,7 @@ namespace SalesforceOrgManager.View
             if (allPages.Count > 0)
             {
                 // Init page nodes
-                TreeNode pageRoot = new TreeNode();
-                pageRoot.Name = "ApexPage";
-                pageRoot.Text = "ApexPage";
-                pageRoot.ForeColor = (ShoppingList.projectPages.Count > 0) ? Color.Blue : pageRoot.ForeColor;
+                TreeNode pageRoot = initApexPageRootNode();
                 root.Nodes.Add(pageRoot);
 
                 foreach (ApexPageStub stub in allPages)
@@ -161,10 +129,7 @@ namespace SalesforceOrgManager.View
             if (allTriggers.Count > 0)
             {
                 // Init trigger nodes
-                TreeNode triggerRoot = new TreeNode();
-                triggerRoot.Name = "ApexTrigger";
-                triggerRoot.Text = "ApexTrigger";
-                triggerRoot.ForeColor = (ShoppingList.projectTriggers.Count > 0) ? Color.Blue : triggerRoot.ForeColor;
+                TreeNode triggerRoot = initApexTriggerRootNode();
                 root.Nodes.Add(triggerRoot);
 
                 foreach (ApexTriggerStub stub in allTriggers)
@@ -183,10 +148,7 @@ namespace SalesforceOrgManager.View
             if (allResources.Count > 0)
             {
                 // Init trigger nodes
-                TreeNode staticResourceRoot = new TreeNode();
-                staticResourceRoot.Name = "StaticResource";
-                staticResourceRoot.Text = "StaticResource";
-                staticResourceRoot.ForeColor = (ShoppingList.projectStaticResources.Count > 0) ? Color.Blue : staticResourceRoot.ForeColor;
+                TreeNode staticResourceRoot = initStaticResourceRootNode();
                 root.Nodes.Add(staticResourceRoot);
 
                 foreach (ApexStaticResourceStub stub in allResources)
@@ -205,10 +167,7 @@ namespace SalesforceOrgManager.View
             if (allLightningItems.Count > 0)
             {
                 // Init class nodes
-                TreeNode lightningItemRoot = new TreeNode();
-                lightningItemRoot.Name = "AuraDefinitionBundle";
-                lightningItemRoot.Text = "AuraDefinitionBundle";
-                lightningItemRoot.ForeColor = (ShoppingList.projectLightningItems.Count > 0) ? Color.Blue : lightningItemRoot.ForeColor;
+                TreeNode lightningItemRoot = initLightningItemRootNode();
                 root.Nodes.Add(lightningItemRoot);
 
                 foreach (LightningItemBundle stub in allLightningItems)
@@ -223,24 +182,21 @@ namespace SalesforceOrgManager.View
                 }
             }
             // Populate lightning web components
-            List<LightningWebComponent> allLwc = Program.retrieveLightningWebComponents();
+            List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
             if (allLwc.Count > 0)
             {
                 // Init class nodes
-                TreeNode lwcItemRoot = new TreeNode();
-                lwcItemRoot.Name = "LightningComponentBundle";
-                lwcItemRoot.Text = "LightningComponentBundle";
-                lwcItemRoot.ForeColor = (ShoppingList.projectLwcItems.Count > 0) ? Color.Blue : lwcItemRoot.ForeColor;
+                TreeNode lwcItemRoot = initLwcItemRootNode();
                 root.Nodes.Add(lwcItemRoot);
 
-                foreach (LightningWebComponent stub in allLwc)
+                foreach (LightningWebComponentStub stub in allLwc)
                 {
                     TreeNode lwcNode = new TreeNode();
-                    lwcNode.Name = stub.Id;
-                    lwcNode.Text = stub.MasterLabel;
+                    lwcNode.Name = stub.id;
+                    lwcNode.Text = stub.masterLabel;
                     lwcNode.Tag = stub;
-                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.MasterLabel) ? true : false);
-                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.MasterLabel) ? Color.Blue : lwcNode.ForeColor);
+                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
+                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
                     lwcItemRoot.Nodes.Add(lwcNode);
                 }
             }
@@ -364,7 +320,7 @@ namespace SalesforceOrgManager.View
                 }
             }
             // Populate lightning web components
-            List<LightningWebComponent> allLwc = Program.retrieveLightningWebComponents();
+            List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
             if (allLwc.Count > 0)
             {
                 // Init class nodes
@@ -374,14 +330,14 @@ namespace SalesforceOrgManager.View
                 lwcItemRoot.ForeColor = (ShoppingList.projectLwcItems.Count > 0) ? Color.Blue : lwcItemRoot.ForeColor;
                 root.Nodes.Add(lwcItemRoot);
 
-                foreach (LightningWebComponent stub in allLwc)
+                foreach (LightningWebComponentStub stub in allLwc)
                 {
                     TreeNode lwcNode = new TreeNode();
-                    lwcNode.Name = stub.Id;
-                    lwcNode.Text = stub.MasterLabel;
+                    lwcNode.Name = stub.id;
+                    lwcNode.Text = stub.masterLabel;
                     lwcNode.Tag = stub;
-                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.MasterLabel) ? true : false);
-                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.MasterLabel) ? Color.Blue : lwcNode.ForeColor);
+                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
+                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
                     lwcItemRoot.Nodes.Add(lwcNode);
                 }
             }
@@ -417,7 +373,7 @@ namespace SalesforceOrgManager.View
             TreeNode bundleRootNode = rootNode.Nodes["AuraDefinitionBundle"];
             TreeNode lwcRootNode = rootNode.Nodes["LightningComponentBundle"];
 
-            if (nodeResult != null)
+            if (!nodeResult.GetType().Equals(typeof(System.Reflection.Missing)))
             {
                 if (nodeResult.GetType() == typeof(ApexClassStub)) {
                     ApexClassStub tmpResult = nodeResult as ApexClassStub;
@@ -427,7 +383,17 @@ namespace SalesforceOrgManager.View
                     classNode.Tag = nodeResult;
                     classNode.Checked = true;
                     classNode.ForeColor = Color.Blue;
-                    classRootNode.Nodes.Add(classNode);
+
+                    if (classRootNode == null)
+                    {
+                        classRootNode = initApexClassRootNode();
+                        classRootNode.Nodes.Add(classNode);
+                        rootNode.Nodes.Add(classRootNode);
+                    }
+                    else
+                    {
+                        classRootNode.Nodes.Add(classNode);
+                    }
                 }
                 if (nodeResult.GetType() == typeof(ApexPageStub))
                 {
@@ -438,7 +404,17 @@ namespace SalesforceOrgManager.View
                     pageNode.Tag = tmpResult;
                     pageNode.Checked = true;
                     pageNode.ForeColor = Color.Blue;
-                    pageRootNode.Nodes.Add(pageNode);
+
+                    if (pageRootNode == null)
+                    {
+                        pageRootNode = initApexPageRootNode();
+                        pageRootNode.Nodes.Add(pageNode);
+                        rootNode.Nodes.Add(classRootNode);
+                    }
+                    else
+                    {
+                        pageRootNode.Nodes.Add(pageNode);
+                    }
                 }
                 if (nodeResult.GetType() == typeof(ApexTriggerStub))
                 {
@@ -449,7 +425,16 @@ namespace SalesforceOrgManager.View
                     triggerNode.Tag = tmpResult;
                     triggerNode.Checked = true;
                     triggerNode.ForeColor = Color.Blue;
-                    triggerRootNode.Nodes.Add(triggerNode);
+                    if (triggerRootNode == null)
+                    {
+                        triggerRootNode = initApexTriggerRootNode();
+                        triggerRootNode.Nodes.Add(triggerNode);
+                        rootNode.Nodes.Add(triggerRootNode);
+                    }
+                    else
+                    {
+                        triggerRootNode.Nodes.Add(triggerNode);
+                    }
                 }
                 if (nodeResult.GetType() == typeof(ApexStaticResourceStub))
                 {
@@ -460,7 +445,17 @@ namespace SalesforceOrgManager.View
                     staticResourceNode.Tag = tmpResult;
                     staticResourceNode.Checked = true;
                     staticResourceNode.ForeColor = Color.Blue;
-                    staticResourceRootNode.Nodes.Add(staticResourceNode);
+
+                    if (staticResourceRootNode == null)
+                    {
+                        staticResourceRootNode = initStaticResourceRootNode();
+                        staticResourceRootNode.Nodes.Add(staticResourceNode);
+                        rootNode.Nodes.Add(staticResourceRootNode);
+                    }
+                    else
+                    {
+                        staticResourceRootNode.Nodes.Add(staticResourceNode);
+                    }
                 }
                 if (nodeResult.GetType() == typeof(LightningItemBundle))
                 {
@@ -471,7 +466,38 @@ namespace SalesforceOrgManager.View
                     bundleNode.Tag = tmpResult;
                     bundleNode.Checked = true;
                     bundleNode.ForeColor = Color.Blue;
-                    bundleRootNode.Nodes.Add(bundleNode);
+
+                    if (bundleRootNode == null)
+                    {
+                        bundleRootNode = initLightningItemRootNode();
+                        bundleRootNode.Nodes.Add(bundleNode);
+                        rootNode.Nodes.Add(bundleRootNode);
+                    }
+                    else
+                    {
+                        bundleRootNode.Nodes.Add(bundleNode);
+                    }
+                }
+                if (nodeResult.GetType() == typeof(LightningWebComponentStub))
+                {
+                    LightningWebComponentStub tmpResult = nodeResult as LightningWebComponentStub;
+                    TreeNode lwcNode = new TreeNode();
+                    lwcNode.Name = tmpResult.id;
+                    lwcNode.Text = tmpResult.masterLabel;
+                    lwcNode.Tag = tmpResult;
+                    lwcNode.Checked = true;
+                    lwcNode.ForeColor = Color.Blue;
+
+                    if (lwcRootNode == null)
+                    {
+                        lwcRootNode = initLwcItemRootNode();
+                        lwcRootNode.Nodes.Add(lwcNode);
+                        rootNode.Nodes.Add(lwcRootNode);
+                    }
+                    else
+                    {
+                        lwcRootNode.Nodes.Add(lwcNode);
+                    }
                 }
             }
 
@@ -481,21 +507,21 @@ namespace SalesforceOrgManager.View
             List<ApexTriggerStub> selectedTriggers = new List<ApexTriggerStub>();
             List<ApexStaticResourceStub> selectedStaticResources = new List<ApexStaticResourceStub>();
             List<LightningItemBundle> selectedBundles = new List<LightningItemBundle>();
-            List<LightningWebComponent> selectedWebComponents = new List<LightningWebComponent>();
+            List<LightningWebComponentStub> selectedWebComponents = new List<LightningWebComponentStub>();
 
             if (classRootNode!=null) {foreach (TreeNode node in classRootNode.Nodes) {if (node.Checked) {selectedClasses.Add((ApexClassStub)node.Tag);}}}
             if (pageRootNode!=null) {foreach (TreeNode node in pageRootNode.Nodes) {if (node.Checked) {selectedPages.Add((ApexPageStub)node.Tag);}}}
             if (triggerRootNode!=null) {foreach (TreeNode node in triggerRootNode.Nodes) {if (node.Checked) {selectedTriggers.Add((ApexTriggerStub)node.Tag);}}}
             if (staticResourceRootNode!=null) {foreach (TreeNode node in staticResourceRootNode.Nodes) {if (node.Checked) {selectedStaticResources.Add((ApexStaticResourceStub)node.Tag);}}}
             if (bundleRootNode!=null) {foreach (TreeNode node in bundleRootNode.Nodes) {if (node.Checked) {selectedBundles.Add((LightningItemBundle)node.Tag);}}}
-            if (lwcRootNode!=null) {foreach (TreeNode node in lwcRootNode.Nodes) {if (node.Checked) {selectedWebComponents.Add((LightningWebComponent)node.Tag);}}}
+            if (lwcRootNode!=null) {foreach (TreeNode node in lwcRootNode.Nodes) {if (node.Checked) {selectedWebComponents.Add((LightningWebComponentStub)node.Tag);}}}
 
             List<ApexClassStub> classesAdder = selectedClasses.Count == 0 ? null : selectedClasses;
             List<ApexPageStub> pagesAdder = selectedPages.Count == 0 ? null : selectedPages;
             List<ApexTriggerStub> triggersAdder = selectedTriggers.Count == 0 ? null : selectedTriggers;
             List<ApexStaticResourceStub> staticResourcesAdder = selectedStaticResources.Count == 0 ? null : selectedStaticResources;
             List<LightningItemBundle> bundlesAdder = selectedBundles.Count == 0 ? null : selectedBundles;
-            List<LightningWebComponent> lwcAdder = selectedWebComponents.Count == 0 ? null : selectedWebComponents;
+            List<LightningWebComponentStub> lwcAdder = selectedWebComponents.Count == 0 ? null : selectedWebComponents;
 
             // Update current project files
             Program.updateCurrentProject(classesAdder, pagesAdder, triggersAdder, staticResourcesAdder, bundlesAdder, lwcAdder);
@@ -562,6 +588,54 @@ namespace SalesforceOrgManager.View
             TreeNode[] tn = treeView.Nodes.Find(nodeName, true);
             return tn[0];
         }
+        public TreeNode initApexClassRootNode()
+        {
+            TreeNode classRoot = new TreeNode();
+            classRoot.Name = "ApexClass";
+            classRoot.Text = "ApexClass";
+            classRoot.ForeColor = (ShoppingList.projectClasses.Count > 0) ? Color.Blue : classRoot.ForeColor;
+            return classRoot;
+        }
+        public TreeNode initApexPageRootNode()
+        {
+            TreeNode pageRoot = new TreeNode();
+            pageRoot.Name = "ApexPage";
+            pageRoot.Text = "ApexPage";
+            pageRoot.ForeColor = (ShoppingList.projectPages.Count > 0) ? Color.Blue : pageRoot.ForeColor;
+            return pageRoot;
+        }
+        public TreeNode initApexTriggerRootNode()
+        {
+            TreeNode triggerRoot = new TreeNode();
+            triggerRoot.Name = "ApexTrigger";
+            triggerRoot.Text = "ApexTrigger";
+            triggerRoot.ForeColor = (ShoppingList.projectTriggers.Count > 0) ? Color.Blue : triggerRoot.ForeColor;
+            return triggerRoot;
+        }
+        public TreeNode initStaticResourceRootNode()
+        {
+            TreeNode staticResourceRoot = new TreeNode();
+            staticResourceRoot.Name = "StaticResource";
+            staticResourceRoot.Text = "StaticResource";
+            staticResourceRoot.ForeColor = (ShoppingList.projectStaticResources.Count > 0) ? Color.Blue : staticResourceRoot.ForeColor;
+            return staticResourceRoot;
+        }
+        public TreeNode initLightningItemRootNode()
+        {
+            TreeNode lightningItemRoot = new TreeNode();
+            lightningItemRoot.Name = "AuraDefinitionBundle";
+            lightningItemRoot.Text = "AuraDefinitionBundle";
+            lightningItemRoot.ForeColor = (ShoppingList.projectLightningItems.Count > 0) ? Color.Blue : lightningItemRoot.ForeColor;
+            return lightningItemRoot;
+        }
+        public TreeNode initLwcItemRootNode()
+        {
+            TreeNode lwcItemRoot = new TreeNode();
+            lwcItemRoot.Name = "LightningComponentBundle";
+            lwcItemRoot.Text = "LightningComponentBundle";
+            lwcItemRoot.ForeColor = (ShoppingList.projectLwcItems.Count > 0) ? Color.Blue : lwcItemRoot.ForeColor;
+            return lwcItemRoot;
+        }
         // TREEVIEW UTILITY METHODS -- END ---------------------
 
         // ---- CLASSIC ITEMS -- START -------------
@@ -590,27 +664,32 @@ namespace SalesforceOrgManager.View
         // ----------- LIGHTNING ITEMS -- START ---------
         private void btnNewLightEvent_Click(object sender, EventArgs e)
         {
-            BoxCreazioneLightning BoxCreazione = new BoxCreazioneLightning();
-            BoxCreazione.radioEvent.Checked = true;
-            BoxCreazione.Show();
+            BoxCreazioneLightning boxCreazione = new BoxCreazioneLightning();
+            boxCreazione.radioEvent.Checked = true;
+            boxCreazione.Show();
         }
         private void btnNewLightComponent_Click(object sender, EventArgs e)
         {
-            BoxCreazioneLightning BoxCreazione = new BoxCreazioneLightning();
-            BoxCreazione.radioComponent.Checked = true;
-            BoxCreazione.Show();
+            BoxCreazioneLightning boxCreazione = new BoxCreazioneLightning();
+            boxCreazione.radioComponent.Checked = true;
+            boxCreazione.Show();
         }
         private void btnNewLightApp_Click(object sender, EventArgs e)
         {
-            BoxCreazioneLightning BoxCreazione = new BoxCreazioneLightning();
-            BoxCreazione.radioApp.Checked = true;
-            BoxCreazione.Show();
+            BoxCreazioneLightning boxCreazione = new BoxCreazioneLightning();
+            boxCreazione.radioApp.Checked = true;
+            boxCreazione.Show();
         }
         private void btnNewLightningInterface_Click(object sender, EventArgs e)
         {
-            BoxCreazioneLightning BoxCreazione = new BoxCreazioneLightning();
-            BoxCreazione.radioInterface.Checked = true;
-            BoxCreazione.Show();
+            BoxCreazioneLightning boxCreazione = new BoxCreazioneLightning();
+            boxCreazione.radioInterface.Checked = true;
+            boxCreazione.Show();
+        }
+        private void btnNewLwc_Click(object sender, EventArgs e)
+        {
+            BoxCreazioneLwc boxCreazione = new BoxCreazioneLwc();
+            boxCreazione.Show();
         }
         //----------- LIGHTNING ITEMS -- END ---------
 
@@ -651,7 +730,6 @@ namespace SalesforceOrgManager.View
             BoxExecuteAnonymous bea = new BoxExecuteAnonymous();
             bea.Show();
         }
-
         private void OrgTree_FormClosing(object sender, FormClosingEventArgs e)
         {
             ShoppingList.principalePointer.Show();

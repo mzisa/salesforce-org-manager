@@ -54,7 +54,7 @@
             this.txtItemName.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(344, 26);
-            this.txtItemName.TabIndex = 7;
+            this.txtItemName.TabIndex = 1;
             // 
             // label1
             // 
@@ -74,7 +74,7 @@
             this.btnCreateItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateItem.Name = "btnCreateItem";
             this.btnCreateItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCreateItem.TabIndex = 9;
+            this.btnCreateItem.TabIndex = 10;
             this.btnCreateItem.Text = "CREATE";
             this.btnCreateItem.UseVisualStyleBackColor = false;
             this.btnCreateItem.Click += new System.EventHandler(this.btnCreateItem_Click);
@@ -85,7 +85,7 @@
             this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelItem.Name = "btnCancelItem";
             this.btnCancelItem.Size = new System.Drawing.Size(209, 59);
-            this.btnCancelItem.TabIndex = 10;
+            this.btnCancelItem.TabIndex = 11;
             this.btnCancelItem.Text = "CANCEL";
             this.btnCancelItem.UseVisualStyleBackColor = true;
             this.btnCancelItem.Click += new System.EventHandler(this.btnCancelItem_Click);
@@ -98,7 +98,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(422, 71);
-            this.txtLog.TabIndex = 11;
+            this.txtLog.TabIndex = 12;
             // 
             // label2
             // 
@@ -118,7 +118,7 @@
             this.txtItemDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtItemDescription.Name = "txtItemDescription";
             this.txtItemDescription.Size = new System.Drawing.Size(344, 26);
-            this.txtItemDescription.TabIndex = 12;
+            this.txtItemDescription.TabIndex = 2;
             // 
             // groupBoxBundleType
             // 
@@ -130,7 +130,7 @@
             this.groupBoxBundleType.Location = new System.Drawing.Point(11, 89);
             this.groupBoxBundleType.Name = "groupBoxBundleType";
             this.groupBoxBundleType.Size = new System.Drawing.Size(435, 152);
-            this.groupBoxBundleType.TabIndex = 14;
+            this.groupBoxBundleType.TabIndex = 3;
             this.groupBoxBundleType.TabStop = false;
             this.groupBoxBundleType.Text = "Lightning bundle type";
             // 
@@ -147,7 +147,7 @@
             this.chkDefinitionType.Location = new System.Drawing.Point(169, 22);
             this.chkDefinitionType.Name = "chkDefinitionType";
             this.chkDefinitionType.Size = new System.Drawing.Size(236, 79);
-            this.chkDefinitionType.TabIndex = 4;
+            this.chkDefinitionType.TabIndex = 8;
             // 
             // radioInterface
             // 
@@ -155,7 +155,7 @@
             this.radioInterface.Location = new System.Drawing.Point(6, 100);
             this.radioInterface.Name = "radioInterface";
             this.radioInterface.Size = new System.Drawing.Size(67, 17);
-            this.radioInterface.TabIndex = 3;
+            this.radioInterface.TabIndex = 7;
             this.radioInterface.TabStop = true;
             this.radioInterface.Text = "Interface";
             this.radioInterface.UseVisualStyleBackColor = true;
@@ -166,7 +166,7 @@
             this.radioEvent.Location = new System.Drawing.Point(6, 73);
             this.radioEvent.Name = "radioEvent";
             this.radioEvent.Size = new System.Drawing.Size(53, 17);
-            this.radioEvent.TabIndex = 2;
+            this.radioEvent.TabIndex = 6;
             this.radioEvent.TabStop = true;
             this.radioEvent.Text = "Event";
             this.radioEvent.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             this.radioComponent.Location = new System.Drawing.Point(6, 47);
             this.radioComponent.Name = "radioComponent";
             this.radioComponent.Size = new System.Drawing.Size(79, 17);
-            this.radioComponent.TabIndex = 1;
+            this.radioComponent.TabIndex = 5;
             this.radioComponent.TabStop = true;
             this.radioComponent.Text = "Component";
             this.radioComponent.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             this.radioApp.Location = new System.Drawing.Point(6, 22);
             this.radioApp.Name = "radioApp";
             this.radioApp.Size = new System.Drawing.Size(44, 17);
-            this.radioApp.TabIndex = 0;
+            this.radioApp.TabIndex = 4;
             this.radioApp.TabStop = true;
             this.radioApp.Text = "App";
             this.radioApp.UseVisualStyleBackColor = true;
@@ -218,7 +218,7 @@
             this.cmbVersions.Location = new System.Drawing.Point(8, 263);
             this.cmbVersions.Name = "cmbVersions";
             this.cmbVersions.Size = new System.Drawing.Size(408, 28);
-            this.cmbVersions.TabIndex = 15;
+            this.cmbVersions.TabIndex = 9;
             this.cmbVersions.Text = "Version...";
             // 
             // BoxCreazioneLightning

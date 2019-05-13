@@ -16,5 +16,13 @@ namespace SalesforceOrgManager.View
         {
             InitializeComponent();
         }
+        private void btnCreateItem_Click(object sender, EventArgs e)
+        {
+            Program.createLwcAsync(this);
+        }
+        private void btnCancelItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

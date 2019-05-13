@@ -43,6 +43,7 @@
             this.btnNewTrigger = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnNewClass = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.btnNewLightningInterface = new System.Windows.Forms.PictureBox();
@@ -53,6 +54,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnNewLightApp = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnNewLwc = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnDeployToServer = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -60,22 +63,22 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnApiUsage = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.btnNewClass = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewStaticResource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewVisualforce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewTrigger)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNewClass)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightningInterface)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightEvent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightComponent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightApp)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNewLwc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeployToServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDebugLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApiUsage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNewClass)).BeginInit();
             this.SuspendLayout();
             // 
             // treeView
@@ -86,7 +89,7 @@
             this.treeView.Name = "treeView";
             this.treeView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.treeView.Size = new System.Drawing.Size(454, 562);
-            this.treeView.TabIndex = 0;
+            this.treeView.TabIndex = 5;
             // 
             // btnRefreshMetadata
             // 
@@ -96,7 +99,7 @@
             this.btnRefreshMetadata.Margin = new System.Windows.Forms.Padding(2);
             this.btnRefreshMetadata.Name = "btnRefreshMetadata";
             this.btnRefreshMetadata.Size = new System.Drawing.Size(214, 37);
-            this.btnRefreshMetadata.TabIndex = 1;
+            this.btnRefreshMetadata.TabIndex = 3;
             this.btnRefreshMetadata.Text = "REFRESH METADATA INDEX";
             this.btnRefreshMetadata.UseVisualStyleBackColor = false;
             this.btnRefreshMetadata.Click += new System.EventHandler(this.btnRefreshMetadata_Click);
@@ -109,7 +112,7 @@
             this.btnUpdateProject.Margin = new System.Windows.Forms.Padding(2);
             this.btnUpdateProject.Name = "btnUpdateProject";
             this.btnUpdateProject.Size = new System.Drawing.Size(212, 37);
-            this.btnUpdateProject.TabIndex = 2;
+            this.btnUpdateProject.TabIndex = 4;
             this.btnUpdateProject.Text = "UPDATE PROJECT";
             this.btnUpdateProject.UseVisualStyleBackColor = false;
             this.btnUpdateProject.Click += new System.EventHandler(this.btnUpdateProject_Click);
@@ -122,7 +125,7 @@
             this.btnSelectAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(214, 37);
-            this.btnSelectAll.TabIndex = 3;
+            this.btnSelectAll.TabIndex = 1;
             this.btnSelectAll.Text = "SELECT ALL";
             this.btnSelectAll.UseVisualStyleBackColor = false;
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
@@ -135,7 +138,7 @@
             this.btnSelectNone.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectNone.Name = "btnSelectNone";
             this.btnSelectNone.Size = new System.Drawing.Size(212, 37);
-            this.btnSelectNone.TabIndex = 4;
+            this.btnSelectNone.TabIndex = 2;
             this.btnSelectNone.Text = "SELECT NONE";
             this.btnSelectNone.UseVisualStyleBackColor = false;
             this.btnSelectNone.Click += new System.EventHandler(this.btnSelectNone_Click);
@@ -155,7 +158,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(156, 649);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 5;
+            this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.Scheda_Selected);
             // 
             // tabPage1
@@ -258,6 +261,19 @@
             this.label1.Size = new System.Drawing.Size(110, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "NEW APEX CLASS";
+            // 
+            // btnNewClass
+            // 
+            this.btnNewClass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewClass.Image = ((System.Drawing.Image)(resources.GetObject("btnNewClass.Image")));
+            this.btnNewClass.Location = new System.Drawing.Point(25, 22);
+            this.btnNewClass.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNewClass.Name = "btnNewClass";
+            this.btnNewClass.Size = new System.Drawing.Size(102, 105);
+            this.btnNewClass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnNewClass.TabIndex = 0;
+            this.btnNewClass.TabStop = false;
+            this.btnNewClass.Click += new System.EventHandler(this.btnNewClass_Click);
             // 
             // tabPage2
             // 
@@ -380,6 +396,8 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.btnNewLwc);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.btnDeployToServer);
             this.tabPage3.Controls.Add(this.label9);
@@ -393,11 +411,35 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "T";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(40, 124);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 15);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "NEW LWC";
+            // 
+            // btnNewLwc
+            // 
+            this.btnNewLwc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewLwc.Image = ((System.Drawing.Image)(resources.GetObject("btnNewLwc.Image")));
+            this.btnNewLwc.Location = new System.Drawing.Point(21, 8);
+            this.btnNewLwc.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNewLwc.Name = "btnNewLwc";
+            this.btnNewLwc.Size = new System.Drawing.Size(106, 114);
+            this.btnNewLwc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnNewLwc.TabIndex = 18;
+            this.btnNewLwc.TabStop = false;
+            this.btnNewLwc.Click += new System.EventHandler(this.btnNewLwc_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(10, 479);
+            this.label12.Location = new System.Drawing.Point(10, 585);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(126, 15);
@@ -408,7 +450,7 @@
             // 
             this.btnDeployToServer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDeployToServer.Image = ((System.Drawing.Image)(resources.GetObject("btnDeployToServer.Image")));
-            this.btnDeployToServer.Location = new System.Drawing.Point(20, 363);
+            this.btnDeployToServer.Location = new System.Drawing.Point(20, 469);
             this.btnDeployToServer.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeployToServer.Name = "btnDeployToServer";
             this.btnDeployToServer.Size = new System.Drawing.Size(106, 114);
@@ -421,7 +463,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(31, 131);
+            this.label9.Location = new System.Drawing.Point(31, 277);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(86, 15);
@@ -432,7 +474,7 @@
             // 
             this.btnDebugLogs.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDebugLogs.Image = ((System.Drawing.Image)(resources.GetObject("btnDebugLogs.Image")));
-            this.btnDebugLogs.Location = new System.Drawing.Point(20, 15);
+            this.btnDebugLogs.Location = new System.Drawing.Point(20, 161);
             this.btnDebugLogs.Margin = new System.Windows.Forms.Padding(2);
             this.btnDebugLogs.Name = "btnDebugLogs";
             this.btnDebugLogs.Size = new System.Drawing.Size(106, 114);
@@ -445,7 +487,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(40, 307);
+            this.label10.Location = new System.Drawing.Point(40, 435);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 15);
@@ -456,7 +498,7 @@
             // 
             this.btnApiUsage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnApiUsage.Image = ((System.Drawing.Image)(resources.GetObject("btnApiUsage.Image")));
-            this.btnApiUsage.Location = new System.Drawing.Point(20, 191);
+            this.btnApiUsage.Location = new System.Drawing.Point(20, 319);
             this.btnApiUsage.Margin = new System.Windows.Forms.Padding(2);
             this.btnApiUsage.Name = "btnApiUsage";
             this.btnApiUsage.Size = new System.Drawing.Size(106, 114);
@@ -473,19 +515,6 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Visible = false;
-            // 
-            // btnNewClass
-            // 
-            this.btnNewClass.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNewClass.Image = ((System.Drawing.Image)(resources.GetObject("btnNewClass.Image")));
-            this.btnNewClass.Location = new System.Drawing.Point(25, 22);
-            this.btnNewClass.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNewClass.Name = "btnNewClass";
-            this.btnNewClass.Size = new System.Drawing.Size(102, 105);
-            this.btnNewClass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnNewClass.TabIndex = 0;
-            this.btnNewClass.TabStop = false;
-            this.btnNewClass.Click += new System.EventHandler(this.btnNewClass_Click);
             // 
             // OrgTree
             // 
@@ -513,6 +542,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnNewStaticResource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewVisualforce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewTrigger)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNewClass)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightningInterface)).EndInit();
@@ -521,10 +551,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightApp)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNewLwc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeployToServer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDebugLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApiUsage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNewClass)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -562,5 +592,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox btnDeployToServer;
         private System.Windows.Forms.PictureBox btnNewClass;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox btnNewLwc;
     }
 }

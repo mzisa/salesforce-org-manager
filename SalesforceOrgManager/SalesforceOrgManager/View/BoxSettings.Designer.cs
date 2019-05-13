@@ -41,6 +41,7 @@
             this.btnRightToLeft = new System.Windows.Forms.Button();
             this.btnLeftToRight = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSelectPath = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtEncryptKey = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -69,7 +70,6 @@
             this.cmdCreateNewLoginGroup = new System.Windows.Forms.Button();
             this.cmbLoginGroup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnSelectPath = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -105,7 +105,7 @@
             this.lstWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.lstWorkspace.Name = "lstWorkspace";
             this.lstWorkspace.Size = new System.Drawing.Size(461, 108);
-            this.lstWorkspace.TabIndex = 3;
+            this.lstWorkspace.TabIndex = 4;
             this.lstWorkspace.SelectedIndexChanged += new System.EventHandler(this.lstWorkspace_SelectedIndexChanged);
             // 
             // label2
@@ -125,7 +125,7 @@
             this.btnAddWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddWorkspace.Name = "btnAddWorkspace";
             this.btnAddWorkspace.Size = new System.Drawing.Size(461, 41);
-            this.btnAddWorkspace.TabIndex = 2;
+            this.btnAddWorkspace.TabIndex = 3;
             this.btnAddWorkspace.Text = "ADD NEW WORKSPACE";
             this.btnAddWorkspace.UseVisualStyleBackColor = true;
             this.btnAddWorkspace.Click += new System.EventHandler(this.btnAddWorkspace_Click);
@@ -137,7 +137,7 @@
             this.btnRemoveWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveWorkspace.Name = "btnRemoveWorkspace";
             this.btnRemoveWorkspace.Size = new System.Drawing.Size(461, 41);
-            this.btnRemoveWorkspace.TabIndex = 4;
+            this.btnRemoveWorkspace.TabIndex = 5;
             this.btnRemoveWorkspace.Text = "REMOVE SELECTED WORKSPACE";
             this.btnRemoveWorkspace.UseVisualStyleBackColor = true;
             this.btnRemoveWorkspace.Click += new System.EventHandler(this.btnRemoveWorkspace_Click);
@@ -149,7 +149,7 @@
             this.lstBoxLeft.Margin = new System.Windows.Forms.Padding(2);
             this.lstBoxLeft.Name = "lstBoxLeft";
             this.lstBoxLeft.Size = new System.Drawing.Size(167, 121);
-            this.lstBoxLeft.TabIndex = 5;
+            this.lstBoxLeft.TabIndex = 6;
             // 
             // lstBoxRight
             // 
@@ -158,7 +158,7 @@
             this.lstBoxRight.Margin = new System.Windows.Forms.Padding(2);
             this.lstBoxRight.Name = "lstBoxRight";
             this.lstBoxRight.Size = new System.Drawing.Size(167, 121);
-            this.lstBoxRight.TabIndex = 8;
+            this.lstBoxRight.TabIndex = 9;
             // 
             // groupBox1
             // 
@@ -181,7 +181,7 @@
             this.btnRightToLeft.Margin = new System.Windows.Forms.Padding(2);
             this.btnRightToLeft.Name = "btnRightToLeft";
             this.btnRightToLeft.Size = new System.Drawing.Size(75, 36);
-            this.btnRightToLeft.TabIndex = 7;
+            this.btnRightToLeft.TabIndex = 8;
             this.btnRightToLeft.Text = "<<";
             this.btnRightToLeft.UseVisualStyleBackColor = true;
             this.btnRightToLeft.Click += new System.EventHandler(this.btnRightToLeft_Click);
@@ -192,7 +192,7 @@
             this.btnLeftToRight.Margin = new System.Windows.Forms.Padding(2);
             this.btnLeftToRight.Name = "btnLeftToRight";
             this.btnLeftToRight.Size = new System.Drawing.Size(75, 36);
-            this.btnLeftToRight.TabIndex = 6;
+            this.btnLeftToRight.TabIndex = 7;
             this.btnLeftToRight.Text = ">>";
             this.btnLeftToRight.UseVisualStyleBackColor = true;
             this.btnLeftToRight.Click += new System.EventHandler(this.btnLeftToRight_Click);
@@ -214,6 +214,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Workspaces configuration";
             // 
+            // btnSelectPath
+            // 
+            this.btnSelectPath.Location = new System.Drawing.Point(433, 22);
+            this.btnSelectPath.Name = "btnSelectPath";
+            this.btnSelectPath.Size = new System.Drawing.Size(42, 23);
+            this.btnSelectPath.TabIndex = 2;
+            this.btnSelectPath.Text = "-->";
+            this.btnSelectPath.UseVisualStyleBackColor = true;
+            this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.txtEncryptKey);
@@ -224,7 +234,7 @@
             this.groupBox3.Location = new System.Drawing.Point(513, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(518, 511);
-            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Keystore configuration";
             // 
@@ -235,7 +245,7 @@
             this.txtEncryptKey.Margin = new System.Windows.Forms.Padding(2);
             this.txtEncryptKey.Name = "txtEncryptKey";
             this.txtEncryptKey.Size = new System.Drawing.Size(201, 26);
-            this.txtEncryptKey.TabIndex = 26;
+            this.txtEncryptKey.TabIndex = 12;
             this.txtEncryptKey.UseSystemPasswordChar = true;
             // 
             // label8
@@ -257,7 +267,7 @@
             this.chkUseEncryption.Location = new System.Drawing.Point(6, 22);
             this.chkUseEncryption.Name = "chkUseEncryption";
             this.chkUseEncryption.Size = new System.Drawing.Size(163, 24);
-            this.chkUseEncryption.TabIndex = 25;
+            this.chkUseEncryption.TabIndex = 11;
             this.chkUseEncryption.Text = "Encrypt credentials";
             this.chkUseEncryption.UseVisualStyleBackColor = true;
             this.chkUseEncryption.CheckedChanged += new System.EventHandler(this.chkUseEncryption_CheckedChanged);
@@ -282,7 +292,7 @@
             this.grpLoginManagement.Location = new System.Drawing.Point(6, 187);
             this.grpLoginManagement.Name = "grpLoginManagement";
             this.grpLoginManagement.Size = new System.Drawing.Size(496, 281);
-            this.grpLoginManagement.TabIndex = 14;
+            this.grpLoginManagement.TabIndex = 21;
             this.grpLoginManagement.TabStop = false;
             this.grpLoginManagement.Text = "Login management";
             // 
@@ -296,7 +306,7 @@
             this.chkIsSandbox.Location = new System.Drawing.Point(390, 191);
             this.chkIsSandbox.Name = "chkIsSandbox";
             this.chkIsSandbox.Size = new System.Drawing.Size(91, 24);
-            this.chkIsSandbox.TabIndex = 25;
+            this.chkIsSandbox.TabIndex = 28;
             this.chkIsSandbox.Text = "Sandbox";
             this.chkIsSandbox.UseVisualStyleBackColor = true;
             // 
@@ -308,7 +318,7 @@
             this.chkIsDefault.Location = new System.Drawing.Point(6, 191);
             this.chkIsDefault.Name = "chkIsDefault";
             this.chkIsDefault.Size = new System.Drawing.Size(131, 24);
-            this.chkIsDefault.TabIndex = 21;
+            this.chkIsDefault.TabIndex = 27;
             this.chkIsDefault.Text = "Use as default";
             this.chkIsDefault.UseVisualStyleBackColor = true;
             // 
@@ -320,7 +330,7 @@
             this.txtToken.Margin = new System.Windows.Forms.Padding(2);
             this.txtToken.Name = "txtToken";
             this.txtToken.Size = new System.Drawing.Size(361, 26);
-            this.txtToken.TabIndex = 20;
+            this.txtToken.TabIndex = 26;
             this.txtToken.UseSystemPasswordChar = true;
             // 
             // cmdDeleteLogin
@@ -330,7 +340,7 @@
             this.cmdDeleteLogin.Margin = new System.Windows.Forms.Padding(2);
             this.cmdDeleteLogin.Name = "cmdDeleteLogin";
             this.cmdDeleteLogin.Size = new System.Drawing.Size(104, 21);
-            this.cmdDeleteLogin.TabIndex = 24;
+            this.cmdDeleteLogin.TabIndex = 31;
             this.cmdDeleteLogin.Text = "DELETE";
             this.cmdDeleteLogin.UseVisualStyleBackColor = true;
             this.cmdDeleteLogin.Click += new System.EventHandler(this.cmdDeleteLogin_Click);
@@ -353,7 +363,7 @@
             this.cmdSaveLogin.Margin = new System.Windows.Forms.Padding(2);
             this.cmdSaveLogin.Name = "cmdSaveLogin";
             this.cmdSaveLogin.Size = new System.Drawing.Size(104, 21);
-            this.cmdSaveLogin.TabIndex = 23;
+            this.cmdSaveLogin.TabIndex = 30;
             this.cmdSaveLogin.Text = "SAVE";
             this.cmdSaveLogin.UseVisualStyleBackColor = true;
             this.cmdSaveLogin.Click += new System.EventHandler(this.cmdSaveLogin_Click);
@@ -364,7 +374,7 @@
             this.cmdCancelLogin.Margin = new System.Windows.Forms.Padding(2);
             this.cmdCancelLogin.Name = "cmdCancelLogin";
             this.cmdCancelLogin.Size = new System.Drawing.Size(104, 21);
-            this.cmdCancelLogin.TabIndex = 22;
+            this.cmdCancelLogin.TabIndex = 29;
             this.cmdCancelLogin.Text = "CANCEL";
             this.cmdCancelLogin.UseVisualStyleBackColor = true;
             this.cmdCancelLogin.Click += new System.EventHandler(this.cmdCancelLogin_Click);
@@ -377,7 +387,7 @@
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(361, 26);
-            this.txtPassword.TabIndex = 19;
+            this.txtPassword.TabIndex = 25;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label6
@@ -399,7 +409,7 @@
             this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(361, 26);
-            this.txtUsername.TabIndex = 18;
+            this.txtUsername.TabIndex = 24;
             // 
             // label5
             // 
@@ -418,7 +428,7 @@
             this.cmdCreateNewLogin.Margin = new System.Windows.Forms.Padding(2);
             this.cmdCreateNewLogin.Name = "cmdCreateNewLogin";
             this.cmdCreateNewLogin.Size = new System.Drawing.Size(172, 21);
-            this.cmdCreateNewLogin.TabIndex = 16;
+            this.cmdCreateNewLogin.TabIndex = 22;
             this.cmdCreateNewLogin.Text = "CREATE NEW LOGIN";
             this.cmdCreateNewLogin.UseVisualStyleBackColor = true;
             this.cmdCreateNewLogin.Click += new System.EventHandler(this.cmdCreateNewLogin_Click);
@@ -429,7 +439,7 @@
             this.cmbLogin.Location = new System.Drawing.Point(239, 19);
             this.cmbLogin.Name = "cmbLogin";
             this.cmbLogin.Size = new System.Drawing.Size(244, 21);
-            this.cmbLogin.TabIndex = 17;
+            this.cmbLogin.TabIndex = 23;
             this.cmbLogin.Text = "Select login";
             this.cmbLogin.SelectedIndexChanged += new System.EventHandler(this.cmbLogin_SelectedIndexChanged);
             // 
@@ -468,7 +478,7 @@
             this.cmdDeleteLoginGroup.Margin = new System.Windows.Forms.Padding(2);
             this.cmdDeleteLoginGroup.Name = "cmdDeleteLoginGroup";
             this.cmdDeleteLoginGroup.Size = new System.Drawing.Size(104, 21);
-            this.cmdDeleteLoginGroup.TabIndex = 14;
+            this.cmdDeleteLoginGroup.TabIndex = 19;
             this.cmdDeleteLoginGroup.Text = "DELETE";
             this.cmdDeleteLoginGroup.UseVisualStyleBackColor = true;
             this.cmdDeleteLoginGroup.Click += new System.EventHandler(this.cmdDeleteLoginGroup_Click);
@@ -480,7 +490,7 @@
             this.cmdManageLogins.Margin = new System.Windows.Forms.Padding(2);
             this.cmdManageLogins.Name = "cmdManageLogins";
             this.cmdManageLogins.Size = new System.Drawing.Size(104, 21);
-            this.cmdManageLogins.TabIndex = 15;
+            this.cmdManageLogins.TabIndex = 20;
             this.cmdManageLogins.Text = "MANAGE LOGINS";
             this.cmdManageLogins.UseVisualStyleBackColor = true;
             this.cmdManageLogins.Click += new System.EventHandler(this.cmdManageLogins_Click);
@@ -492,7 +502,7 @@
             this.cmdSaveLoginGroup.Margin = new System.Windows.Forms.Padding(2);
             this.cmdSaveLoginGroup.Name = "cmdSaveLoginGroup";
             this.cmdSaveLoginGroup.Size = new System.Drawing.Size(104, 21);
-            this.cmdSaveLoginGroup.TabIndex = 13;
+            this.cmdSaveLoginGroup.TabIndex = 18;
             this.cmdSaveLoginGroup.Text = "SAVE";
             this.cmdSaveLoginGroup.UseVisualStyleBackColor = true;
             this.cmdSaveLoginGroup.Click += new System.EventHandler(this.cmdSaveLoginGroup_Click);
@@ -504,7 +514,7 @@
             this.cmdCancelLoginGroup.Margin = new System.Windows.Forms.Padding(2);
             this.cmdCancelLoginGroup.Name = "cmdCancelLoginGroup";
             this.cmdCancelLoginGroup.Size = new System.Drawing.Size(104, 21);
-            this.cmdCancelLoginGroup.TabIndex = 12;
+            this.cmdCancelLoginGroup.TabIndex = 17;
             this.cmdCancelLoginGroup.Text = "CANCEL";
             this.cmdCancelLoginGroup.UseVisualStyleBackColor = true;
             this.cmdCancelLoginGroup.Click += new System.EventHandler(this.cmdCancelLoginGroup_Click);
@@ -515,7 +525,7 @@
             this.txtLoginGroup.Location = new System.Drawing.Point(5, 54);
             this.txtLoginGroup.Name = "txtLoginGroup";
             this.txtLoginGroup.Size = new System.Drawing.Size(478, 20);
-            this.txtLoginGroup.TabIndex = 11;
+            this.txtLoginGroup.TabIndex = 16;
             // 
             // cmdCreateNewLoginGroup
             // 
@@ -523,7 +533,7 @@
             this.cmdCreateNewLoginGroup.Margin = new System.Windows.Forms.Padding(2);
             this.cmdCreateNewLoginGroup.Name = "cmdCreateNewLoginGroup";
             this.cmdCreateNewLoginGroup.Size = new System.Drawing.Size(172, 21);
-            this.cmdCreateNewLoginGroup.TabIndex = 9;
+            this.cmdCreateNewLoginGroup.TabIndex = 14;
             this.cmdCreateNewLoginGroup.Text = "CREATE NEW LOGIN GROUP";
             this.cmdCreateNewLoginGroup.UseVisualStyleBackColor = true;
             this.cmdCreateNewLoginGroup.Click += new System.EventHandler(this.cmdCreateNewLoginGroup_Click);
@@ -531,10 +541,11 @@
             // cmbLoginGroup
             // 
             this.cmbLoginGroup.FormattingEnabled = true;
+            this.cmbLoginGroup.ItemHeight = 13;
             this.cmbLoginGroup.Location = new System.Drawing.Point(239, 18);
             this.cmbLoginGroup.Name = "cmbLoginGroup";
             this.cmbLoginGroup.Size = new System.Drawing.Size(244, 21);
-            this.cmbLoginGroup.TabIndex = 10;
+            this.cmbLoginGroup.TabIndex = 15;
             this.cmbLoginGroup.Text = "Select login group";
             this.cmbLoginGroup.SelectedIndexChanged += new System.EventHandler(this.cmbLoginGroup_SelectedIndexChanged);
             // 
@@ -548,16 +559,6 @@
             this.label3.Size = new System.Drawing.Size(43, 20);
             this.label3.TabIndex = 11;
             this.label3.Text = "-OR-";
-            // 
-            // btnSelectPath
-            // 
-            this.btnSelectPath.Location = new System.Drawing.Point(433, 22);
-            this.btnSelectPath.Name = "btnSelectPath";
-            this.btnSelectPath.Size = new System.Drawing.Size(42, 23);
-            this.btnSelectPath.TabIndex = 11;
-            this.btnSelectPath.Text = "-->";
-            this.btnSelectPath.UseVisualStyleBackColor = true;
-            this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
             // 
             // folderBrowserDialog1
             // 

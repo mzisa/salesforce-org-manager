@@ -63,7 +63,7 @@
             this.btnRunDeploy.Margin = new System.Windows.Forms.Padding(2);
             this.btnRunDeploy.Name = "btnRunDeploy";
             this.btnRunDeploy.Size = new System.Drawing.Size(805, 41);
-            this.btnRunDeploy.TabIndex = 2;
+            this.btnRunDeploy.TabIndex = 1;
             this.btnRunDeploy.Text = "RUN DEPLOY";
             this.btnRunDeploy.UseVisualStyleBackColor = true;
             this.btnRunDeploy.Click += new System.EventHandler(this.btnRunDeploy_Click);
@@ -85,7 +85,7 @@
             this.progressBar1.Location = new System.Drawing.Point(12, 103);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(804, 23);
-            this.progressBar1.TabIndex = 4;
+            this.progressBar1.TabIndex = 2;
             this.progressBar1.Visible = false;
             // 
             // BoxDeployToServer

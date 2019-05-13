@@ -69,7 +69,7 @@
             this.txtExecutionLog.ReadOnly = true;
             this.txtExecutionLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtExecutionLog.Size = new System.Drawing.Size(433, 546);
-            this.txtExecutionLog.TabIndex = 14;
+            this.txtExecutionLog.TabIndex = 1;
             // 
             // label1
             // 

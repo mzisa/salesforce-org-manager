@@ -100,7 +100,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 47);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(421, 83);
-            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resource format";
             // 
@@ -110,7 +110,7 @@
             this.chkZippedBundle.Location = new System.Drawing.Point(214, 31);
             this.chkZippedBundle.Name = "chkZippedBundle";
             this.chkZippedBundle.Size = new System.Drawing.Size(135, 17);
-            this.chkZippedBundle.TabIndex = 1;
+            this.chkZippedBundle.TabIndex = 3;
             this.chkZippedBundle.Text = "zipped resource bundle";
             this.chkZippedBundle.UseVisualStyleBackColor = true;
             // 
@@ -121,7 +121,7 @@
             this.chkSingleFile.Location = new System.Drawing.Point(19, 31);
             this.chkSingleFile.Name = "chkSingleFile";
             this.chkSingleFile.Size = new System.Drawing.Size(68, 17);
-            this.chkSingleFile.TabIndex = 0;
+            this.chkSingleFile.TabIndex = 2;
             this.chkSingleFile.TabStop = true;
             this.chkSingleFile.Text = "single file";
             this.chkSingleFile.UseVisualStyleBackColor = true;

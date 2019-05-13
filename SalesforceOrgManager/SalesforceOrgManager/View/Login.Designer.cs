@@ -48,7 +48,7 @@
             this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(589, 32);
-            this.txtUsername.TabIndex = 1;
+            this.txtUsername.TabIndex = 2;
             this.txtUsername.Text = "Username";
             // 
             // txtPassword
@@ -58,7 +58,7 @@
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(589, 29);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 3;
             this.txtPassword.Text = "PASSWORDANDTOKEN";
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -68,7 +68,7 @@
             this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(290, 44);
-            this.btnLogin.TabIndex = 3;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "LOGIN";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -79,7 +79,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(290, 44);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
