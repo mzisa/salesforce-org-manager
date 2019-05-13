@@ -13,8 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.5.0] - 2019-05-13
 ### Added
-- Create new ligthtning web component functionality
-- Added WIKI page to explain how to create a new ligthtning web component
+- Create new lightning web component functionality
+- Added WIKI page to explain how to create a new lightning web component
 
 ### Changed
 - Fixed TabIndex on creation forms
