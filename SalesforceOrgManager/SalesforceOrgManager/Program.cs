@@ -134,7 +134,12 @@ namespace SalesforceOrgManager
                     File.AppendAllText(ShoppingList.classesRootDir + "\\" + acs.Name + ".cls-meta.xml", classesMetadataTemplate);
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(ShoppingList.classesRootDir + "\\" + acs.Name + ".cls-meta.xml");
-                    xmlDocument.Save(ShoppingList.classesRootDir + "\\" + acs.Name + ".cls-meta.xml");
+
+                    using (var writer = new XmlTextWriter(ShoppingList.classesRootDir + "\\" + acs.Name + ".cls-meta.xml", new UTF8Encoding(false)))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        xmlDocument.Save(writer);
+                    }
                 }
             }
             if (pages!=null)
@@ -155,6 +160,12 @@ namespace SalesforceOrgManager
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(ShoppingList.pagesRootDir + "\\" + aps.Name + ".page-meta.xml");
                     xmlDocument.Save(ShoppingList.pagesRootDir + "\\" + aps.Name + ".page-meta.xml");
+
+                    using (var writer = new XmlTextWriter(ShoppingList.pagesRootDir + "\\" + aps.Name + ".page-meta.xml", new UTF8Encoding(false)))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        xmlDocument.Save(writer);
+                    }
                 }
             }
             if (triggers!=null)
@@ -171,7 +182,12 @@ namespace SalesforceOrgManager
                     File.AppendAllText(ShoppingList.triggersRootDir + "\\" + ats.Name + ".trigger-meta.xml", triggersMetadataTemplate);
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(ShoppingList.triggersRootDir + "\\" + ats.Name + ".trigger-meta.xml");
-                    xmlDocument.Save(ShoppingList.triggersRootDir + "\\" + ats.Name + ".trigger-meta.xml");
+
+                    using (var writer = new XmlTextWriter(ShoppingList.triggersRootDir + "\\" + ats.Name + ".trigger-meta.xml", new UTF8Encoding(false)))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        xmlDocument.Save(writer);
+                    }
                 }
             }
             if (staticResources!=null)
@@ -207,7 +223,12 @@ namespace SalesforceOrgManager
                     File.AppendAllText(ShoppingList.staticResourcesRootDir + "\\" + asr.Name + ".resource-meta.xml", resourcesMetadataTemplate);
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(ShoppingList.staticResourcesRootDir + "\\" + asr.Name + ".resource-meta.xml");
-                    xmlDocument.Save(ShoppingList.staticResourcesRootDir + "\\" + asr.Name + ".resource-meta.xml");
+
+                    using (var writer = new XmlTextWriter(ShoppingList.staticResourcesRootDir + "\\" + asr.Name + ".resource-meta.xml", new UTF8Encoding(false)))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        xmlDocument.Save(writer);
+                    }
                 }
             }
             if (bundles!=null)
@@ -457,7 +478,7 @@ namespace SalesforceOrgManager
             List<ApexClassStub> retValue = new List<ApexClassStub>();
             ShoppingList.testClasses.Clear();
             string retrieveQuery = "SELECT Id, Name, Body FROM ApexClass ORDER BY Name";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -480,7 +501,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -488,7 +509,7 @@ namespace SalesforceOrgManager
         {
             List<ApexPageStub> retValue = new List<ApexPageStub>();
             string retrieveQuery = "SELECT Id, Name, Markup FROM ApexPage ORDER BY Name";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -504,7 +525,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -512,7 +533,7 @@ namespace SalesforceOrgManager
         {
             List<ApexTriggerStub> retValue = new List<ApexTriggerStub>();
             string retrieveQuery = "SELECT Id, Name, Body FROM ApexTrigger ORDER BY Name";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -528,7 +549,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -536,7 +557,7 @@ namespace SalesforceOrgManager
         {
             List<ApexStaticResourceStub> retValue = new List<ApexStaticResourceStub>();
             string retrieveQuery = "SELECT Id, Name, Body, CacheControl, ContentType, Description FROM StaticResource";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -556,7 +577,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -564,7 +585,7 @@ namespace SalesforceOrgManager
         {
             List<LightningItemBundle> retValue = new List<LightningItemBundle>();
             string retrieveQuery = "SELECT Id, ApiVersion, DeveloperName, MasterLabel, Description FROM AuraDefinitionBundle ORDER BY MasterLabel";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -582,7 +603,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -590,7 +611,7 @@ namespace SalesforceOrgManager
         {
             List<LightningWebComponentStub> retValue = new List<LightningWebComponentStub>();
             string retrieveQuery = "SELECT Id, MasterLabel, ApiVersion, Description, IsExposed, TargetConfigs FROM LightningComponentBundle ORDER BY MasterLabel";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -606,7 +627,7 @@ namespace SalesforceOrgManager
                     string targetConfigs = Convert.ToString(otemp["TargetConfigs"]);
 
                     string retrieveQueryMt = "SELECT Metadata FROM LightningComponentBundle WHERE Id = '" + id + "'";
-                    Dictionary<string, object> queryInformationMt = Program.queryChunk("/query/?q=" + retrieveQueryMt);
+                    Dictionary<string, object> queryInformationMt = Program.getApiRecords(false, "/query/?q=" + retrieveQueryMt);
                     object[] records2 = (object[])queryInformationMt["records"];
                     Dictionary<string, object> otemp2 = (Dictionary<string, object>)records2[0];
                     Dictionary<string, object> mt = otemp2["Metadata"] as Dictionary<string, object>;
@@ -650,7 +671,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -658,7 +679,7 @@ namespace SalesforceOrgManager
         {
             List<string> retValue = new List<string>();
             string retrieveQuery = "SELECT Id, QualifiedApiName FROM EntityDefinition WHERE IsTriggerable = true ORDER BY QualifiedApiName";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -673,7 +694,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -681,7 +702,7 @@ namespace SalesforceOrgManager
         {
             List<LightningItemDefinition> retValue = new List<LightningItemDefinition>();
             string retrieveQuery = "SELECT DefType, Format, Source FROM AuraDefinition WHERE AuraDefinitionBundleId = '" + bundle.Id + "'";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery);
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
 
             do
             {
@@ -697,7 +718,7 @@ namespace SalesforceOrgManager
                 if (!queryInformation.ContainsKey("nextRecordsUrl")) break;
                 string retrieveQueryUri = (string)queryInformation["nextRecordsUrl"];
                 retrieveQuery = retrieveQueryUri.Substring(retrieveQueryUri.LastIndexOf("/") + 1);
-                queryInformation = Program.queryChunk("/query/" + retrieveQuery);
+                queryInformation = Program.getApiRecords(false, "/query/" + retrieveQuery);
             } while (true);
             return retValue;
         }
@@ -705,13 +726,13 @@ namespace SalesforceOrgManager
         {
             List<string> retValue = new List<string>();
             string retrieveQuery = "SELECT Name FROM ApexClass WHERE Id = '" + itemId + "'";
-            Dictionary<string, object> queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery.Replace("\"", ""));
+            Dictionary<string, object> queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery.Replace("\"", ""));
 
             if (Convert.ToInt32(queryInformation["size"]) == 0)
             {
                 // Item is not an ApexClass ==> new tentative for Apex Trigger
                 retrieveQuery = "SELECT Name FROM ApexTrigger WHERE Id = '" + itemId + "'";
-                queryInformation = Program.queryChunk("/query/?q=" + retrieveQuery.Replace("\"", ""));
+                queryInformation = Program.getApiRecords(false, "/query/?q=" + retrieveQuery.Replace("\"", ""));
                 retValue.Add("trigger");
             }
             else
@@ -1167,20 +1188,11 @@ namespace SalesforceOrgManager
         //--------- STATIC RESOURCE METHODS -- START ------
         private static Stream getStaticResourceZipContent(string contentId)
         {
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/sobjects/StaticResource/" + contentId + "/Body");
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            WebResponse res = req.GetResponse();
-
-            return res.GetResponseStream();
+            return runToolingRestCallout(false, "/sobjects/StaticResource/" + contentId + "/Body").GetResponseStream();
         }
         private static string getStaticResourceTextContent(string contentId)
         {
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/sobjects/StaticResource/" + contentId + "/Body");
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
+            StreamReader reader = new StreamReader(runToolingRestCallout(false, "/sobjects/StaticResource/" + contentId + "/Body").GetResponseStream(), System.Text.Encoding.UTF8);
             return reader.ReadToEnd();
         }
         private static bool contentIsZip(string contentType)
@@ -1320,18 +1332,7 @@ namespace SalesforceOrgManager
             string logTicket = "LOGTICKET:" + ShoppingList.toolingService.SessionHeaderValue.sessionId + ShoppingList.logTicketNum;
             codeToRun = "System.debug('" + logTicket + "');\n" + codeToRun;
             string urlEncodedApex = System.Web.HttpUtility.UrlEncode(codeToRun);
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/executeAnonymous/?anonymousBody=" + urlEncodedApex);
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-
-            Dictionary<string, object> temp = (Dictionary<string, object>)serializer.DeserializeObject(result);
+            Dictionary<string, object> temp = Program.getApiRecords(false, "/executeAnonymous/?anonymousBody=" + urlEncodedApex);
             List<string> debugLog = Program.retrieveApexDebugLog(logTicket);
 
             bool compiled = Convert.ToBoolean(temp["compiled"]);
@@ -1355,18 +1356,7 @@ namespace SalesforceOrgManager
             // Retrieve Apex Log ID
             List<ApexDebugLog> retValue = new List<ApexDebugLog>();
             string retrieveQuery = "SELECT Id,Operation,Request,StartTime,Status,LogLength FROM ApexLog ORDER BY starttime desc LIMIT 50";
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/query/?q=" + retrieveQuery);
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-
-            Dictionary<string, object> temp = (Dictionary<string, object>)serializer.DeserializeObject(result);
+            Dictionary<string, object> temp = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
             object[] records = (object[])temp["records"];
             ShoppingList.testClasses.Clear();
 
@@ -1390,18 +1380,7 @@ namespace SalesforceOrgManager
         {
             // Retrieve Apex Log ID
             List<UsageLimit> retValue = new List<UsageLimit>();
-            Uri apxRetrieveUri = new Uri(ShoppingList.toolingApiLoginUri + "/limits/");
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-
-            Dictionary<string, object> temp = (Dictionary<string, object>)serializer.DeserializeObject(result);
+            Dictionary<string, object> temp = Program.getApiRecords(true, "/limits/");
 
             foreach (string key in temp.Keys)
             {
@@ -1462,18 +1441,7 @@ namespace SalesforceOrgManager
             // Retrieve Apex Log ID
             List<string> retValue = new List<string>();
             string retrieveQuery = "SELECT Id FROM ApexLog WHERE Request='Api' AND Operation = '/services/data/v45.0/tooling/executeAnonymous/' ORDER BY SystemModStamp DESC LIMIT 1";
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/query/?q=" + retrieveQuery);
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-
-            Dictionary<string, object> temp = (Dictionary<string, object>)serializer.DeserializeObject(result);
+            Dictionary<string, object> temp = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
             object[] records = (object[])temp["records"];
             ShoppingList.testClasses.Clear();
 
@@ -1493,13 +1461,7 @@ namespace SalesforceOrgManager
         private static string retrieveApexDebugLogBody(string logId)
         {
             // Retrieve Apex Log Body
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + "/sobjects/ApexLog/" + logId + "/Body");
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
+            StreamReader reader = new StreamReader(runToolingRestCallout(false, "/sobjects/ApexLog/" + logId + "/Body").GetResponseStream(), System.Text.Encoding.UTF8);
             string result = reader.ReadToEnd();
             result = result.Replace("\n", "\r\n");
 
@@ -1585,22 +1547,6 @@ namespace SalesforceOrgManager
             }
             return configRecord;
         }
-        private static Dictionary<string, object> queryChunk(string nextRecordPageUrl)
-        {
-            Uri apxRetrieveUri = new Uri(ShoppingList.restServicesBaseUri + nextRecordPageUrl);
-            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
-            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
-            req.ContentType = "application/json";
-
-            WebResponse res = req.GetResponse();
-            StreamReader reader = new StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-
-            Dictionary<string, object> temp = (Dictionary<string, object>)serializer.DeserializeObject(result);
-            return temp;
-        }
         public static bool directoryExists(string dirPath)
         {
             // Check whether the directory exists
@@ -1652,6 +1598,37 @@ namespace SalesforceOrgManager
             //Wait for process to finish
             pProcess.WaitForExit();
             return strOutput;
+        }
+        private static WebResponse runToolingRestCallout(bool useApiUri, string nextRecordPageUrl)
+        {
+            Uri apxRetrieveUri = (useApiUri) ? new Uri(ShoppingList.toolingApiLoginUri + nextRecordPageUrl) : new Uri(ShoppingList.restServicesBaseUri + nextRecordPageUrl);
+            System.Net.HttpWebRequest req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
+            req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
+            req.ContentType = "application/json";
+            WebResponse res = null;
+
+            try
+            {
+                res = req.GetResponse();
+            }
+            catch (System.Net.WebException ex)
+            {
+                Program.doConnect(ShoppingList.orgUserName, ShoppingList.orgPassword, ShoppingList.toolingService.Url.Contains("test.salesforce.com"));
+                apxRetrieveUri = (useApiUri) ? new Uri(ShoppingList.toolingApiLoginUri + nextRecordPageUrl) : new Uri(ShoppingList.restServicesBaseUri + nextRecordPageUrl);
+                req = (HttpWebRequest)WebRequest.Create(apxRetrieveUri);
+                req.Headers.Add("Authorization", "Bearer " + ShoppingList.toolingService.SessionHeaderValue.sessionId);
+                req.ContentType = "application/json";
+                res = req.GetResponse();
+            }
+            return res;
+        }
+        private static Dictionary<string, object> getApiRecords(bool useApiUri, string nextRecordPageUrl)
+        {
+            StreamReader reader = new StreamReader(runToolingRestCallout(useApiUri, nextRecordPageUrl).GetResponseStream(), System.Text.Encoding.UTF8);
+            string result = reader.ReadToEnd();
+            var serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = Int32.MaxValue;
+            return (Dictionary<string, object>)serializer.DeserializeObject(result);
         }
         //--------- GENERAL UTILITY METHODS -- END ----
     }

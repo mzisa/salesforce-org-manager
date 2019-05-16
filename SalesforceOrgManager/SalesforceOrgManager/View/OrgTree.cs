@@ -392,6 +392,7 @@ namespace SalesforceOrgManager.View
                     }
                     else
                     {
+                        classRootNode.ForeColor = Color.Blue;
                         classRootNode.Nodes.Add(classNode);
                     }
                 }
@@ -409,10 +410,11 @@ namespace SalesforceOrgManager.View
                     {
                         pageRootNode = initApexPageRootNode();
                         pageRootNode.Nodes.Add(pageNode);
-                        rootNode.Nodes.Add(classRootNode);
+                        rootNode.Nodes.Add(pageRootNode);
                     }
                     else
                     {
+                        pageRootNode.ForeColor = Color.Blue;
                         pageRootNode.Nodes.Add(pageNode);
                     }
                 }
@@ -433,6 +435,7 @@ namespace SalesforceOrgManager.View
                     }
                     else
                     {
+                        triggerRootNode.ForeColor = Color.Blue;
                         triggerRootNode.Nodes.Add(triggerNode);
                     }
                 }
@@ -454,6 +457,7 @@ namespace SalesforceOrgManager.View
                     }
                     else
                     {
+                        staticResourceRootNode.ForeColor = Color.Blue;
                         staticResourceRootNode.Nodes.Add(staticResourceNode);
                     }
                 }
@@ -475,6 +479,7 @@ namespace SalesforceOrgManager.View
                     }
                     else
                     {
+                        bundleRootNode.ForeColor = Color.Blue;
                         bundleRootNode.Nodes.Add(bundleNode);
                     }
                 }
@@ -496,6 +501,7 @@ namespace SalesforceOrgManager.View
                     }
                     else
                     {
+                        lwcRootNode.ForeColor = Color.Blue;
                         lwcRootNode.Nodes.Add(lwcNode);
                     }
                 }

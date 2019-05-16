@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve static resources management
 - New lightning web component should allow target and target config selections
 
+## [1.5.1] - 2019-05-16
+### Changed
+- Code optimizations
+- Fixed bug: while creating a new metadata the related root node did not its foreground color to blue
+- Fixed encoding on xml file descriptors for metadata: from UTF-8 BOM to UTF-8 (without BOM)
 
 ## [1.5.0] - 2019-05-13
 ### Added
@@ -18,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Fixed TabIndex on creation forms
-- Fixed encoding on xml manifest files: from UTF-8 BOM to UTF-8 (without BOM)
+- Fixed encoding on xml manifest file: from UTF-8 BOM to UTF-8 (without BOM)
 
 ## [1.4.2] - 2019-05-08
 ### Changed
