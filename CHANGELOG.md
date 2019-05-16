@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.1] - 2019-05-16
 ### Changed
 - Code optimizations
-- Fixed bug: while creating a new metadata the related root node did not its foreground color to blue
+- Fixed bug: while creating a new metadata the related root node did not set its foreground color to blue
 - Fixed encoding on xml file descriptors for metadata: from UTF-8 BOM to UTF-8 (without BOM)
 
 ## [1.5.0] - 2019-05-13
