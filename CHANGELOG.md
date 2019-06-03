@@ -11,15 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Org metadata tree can manage all metadata types now
 - Added project metadata configuration form: now you can select which metadata you want to consider in your code project
-- Implemented local cache for metadata to boost performance on large ORGs: in project configuration form you can now choose to use metadata cache in your project (recommended and enabled by default) or not
+- Implemented local cache for metadata to boost performance on large ORGs: in project configuration form you can now choose to use metadata cache in your project (**recommended and enabled by default**) or not
 
 ### Changed
 - Improved static resources management
-- Peformance optimizations
+- Performance optimizations
 - If you want download just the executable, you can now simply grab the /Release folder content
 
 ### Removed
-- Fix DEPLOY TO SERVER functionality
+- DEPLOY TO SERVER functionality
 
 ## [1.5.1] - 2019-05-16
 ### Changed
