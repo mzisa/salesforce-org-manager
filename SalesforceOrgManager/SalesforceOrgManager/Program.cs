@@ -35,13 +35,15 @@ namespace SalesforceOrgManager
             ShoppingList.projectName = Path.GetFileName(ShoppingList.projectRootDir);
             ShoppingList.projectOrgContentRootDir = ShoppingList.projectRootDir + "\\force-app\\main\\default";
             ShoppingList.orgManifest = ShoppingList.projectOrgContentRootDir + "\\package.xml";
-            //ShoppingList.orgManifest = ShoppingList.projectRootDir + "\\manifest\\package.xml";
             ShoppingList.classesRootDir = ShoppingList.projectOrgContentRootDir + "\\classes";
             ShoppingList.pagesRootDir = ShoppingList.projectOrgContentRootDir + "\\pages";
             ShoppingList.triggersRootDir = ShoppingList.projectOrgContentRootDir + "\\triggers";
             ShoppingList.staticResourcesRootDir = ShoppingList.projectOrgContentRootDir + "\\staticresources";
             ShoppingList.auraRootDir = ShoppingList.projectOrgContentRootDir + "\\aura";
             ShoppingList.lwcRootDir = ShoppingList.projectOrgContentRootDir + "\\lwc";
+            // Version 1.6 START ---------------
+            ShoppingList.retrieveRootDir = ShoppingList.projectRootDir + "\\tmpretrieve";
+            // Version 1.6 END ---------------
         }
         public static void createNewProject()
         {
@@ -52,6 +54,22 @@ namespace SalesforceOrgManager
             using (System.Diagnostics.Process exeProcess = System.Diagnostics.Process.Start(startInfo))
             {
                 exeProcess.WaitForExit();
+            }
+            List<string> defaultMetadata = new List<string>()
+            {
+                "ApexClass",
+                "ApexPage",
+                "StaticResource",
+                "ApexTrigger",
+                "AuraDefinitionBundle",
+                "LightningItemBundle"
+            };
+            Dictionary<string, object> metadataToUse = new Dictionary<string, object>();
+            metadataToUse.Add("metadataToUse", defaultMetadata);
+            metadataToUse.Add("useCache", true);
+            if (Program.setPrjConfig(metadataToUse)) {
+                ShoppingList.metadataToUse = defaultMetadata;
+                ShoppingList.useCache = true;
             }
         }
         public static void createManifestForNewProject()
@@ -83,45 +101,72 @@ namespace SalesforceOrgManager
             XmlNodeList bundleNodeList = xmlDocument.DocumentElement.SelectNodes("//a:types[a:name='AuraDefinitionBundle']//a:members", xmlnsManager);
             XmlNodeList lwcNodeList = xmlDocument.DocumentElement.SelectNodes("//a:types[a:name='LightningComponentBundle']//a:members", xmlnsManager);
 
+            // Version 1.6 START ---------------
+            Dictionary<string, object> prjConfig = Program.getPrjConfig();
+            ShoppingList.metadataToUse = ((IEnumerable<object>)prjConfig["metadataToUse"]).OfType<string>().ToList();
+            // Version 1.6 END ---------------
+
             // Put all the stuff in the Shopping List
-            foreach (XmlNode node in classNodeList) {ShoppingList.projectClasses.Add(node.InnerText);}
-            foreach (XmlNode node in pageNodeList) {ShoppingList.projectPages.Add(node.InnerText);}
-            foreach (XmlNode node in triggerNodeList) {ShoppingList.projectTriggers.Add(node.InnerText);}
-            foreach (XmlNode node in staticResourceNodeList) {ShoppingList.projectStaticResources.Add(node.InnerText);}
-            foreach (XmlNode node in bundleNodeList) {ShoppingList.projectLightningItems.Add(node.InnerText);}
-            foreach (XmlNode node in lwcNodeList) {ShoppingList.projectLwcItems.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("ApexClass")) foreach (XmlNode node in classNodeList) {ShoppingList.projectClasses.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("ApexPage")) foreach (XmlNode node in pageNodeList) {ShoppingList.projectPages.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("ApexTrigger")) foreach (XmlNode node in triggerNodeList) {ShoppingList.projectTriggers.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("StaticResource")) foreach (XmlNode node in staticResourceNodeList) {ShoppingList.projectStaticResources.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("AuraDefinitionBundle")) foreach (XmlNode node in bundleNodeList) {ShoppingList.projectLightningItems.Add(node.InnerText);}
+            if (ShoppingList.metadataToUse.Contains("LightningComponentBundle")) foreach (XmlNode node in lwcNodeList) {ShoppingList.projectLwcItems.Add(node.InnerText);}
+
+            // Version 1.6 START ---------------
+            // Retrieve other stuff and put it into the Shopping List
+            //foreach (string metadataEntry in ShoppingList.metadataBible)
+            foreach (string metadataEntry in Program.getMetadataToUseWithoutDefaults())
+            {
+                List<string> metadataItems = new List<string>();
+                XmlNodeList others = xmlDocument.DocumentElement.SelectNodes("//a:types[a:name='" + metadataEntry + "']//a:members", xmlnsManager);
+                if (others.Count > 0)
+                {
+                    foreach (XmlNode node in others) {metadataItems.Add(node.InnerText);}
+                    ShoppingList.projectOtherMetadata.Add(metadataEntry, metadataItems);
+                }
+            }
+            // Version 1.6 END ---------------
         }
-        public static void updateCurrentProject(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponentStub> lwcs)
+        public static void updateCurrentProject(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponentStub> lwcs, Dictionary<string, List<GenericMetadataStub>> genericMetadata)
         {
-            if (!Directory.Exists(ShoppingList.classesRootDir)) {Directory.CreateDirectory(ShoppingList.classesRootDir);}
-            if (!Directory.Exists(ShoppingList.pagesRootDir)) {Directory.CreateDirectory(ShoppingList.pagesRootDir);}
-            if (!Directory.Exists(ShoppingList.triggersRootDir)) {Directory.CreateDirectory(ShoppingList.triggersRootDir);}
-            if (!Directory.Exists(ShoppingList.staticResourcesRootDir)) {Directory.CreateDirectory(ShoppingList.staticResourcesRootDir);}
-            if (!Directory.Exists(ShoppingList.auraRootDir)) {Directory.CreateDirectory(ShoppingList.auraRootDir);}
-            if (!Directory.Exists(ShoppingList.lwcRootDir)) {Directory.CreateDirectory(ShoppingList.lwcRootDir);}
-
-            string[] classFiles = Directory.GetFiles(ShoppingList.classesRootDir);
-            string[] pageFiles = Directory.GetFiles(ShoppingList.pagesRootDir);
-            string[] triggerFiles = Directory.GetFiles(ShoppingList.triggersRootDir);
-            string[] staticResourceFiles = Directory.GetFiles(ShoppingList.staticResourcesRootDir);
-            string[] staticResourceDirs = Directory.GetDirectories(ShoppingList.staticResourcesRootDir);
-            string[] bundleFiles = Directory.GetFiles(ShoppingList.auraRootDir);
-            string[] bundleDirs = Directory.GetDirectories(ShoppingList.auraRootDir);
-            string[] lwcFiles = Directory.GetFiles(ShoppingList.lwcRootDir);
-            string[] lwcDirs = Directory.GetDirectories(ShoppingList.lwcRootDir);
-
-            foreach (string f in classFiles) {File.Delete(f);}
-            foreach (string f in pageFiles) {File.Delete(f);}
-            foreach (string f in triggerFiles) {File.Delete(f);}
-            foreach (string f in staticResourceFiles) {File.Delete(f);}
-            foreach (string f in staticResourceDirs) {Directory.Delete(f, true);}
-            foreach (string f in bundleFiles) {File.Delete(f);}
-            foreach (string f in bundleDirs) {Directory.Delete(f, true);}
-            foreach (string f in lwcFiles) {File.Delete(f);}
-            foreach (string f in lwcDirs) {Directory.Delete(f, true);}
+            if (Directory.Exists(ShoppingList.classesRootDir)) { foreach (string f in Directory.GetFiles(ShoppingList.classesRootDir)) { File.Delete(f); } }
+            if (Directory.Exists(ShoppingList.pagesRootDir)) { foreach (string f in Directory.GetFiles(ShoppingList.pagesRootDir)) { File.Delete(f); } }
+            if (Directory.Exists(ShoppingList.triggersRootDir)) { foreach (string f in Directory.GetFiles(ShoppingList.triggersRootDir)) { File.Delete(f); } }
+            if (Directory.Exists(ShoppingList.staticResourcesRootDir))
+            {
+                foreach (string f in Directory.GetFiles(ShoppingList.staticResourcesRootDir)) { File.Delete(f); }
+                foreach (string f in Directory.GetDirectories(ShoppingList.staticResourcesRootDir)) { Directory.Delete(f, true); }
+            }
+            if (Directory.Exists(ShoppingList.auraRootDir))
+            {
+                foreach (string f in Directory.GetFiles(ShoppingList.auraRootDir)) { File.Delete(f); }
+                foreach (string f in Directory.GetDirectories(ShoppingList.auraRootDir)) { Directory.Delete(f, true); }
+            }
+            if (Directory.Exists(ShoppingList.lwcRootDir))
+            {
+                foreach (string f in Directory.GetFiles(ShoppingList.lwcRootDir)) { File.Delete(f); }
+                foreach (string f in Directory.GetDirectories(ShoppingList.lwcRootDir)) { Directory.Delete(f, true); }
+            }
+            // Version 1.6 START ---------------
+            // Manage other metadata -- START
+            //foreach (string key in genericMetadata.Keys.ToList<string>())
+            foreach (string key in ShoppingList.metadataBible)
+            {
+                if (Directory.Exists(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key]))
+                {
+                    string[] otherFiles = Directory.GetFiles(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key]);
+                    foreach (string f in otherFiles) { File.Delete(f); }
+                    Directory.Delete(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key], true);
+                }
+            }
+            // Manage other metadata -- END
+            // Version 1.6 END ---------------
 
             if (classes!=null)
             {
+                Directory.CreateDirectory(ShoppingList.classesRootDir);
                 string classesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 classesMetadataTemplate += "<ApexClass xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
                 classesMetadataTemplate += "<apiVersion>45.0</apiVersion>";
@@ -144,6 +189,7 @@ namespace SalesforceOrgManager
             }
             if (pages!=null)
             {
+                Directory.CreateDirectory(ShoppingList.pagesRootDir);
                 string pagesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 pagesMetadataTemplate += "<ApexPage xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
                 pagesMetadataTemplate += "<apiVersion>45.0</apiVersion>";
@@ -170,6 +216,7 @@ namespace SalesforceOrgManager
             }
             if (triggers!=null)
             {
+                Directory.CreateDirectory(ShoppingList.triggersRootDir);
                 string triggersMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 triggersMetadataTemplate += "<ApexTrigger xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
                 triggersMetadataTemplate += "<apiVersion>45.0</apiVersion>";
@@ -192,6 +239,7 @@ namespace SalesforceOrgManager
             }
             if (staticResources!=null)
             {
+                Directory.CreateDirectory(ShoppingList.staticResourcesRootDir);
                 foreach (ApexStaticResourceStub asr in staticResources)
                 {
                     string resourcesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -233,6 +281,7 @@ namespace SalesforceOrgManager
             }
             if (bundles!=null)
             {
+                Directory.CreateDirectory(ShoppingList.auraRootDir);
                 foreach (LightningItemBundle lib in bundles)
                 {
                     string bundlesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -301,6 +350,7 @@ namespace SalesforceOrgManager
             }
             if (lwcs != null)
             {
+                Directory.CreateDirectory(ShoppingList.lwcRootDir);
                 foreach (LightningWebComponentStub lwc in lwcs)
                 {
                     LightningWebComponentStub.LwcResourceStub resource = null;
@@ -333,8 +383,31 @@ namespace SalesforceOrgManager
                     Program.createLightningMetafile(ShoppingList.lwcRootDir, lwc.masterLabel, "js", lwcMetadataTemplate);
                 }
             }
+            // Version 1.6 START ---------------
+            if (genericMetadata.Count > 0)
+            {
+                foreach(string key in genericMetadata.Keys.ToList<string>())
+                {
+                    foreach(GenericMetadataStub gm in genericMetadata[key])
+                    {
+                        Directory.CreateDirectory(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key]);
+                        File.WriteAllText(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key] + "\\" + gm.NameWithExt, gm.Body);
+                        XmlDocument xmlDocument = new XmlDocument();
+                        xmlDocument.Load(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key] + "\\" + gm.NameWithExt);
+
+                        using (var writer = new XmlTextWriter(ShoppingList.projectOrgContentRootDir + "\\" + ShoppingList.metadataTranslator[key] + "\\" + gm.NameWithExt, new UTF8Encoding(false)))
+                        {
+                            writer.Formatting = Formatting.Indented;
+                            xmlDocument.Save(writer);
+                        }
+                    }
+                }                
+            }
+            // Version 1.6 END ---------------
         }
-        public static void updateManifestFile(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, List<LightningWebComponentStub> lwcs)
+        public static void updateManifestFile(List<ApexClassStub> classes, List<ApexPageStub> pages, List<ApexTriggerStub> triggers, 
+            List<ApexStaticResourceStub> staticResources, List<LightningItemBundle> bundles, 
+            List<LightningWebComponentStub> lwcs, Dictionary<string, List<GenericMetadataStub>> genericMetadata)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(ShoppingList.orgManifest);
@@ -374,6 +447,28 @@ namespace SalesforceOrgManager
             if (staticResources!=null) {resourceRoot = xmlDocument.DocumentElement.AppendChild(nodeTypesResource);}
             if (bundles!=null) {bundleRoot = xmlDocument.DocumentElement.AppendChild(nodeTypesBundle);}
             if (lwcs!=null) {lwcRoot = xmlDocument.DocumentElement.AppendChild(nodeTypesLwc);}
+
+            // Version 1.6 START ---------------
+            ShoppingList.projectOtherMetadata.Clear();
+            foreach (string key in genericMetadata.Keys.ToList<string>())
+            {
+                XmlNode generic = xmlDocument.CreateNode(XmlNodeType.Element, "types", "");
+                XmlNode genericRoot = xmlDocument.DocumentElement.AppendChild(generic);
+                List<string> genericItemNames = new List<string>();
+
+                foreach(GenericMetadataStub gm in genericMetadata[key])
+                {
+                    XmlNode nodeMembers = xmlDocument.CreateNode(XmlNodeType.Element, "members", "");
+                    nodeMembers.InnerText = gm.Name;
+                    genericRoot.AppendChild(nodeMembers);
+                    genericItemNames.Add(gm.Name);
+                }
+                XmlNode genericNodeName = xmlDocument.CreateNode(XmlNodeType.Element, "name", "");
+                genericNodeName.InnerText = key;
+                genericRoot.AppendChild(genericNodeName);
+                ShoppingList.projectOtherMetadata.Add(key, genericItemNames);
+            }
+            // Version 1.6 END ------------------
 
             nodeVersion.InnerText = "45.0";
             xmlDocument.DocumentElement.AppendChild(nodeVersion);
@@ -1223,11 +1318,6 @@ namespace SalesforceOrgManager
             }
             return logins;
         }
-        public static object[] getDefaultProjectContent()
-        {
-            object[] defaultProjectContent = (object[])getConfigRecord("orgConfig", null)["defaultProjectContent"];
-            return defaultProjectContent;
-        }
         public static bool setConfigRecord(object[] source, string key, string strRecordName, bool useEncryption, string encryptKey)
         {
             try
@@ -1534,6 +1624,7 @@ namespace SalesforceOrgManager
             JavaScriptSerializer jss = new JavaScriptSerializer();
             jss.MaxJsonLength = Int32.MaxValue;
 
+
             // Prevents application failure in case login.json or orgConfig.json file does not exist by creating a default empty *.json
             if (!File.Exists(Application.StartupPath + "\\" + strRecordName + ".json"))
             {
@@ -1546,6 +1637,21 @@ namespace SalesforceOrgManager
                 File.Delete(Application.StartupPath + "\\" + strRecordName + ".json");
             }
             return configRecord;
+        }
+        private static Dictionary<string, object> getPrjConfig()
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            jss.MaxJsonLength = Int32.MaxValue;
+            Dictionary<string, object> configRecord = (Dictionary<string, object>)jss.DeserializeObject(File.ReadAllText(ShoppingList.projectRootDir + "\\config\\prjConfig.json"));
+            return configRecord;
+        }
+        public static bool setPrjConfig(Dictionary<string,object> configRecord)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            jss.MaxJsonLength = Int32.MaxValue;
+            string content = jss.Serialize(configRecord);
+            File.WriteAllText(ShoppingList.projectRootDir + "\\config\\prjConfig.json", content);
+            return true;
         }
         public static bool directoryExists(string dirPath)
         {
@@ -1629,6 +1735,42 @@ namespace SalesforceOrgManager
             var serializer = new JavaScriptSerializer();
             serializer.MaxJsonLength = Int32.MaxValue;
             return (Dictionary<string, object>)serializer.DeserializeObject(result);
+        }
+        // Version 1.6 START ---------------
+        public static List<string> getMetadataBible()
+        {
+            List<string> bible = ((IEnumerable<object>)getConfigRecord("metadataBible", null)["metadatas"]).ToList<object>().Select(s => (string)s).ToList();
+            return bible;
+        }
+        public static Dictionary<string, string> getMetadataTranslator()
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            jss.MaxJsonLength = Int32.MaxValue;
+            Dictionary<string, string> configRecord = ((Dictionary<string, object>)jss.DeserializeObject(File.ReadAllText(Application.StartupPath + "\\metadataTranslator.json"))).ToDictionary(k => k.Key, k => k.Value.ToString());
+            return configRecord;
+        }
+        // Version 1.6 END ---------------
+        public static async void retrieveAllOtherMetadata()
+        {
+            // Create destination directory
+            string destinationDir = ShoppingList.projectRootDir + "\\tmpretrieve";
+            Directory.CreateDirectory(destinationDir);
+            string packageSourceFile = Application.StartupPath + "\\packageDelta.xml";
+            string cmdParameters = "force:mdapi:retrieve -r \"" + destinationDir + "\" -k \"" + packageSourceFile + "\" -u " + ShoppingList.orgUserName + " --wait 5 --verbose";
+            await Task<string>.Run(() => runShellProcessUI(@"C:\Users\zisa\AppData\Local\sfdx\client\bin\sfdx.cmd", cmdParameters));
+        }
+        public static List<string> getMetadataToUseWithoutDefaults()
+        {
+            List<string> toRemove = new List<string>()
+            {
+                "ApexClass",
+                "ApexPage",
+                "StaticResource",
+                "ApexTrigger",
+                "AuraDefinitionBundle",
+                "LightningItemBundle"
+            };
+            return ShoppingList.metadataToUse.Except(toRemove).ToList();
         }
         //--------- GENERAL UTILITY METHODS -- END ----
     }

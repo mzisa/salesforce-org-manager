@@ -35,11 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddWorkspace = new System.Windows.Forms.Button();
             this.btnRemoveWorkspace = new System.Windows.Forms.Button();
-            this.lstBoxLeft = new System.Windows.Forms.ListBox();
-            this.lstBoxRight = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnRightToLeft = new System.Windows.Forms.Button();
-            this.btnLeftToRight = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSelectPath = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -71,7 +66,6 @@
             this.cmbLoginGroup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.grpLoginManagement.SuspendLayout();
@@ -104,7 +98,7 @@
             this.lstWorkspace.Location = new System.Drawing.Point(14, 146);
             this.lstWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.lstWorkspace.Name = "lstWorkspace";
-            this.lstWorkspace.Size = new System.Drawing.Size(461, 108);
+            this.lstWorkspace.Size = new System.Drawing.Size(461, 277);
             this.lstWorkspace.TabIndex = 4;
             this.lstWorkspace.SelectedIndexChanged += new System.EventHandler(this.lstWorkspace_SelectedIndexChanged);
             // 
@@ -133,7 +127,7 @@
             // btnRemoveWorkspace
             // 
             this.btnRemoveWorkspace.Enabled = false;
-            this.btnRemoveWorkspace.Location = new System.Drawing.Point(14, 274);
+            this.btnRemoveWorkspace.Location = new System.Drawing.Point(14, 440);
             this.btnRemoveWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveWorkspace.Name = "btnRemoveWorkspace";
             this.btnRemoveWorkspace.Size = new System.Drawing.Size(461, 41);
@@ -142,66 +136,10 @@
             this.btnRemoveWorkspace.UseVisualStyleBackColor = true;
             this.btnRemoveWorkspace.Click += new System.EventHandler(this.btnRemoveWorkspace_Click);
             // 
-            // lstBoxLeft
-            // 
-            this.lstBoxLeft.FormattingEnabled = true;
-            this.lstBoxLeft.Location = new System.Drawing.Point(13, 35);
-            this.lstBoxLeft.Margin = new System.Windows.Forms.Padding(2);
-            this.lstBoxLeft.Name = "lstBoxLeft";
-            this.lstBoxLeft.Size = new System.Drawing.Size(167, 121);
-            this.lstBoxLeft.TabIndex = 6;
-            // 
-            // lstBoxRight
-            // 
-            this.lstBoxRight.FormattingEnabled = true;
-            this.lstBoxRight.Location = new System.Drawing.Point(280, 35);
-            this.lstBoxRight.Margin = new System.Windows.Forms.Padding(2);
-            this.lstBoxRight.Name = "lstBoxRight";
-            this.lstBoxRight.Size = new System.Drawing.Size(167, 121);
-            this.lstBoxRight.TabIndex = 9;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnRightToLeft);
-            this.groupBox1.Controls.Add(this.btnLeftToRight);
-            this.groupBox1.Controls.Add(this.lstBoxRight);
-            this.groupBox1.Controls.Add(this.lstBoxLeft);
-            this.groupBox1.Location = new System.Drawing.Point(14, 326);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(461, 169);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Default metadata for new project";
-            // 
-            // btnRightToLeft
-            // 
-            this.btnRightToLeft.Location = new System.Drawing.Point(191, 106);
-            this.btnRightToLeft.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRightToLeft.Name = "btnRightToLeft";
-            this.btnRightToLeft.Size = new System.Drawing.Size(75, 36);
-            this.btnRightToLeft.TabIndex = 8;
-            this.btnRightToLeft.Text = "<<";
-            this.btnRightToLeft.UseVisualStyleBackColor = true;
-            this.btnRightToLeft.Click += new System.EventHandler(this.btnRightToLeft_Click);
-            // 
-            // btnLeftToRight
-            // 
-            this.btnLeftToRight.Location = new System.Drawing.Point(191, 46);
-            this.btnLeftToRight.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLeftToRight.Name = "btnLeftToRight";
-            this.btnLeftToRight.Size = new System.Drawing.Size(75, 36);
-            this.btnLeftToRight.TabIndex = 7;
-            this.btnLeftToRight.Text = ">>";
-            this.btnLeftToRight.UseVisualStyleBackColor = true;
-            this.btnLeftToRight.Click += new System.EventHandler(this.btnLeftToRight_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnSelectPath);
             this.groupBox2.Controls.Add(this.txtItemName);
-            this.groupBox2.Controls.Add(this.groupBox1);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnRemoveWorkspace);
             this.groupBox2.Controls.Add(this.lstWorkspace);
@@ -576,7 +514,6 @@
             this.Name = "BoxSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -597,11 +534,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddWorkspace;
         private System.Windows.Forms.Button btnRemoveWorkspace;
-        private System.Windows.Forms.ListBox lstBoxLeft;
-        private System.Windows.Forms.ListBox lstBoxRight;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnRightToLeft;
-        private System.Windows.Forms.Button btnLeftToRight;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox grpLoginManagement;

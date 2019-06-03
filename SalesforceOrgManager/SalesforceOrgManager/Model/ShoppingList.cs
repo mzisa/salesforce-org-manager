@@ -26,12 +26,15 @@ namespace SalesforceOrgManager.Model
         public static string restServicesBaseUri;
         public static string toolingApiLoginUri;
         public static SforceServiceService toolingService;
+        public static List<string> metadataBible = new List<string>();
+        public static Dictionary<string, string> metadataTranslator = new Dictionary<string, string>();
 
-        // Project related properties
+        // Workspace related properties
         public static object[] workspaces;
-        public static object[] defaultProjectContent;
         public static Dictionary<string, object> logins;
         public static string workspaceDir;
+
+        // Project related properties
         public static string projectRootDir;
         public static string projectOrgContentRootDir;
         public static string classesRootDir;
@@ -40,6 +43,7 @@ namespace SalesforceOrgManager.Model
         public static string staticResourcesRootDir;
         public static string auraRootDir;
         public static string lwcRootDir;
+        public static string retrieveRootDir;
         public static string orgManifest;
         public static string projectName;
 
@@ -53,6 +57,12 @@ namespace SalesforceOrgManager.Model
         public static List<ApexClassStub> testClasses = new List<ApexClassStub>();
         public static string currentTestsJobId;
         public static int logTicketNum = 0;
+
+        // Version 1.6 START ---------------
+        public static Dictionary<string, List<string>> projectOtherMetadata = new Dictionary<string, List<string>>();
+        public static List<string> metadataToUse = new List<string>();
+        public static bool useCache = true;
+        // Version 1.6 END ---------------
 
         // Pointer(s) to Forms
         public static SalesforceOrgManager.View.Principale principalePointer;
@@ -76,7 +86,9 @@ namespace SalesforceOrgManager.Model
             ShoppingList.pagesRootDir = null;
             ShoppingList.triggersRootDir = null;
             ShoppingList.staticResourcesRootDir = null;
-            //ShoppingList.principalePointer = null;
+            ShoppingList.auraRootDir = null;
+            ShoppingList.lwcRootDir = null;
+            ShoppingList.retrieveRootDir = null;
 
             ShoppingList.projectClasses = new List<string>();
             ShoppingList.projectPages = new List<string>();

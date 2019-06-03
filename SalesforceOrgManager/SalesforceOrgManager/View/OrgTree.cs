@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.IO.Compression;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 using SalesforceOrgManager.Model;
 
 namespace SalesforceOrgManager.View
@@ -87,119 +91,181 @@ namespace SalesforceOrgManager.View
             treeView.Nodes.Add(root);
 
             // Populate class nodes
-            List<ApexClassStub> allClasses = Program.retrieveClasses();
-            if (allClasses.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexClass"))
             {
-                // Init class nodes
-                TreeNode classRoot = initApexClassRootNode();
-                root.Nodes.Add(classRoot);
-
-                foreach (ApexClassStub stub in allClasses)
+                List<ApexClassStub> allClasses = Program.retrieveClasses();
+                if (allClasses.Count > 0)
                 {
-                    TreeNode classNode = new TreeNode();
-                    classNode.Name = stub.Id;
-                    classNode.Text = stub.Name;
-                    classNode.Tag = stub;
-                    classNode.Checked = (ShoppingList.projectClasses.Contains(stub.Name) ? true : false);
-                    classNode.ForeColor = (ShoppingList.projectClasses.Contains(stub.Name) ? Color.Blue : classNode.ForeColor);
-                    classRoot.Nodes.Add(classNode);
+                    // Init class nodes
+                    TreeNode classRoot = initApexClassRootNode();
+                    root.Nodes.Add(classRoot);
+
+                    foreach (ApexClassStub stub in allClasses)
+                    {
+                        TreeNode classNode = new TreeNode();
+                        classNode.Name = stub.Id;
+                        classNode.Text = stub.Name;
+                        classNode.Tag = stub;
+                        classNode.Checked = (ShoppingList.projectClasses.Contains(stub.Name) ? true : false);
+                        classNode.ForeColor = (ShoppingList.projectClasses.Contains(stub.Name) ? Color.Blue : classNode.ForeColor);
+                        classRoot.Nodes.Add(classNode);
+                    }
                 }
             }
             // Populate page nodes
-            List<ApexPageStub> allPages = Program.retrievePages();
-            if (allPages.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexPage"))
             {
-                // Init page nodes
-                TreeNode pageRoot = initApexPageRootNode();
-                root.Nodes.Add(pageRoot);
-
-                foreach (ApexPageStub stub in allPages)
+                List<ApexPageStub> allPages = Program.retrievePages();
+                if (allPages.Count > 0)
                 {
-                    TreeNode pageNode = new TreeNode();
-                    pageNode.Name = stub.Id;
-                    pageNode.Text = stub.Name;
-                    pageNode.Tag = stub;
-                    pageNode.Checked = (ShoppingList.projectPages.Contains(stub.Name) ? true : false);
-                    pageNode.ForeColor = (ShoppingList.projectPages.Contains(stub.Name) ? Color.Blue : pageNode.ForeColor);
-                    pageRoot.Nodes.Add(pageNode);
+                    // Init page nodes
+                    TreeNode pageRoot = initApexPageRootNode();
+                    root.Nodes.Add(pageRoot);
+
+                    foreach (ApexPageStub stub in allPages)
+                    {
+                        TreeNode pageNode = new TreeNode();
+                        pageNode.Name = stub.Id;
+                        pageNode.Text = stub.Name;
+                        pageNode.Tag = stub;
+                        pageNode.Checked = (ShoppingList.projectPages.Contains(stub.Name) ? true : false);
+                        pageNode.ForeColor = (ShoppingList.projectPages.Contains(stub.Name) ? Color.Blue : pageNode.ForeColor);
+                        pageRoot.Nodes.Add(pageNode);
+                    }
                 }
             }
             // Populate trigger nodes
-            List<ApexTriggerStub> allTriggers = Program.retrieveTriggers();
-            if (allTriggers.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexTrigger"))
             {
-                // Init trigger nodes
-                TreeNode triggerRoot = initApexTriggerRootNode();
-                root.Nodes.Add(triggerRoot);
-
-                foreach (ApexTriggerStub stub in allTriggers)
+                List<ApexTriggerStub> allTriggers = Program.retrieveTriggers();
+                if (allTriggers.Count > 0)
                 {
-                    TreeNode triggerNode = new TreeNode();
-                    triggerNode.Name = stub.Id;
-                    triggerNode.Text = stub.Name;
-                    triggerNode.Tag = stub;
-                    triggerNode.Checked = (ShoppingList.projectTriggers.Contains(stub.Name) ? true : false);
-                    triggerNode.ForeColor = (ShoppingList.projectTriggers.Contains(stub.Name) ? Color.Blue : triggerNode.ForeColor);
-                    triggerRoot.Nodes.Add(triggerNode);
+                    // Init trigger nodes
+                    TreeNode triggerRoot = initApexTriggerRootNode();
+                    root.Nodes.Add(triggerRoot);
+
+                    foreach (ApexTriggerStub stub in allTriggers)
+                    {
+                        TreeNode triggerNode = new TreeNode();
+                        triggerNode.Name = stub.Id;
+                        triggerNode.Text = stub.Name;
+                        triggerNode.Tag = stub;
+                        triggerNode.Checked = (ShoppingList.projectTriggers.Contains(stub.Name) ? true : false);
+                        triggerNode.ForeColor = (ShoppingList.projectTriggers.Contains(stub.Name) ? Color.Blue : triggerNode.ForeColor);
+                        triggerRoot.Nodes.Add(triggerNode);
+                    }
                 }
             }
             // Populate static resource nodes
-            List<ApexStaticResourceStub> allResources = Program.retrieveStaticResources();
-            if (allResources.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("StaticResource"))
             {
-                // Init trigger nodes
-                TreeNode staticResourceRoot = initStaticResourceRootNode();
-                root.Nodes.Add(staticResourceRoot);
-
-                foreach (ApexStaticResourceStub stub in allResources)
+                List<ApexStaticResourceStub> allResources = Program.retrieveStaticResources();
+                if (allResources.Count > 0)
                 {
-                    TreeNode staticResourceNode = new TreeNode();
-                    staticResourceNode.Name = stub.Id;
-                    staticResourceNode.Text = stub.Name;
-                    staticResourceNode.Tag = stub;
-                    staticResourceNode.Checked = (ShoppingList.projectStaticResources.Contains(stub.Name) ? true : false);
-                    staticResourceNode.ForeColor = (ShoppingList.projectStaticResources.Contains(stub.Name) ? Color.Blue : staticResourceNode.ForeColor);
-                    staticResourceRoot.Nodes.Add(staticResourceNode);
+                    // Init trigger nodes
+                    TreeNode staticResourceRoot = initStaticResourceRootNode();
+                    root.Nodes.Add(staticResourceRoot);
+
+                    foreach (ApexStaticResourceStub stub in allResources)
+                    {
+                        TreeNode staticResourceNode = new TreeNode();
+                        staticResourceNode.Name = stub.Id;
+                        staticResourceNode.Text = stub.Name;
+                        staticResourceNode.Tag = stub;
+                        staticResourceNode.Checked = (ShoppingList.projectStaticResources.Contains(stub.Name) ? true : false);
+                        staticResourceNode.ForeColor = (ShoppingList.projectStaticResources.Contains(stub.Name) ? Color.Blue : staticResourceNode.ForeColor);
+                        staticResourceRoot.Nodes.Add(staticResourceNode);
+                    }
                 }
             }
             // Populate lightning apps
-            List<LightningItemBundle> allLightningItems = Program.retrieveLightningItems();
-            if (allLightningItems.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("AuraDefinitionBundle"))
             {
-                // Init class nodes
-                TreeNode lightningItemRoot = initLightningItemRootNode();
-                root.Nodes.Add(lightningItemRoot);
-
-                foreach (LightningItemBundle stub in allLightningItems)
+                List<LightningItemBundle> allLightningItems = Program.retrieveLightningItems();
+                if (allLightningItems.Count > 0)
                 {
-                    TreeNode bundleNode = new TreeNode();
-                    bundleNode.Name = stub.Id;
-                    bundleNode.Text = stub.MasterLabel;
-                    bundleNode.Tag = stub;
-                    bundleNode.Checked = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? true : false);
-                    bundleNode.ForeColor = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? Color.Blue : bundleNode.ForeColor);
-                    lightningItemRoot.Nodes.Add(bundleNode);
+                    // Init class nodes
+                    TreeNode lightningItemRoot = initLightningItemRootNode();
+                    root.Nodes.Add(lightningItemRoot);
+
+                    foreach (LightningItemBundle stub in allLightningItems)
+                    {
+                        TreeNode bundleNode = new TreeNode();
+                        bundleNode.Name = stub.Id;
+                        bundleNode.Text = stub.MasterLabel;
+                        bundleNode.Tag = stub;
+                        bundleNode.Checked = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? true : false);
+                        bundleNode.ForeColor = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? Color.Blue : bundleNode.ForeColor);
+                        lightningItemRoot.Nodes.Add(bundleNode);
+                    }
                 }
             }
             // Populate lightning web components
-            List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
-            if (allLwc.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("LightningComponentBundle"))
             {
-                // Init class nodes
-                TreeNode lwcItemRoot = initLwcItemRootNode();
-                root.Nodes.Add(lwcItemRoot);
-
-                foreach (LightningWebComponentStub stub in allLwc)
+                List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
+                if (allLwc.Count > 0)
                 {
-                    TreeNode lwcNode = new TreeNode();
-                    lwcNode.Name = stub.id;
-                    lwcNode.Text = stub.masterLabel;
-                    lwcNode.Tag = stub;
-                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
-                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
-                    lwcItemRoot.Nodes.Add(lwcNode);
+                    // Init class nodes
+                    TreeNode lwcItemRoot = initLwcItemRootNode();
+                    root.Nodes.Add(lwcItemRoot);
+
+                    foreach (LightningWebComponentStub stub in allLwc)
+                    {
+                        TreeNode lwcNode = new TreeNode();
+                        lwcNode.Name = stub.id;
+                        lwcNode.Text = stub.masterLabel;
+                        lwcNode.Tag = stub;
+                        lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
+                        lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
+                        lwcItemRoot.Nodes.Add(lwcNode);
+                    }
                 }
             }
+            // Version 1.6 START ---------------
+            // Populate all other metadata -- START
+            if (Program.getMetadataToUseWithoutDefaults().Count > 0)
+            {
+                // Check for local cache
+                if (!Directory.Exists(ShoppingList.retrieveRootDir + "\\unpackaged"))
+                {
+                    Program.retrieveAllOtherMetadata();
+                    do { } while (!File.Exists(ShoppingList.retrieveRootDir + "\\unpackaged.zip"));
+                    Thread.Sleep(1000);
+                    ZipFile.ExtractToDirectory(ShoppingList.retrieveRootDir + "\\unpackaged.zip", ShoppingList.retrieveRootDir);
+                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged.zip");
+                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged\\package.xml");
+                }
+                foreach (string ddir in Directory.GetDirectories(ShoppingList.retrieveRootDir + "\\unpackaged"))
+                {
+                    // Init other nodes
+                    string rootNodeName = Path.GetFileName(Path.GetDirectoryName(ddir + "\\"));
+                    //if (ShoppingList.metadataToUse.Contains(ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == rootNodeName).Key)) {
+                    if (Program.getMetadataToUseWithoutDefaults().Contains(ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == rootNodeName).Key))
+                    {
+                        TreeNode genericItemRoot = initGenericRootNode(rootNodeName);
+                        root.Nodes.Add(genericItemRoot);
+
+                        foreach (string ffile in Directory.GetFiles(ddir))
+                        {
+                            TreeNode genericNode = new TreeNode();
+                            genericNode.Name = Path.GetFileName(ffile);
+                            genericNode.Text = Path.GetFileNameWithoutExtension(ffile);
+                            genericNode.Tag = File.ReadAllText(ffile);
+                            if (ShoppingList.projectOtherMetadata.ContainsKey(genericItemRoot.Text))
+                            {
+                                genericNode.Checked = (ShoppingList.projectOtherMetadata[genericItemRoot.Text].Contains(genericNode.Text) ? true : false);
+                                genericNode.ForeColor = (ShoppingList.projectOtherMetadata[genericItemRoot.Text].Contains(genericNode.Text) ? Color.Blue : genericNode.ForeColor);
+                                genericItemRoot.ForeColor = Color.Blue;
+                            }
+                            genericItemRoot.Nodes.Add(genericNode);
+                        }
+                    }
+                }
+                if (!ShoppingList.useCache) {Directory.Delete(ShoppingList.retrieveRootDir, true);}
+            }
+            // Populate all other metadata -- END
+            // Version 1.6 END ---------------
         }
         private TreeNode refreshMetadataIndexAsync()
         {
@@ -210,137 +276,181 @@ namespace SalesforceOrgManager.View
             root.Tag = "_STRUCTURE";
 
             // Populate class nodes
-            List<ApexClassStub> allClasses = Program.retrieveClasses();
-            if (allClasses.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexClass"))
             {
-                // Init class nodes
-                TreeNode classRoot = new TreeNode();
-                classRoot.Name = "ApexClass";
-                classRoot.Text = "ApexClass";
-                classRoot.ForeColor = (ShoppingList.projectClasses.Count > 0) ? Color.Blue : classRoot.ForeColor;
-                root.Nodes.Add(classRoot);
-
-                foreach (ApexClassStub stub in allClasses)
+                List<ApexClassStub> allClasses = Program.retrieveClasses();
+                if (allClasses.Count > 0)
                 {
-                    TreeNode classNode = new TreeNode();
-                    classNode.Name = stub.Id;
-                    classNode.Text = stub.Name;
-                    classNode.Tag = stub;
-                    classNode.Checked = (ShoppingList.projectClasses.Contains(stub.Name) ? true : false);
-                    classNode.ForeColor = (ShoppingList.projectClasses.Contains(stub.Name) ? Color.Blue : classNode.ForeColor);
-                    classRoot.Nodes.Add(classNode);
+                    // Init class nodes
+                    TreeNode classRoot = initApexClassRootNode();
+                    root.Nodes.Add(classRoot);
+
+                    foreach (ApexClassStub stub in allClasses)
+                    {
+                        TreeNode classNode = new TreeNode();
+                        classNode.Name = stub.Id;
+                        classNode.Text = stub.Name;
+                        classNode.Tag = stub;
+                        classNode.Checked = (ShoppingList.projectClasses.Contains(stub.Name) ? true : false);
+                        classNode.ForeColor = (ShoppingList.projectClasses.Contains(stub.Name) ? Color.Blue : classNode.ForeColor);
+                        classRoot.Nodes.Add(classNode);
+                    }
                 }
             }
             // Populate page nodes
-            List<ApexPageStub> allPages = Program.retrievePages();
-            if (allPages.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexPage"))
             {
-                // Init page nodes
-                TreeNode pageRoot = new TreeNode();
-                pageRoot.Name = "ApexPage";
-                pageRoot.Text = "ApexPage";
-                pageRoot.ForeColor = (ShoppingList.projectPages.Count > 0) ? Color.Blue : pageRoot.ForeColor;
-                root.Nodes.Add(pageRoot);
-
-                foreach (ApexPageStub stub in allPages)
+                List<ApexPageStub> allPages = Program.retrievePages();
+                if (allPages.Count > 0)
                 {
-                    TreeNode pageNode = new TreeNode();
-                    pageNode.Name = stub.Id;
-                    pageNode.Text = stub.Name;
-                    pageNode.Tag = stub;
-                    pageNode.Checked = (ShoppingList.projectPages.Contains(stub.Name) ? true : false);
-                    pageNode.ForeColor = (ShoppingList.projectPages.Contains(stub.Name) ? Color.Blue : pageNode.ForeColor);
-                    pageRoot.Nodes.Add(pageNode);
+                    // Init page nodes
+                    TreeNode pageRoot = initApexPageRootNode();
+                    root.Nodes.Add(pageRoot);
+
+                    foreach (ApexPageStub stub in allPages)
+                    {
+                        TreeNode pageNode = new TreeNode();
+                        pageNode.Name = stub.Id;
+                        pageNode.Text = stub.Name;
+                        pageNode.Tag = stub;
+                        pageNode.Checked = (ShoppingList.projectPages.Contains(stub.Name) ? true : false);
+                        pageNode.ForeColor = (ShoppingList.projectPages.Contains(stub.Name) ? Color.Blue : pageNode.ForeColor);
+                        pageRoot.Nodes.Add(pageNode);
+                    }
                 }
             }
             // Populate trigger nodes
-            List<ApexTriggerStub> allTriggers = Program.retrieveTriggers();
-            if (allTriggers.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("ApexTrigger"))
             {
-                // Init trigger nodes
-                TreeNode triggerRoot = new TreeNode();
-                triggerRoot.Name = "ApexTrigger";
-                triggerRoot.Text = "ApexTrigger";
-                triggerRoot.ForeColor = (ShoppingList.projectTriggers.Count > 0) ? Color.Blue : triggerRoot.ForeColor;
-                root.Nodes.Add(triggerRoot);
-
-                foreach (ApexTriggerStub stub in allTriggers)
+                List<ApexTriggerStub> allTriggers = Program.retrieveTriggers();
+                if (allTriggers.Count > 0)
                 {
-                    TreeNode triggerNode = new TreeNode();
-                    triggerNode.Name = stub.Id;
-                    triggerNode.Text = stub.Name;
-                    triggerNode.Tag = stub;
-                    triggerNode.Checked = (ShoppingList.projectTriggers.Contains(stub.Name) ? true : false);
-                    triggerNode.ForeColor = (ShoppingList.projectTriggers.Contains(stub.Name) ? Color.Blue : triggerNode.ForeColor);
-                    triggerRoot.Nodes.Add(triggerNode);
+                    // Init trigger nodes
+                    TreeNode triggerRoot = initApexTriggerRootNode();
+                    root.Nodes.Add(triggerRoot);
+
+                    foreach (ApexTriggerStub stub in allTriggers)
+                    {
+                        TreeNode triggerNode = new TreeNode();
+                        triggerNode.Name = stub.Id;
+                        triggerNode.Text = stub.Name;
+                        triggerNode.Tag = stub;
+                        triggerNode.Checked = (ShoppingList.projectTriggers.Contains(stub.Name) ? true : false);
+                        triggerNode.ForeColor = (ShoppingList.projectTriggers.Contains(stub.Name) ? Color.Blue : triggerNode.ForeColor);
+                        triggerRoot.Nodes.Add(triggerNode);
+                    }
                 }
             }
             // Populate static resource nodes
-            List<ApexStaticResourceStub> allResources = Program.retrieveStaticResources();
-            if (allResources.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("StaticResource"))
             {
-                // Init trigger nodes
-                TreeNode staticResourceRoot = new TreeNode();
-                staticResourceRoot.Name = "StaticResource";
-                staticResourceRoot.Text = "StaticResource";
-                staticResourceRoot.ForeColor = (ShoppingList.projectStaticResources.Count > 0) ? Color.Blue : staticResourceRoot.ForeColor;
-                root.Nodes.Add(staticResourceRoot);
-
-                foreach (ApexStaticResourceStub stub in allResources)
+                List<ApexStaticResourceStub> allResources = Program.retrieveStaticResources();
+                if (allResources.Count > 0)
                 {
-                    TreeNode staticResourceNode = new TreeNode();
-                    staticResourceNode.Name = stub.Id;
-                    staticResourceNode.Text = stub.Name;
-                    staticResourceNode.Tag = stub;
-                    staticResourceNode.Checked = (ShoppingList.projectStaticResources.Contains(stub.Name) ? true : false);
-                    staticResourceNode.ForeColor = (ShoppingList.projectStaticResources.Contains(stub.Name) ? Color.Blue : staticResourceNode.ForeColor);
-                    staticResourceRoot.Nodes.Add(staticResourceNode);
+                    // Init trigger nodes
+                    TreeNode staticResourceRoot = initStaticResourceRootNode();
+                    root.Nodes.Add(staticResourceRoot);
+
+                    foreach (ApexStaticResourceStub stub in allResources)
+                    {
+                        TreeNode staticResourceNode = new TreeNode();
+                        staticResourceNode.Name = stub.Id;
+                        staticResourceNode.Text = stub.Name;
+                        staticResourceNode.Tag = stub;
+                        staticResourceNode.Checked = (ShoppingList.projectStaticResources.Contains(stub.Name) ? true : false);
+                        staticResourceNode.ForeColor = (ShoppingList.projectStaticResources.Contains(stub.Name) ? Color.Blue : staticResourceNode.ForeColor);
+                        staticResourceRoot.Nodes.Add(staticResourceNode);
+                    }
                 }
             }
             // Populate lightning apps
-            List<LightningItemBundle> allLightningItems = Program.retrieveLightningItems();
-            if (allLightningItems.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("AuraDefinitionBundle"))
             {
-                // Init class nodes
-                TreeNode lightningItemRoot = new TreeNode();
-                lightningItemRoot.Name = "AuraDefinitionBundle";
-                lightningItemRoot.Text = "AuraDefinitionBundle";
-                lightningItemRoot.ForeColor = (ShoppingList.projectLightningItems.Count > 0) ? Color.Blue : lightningItemRoot.ForeColor;
-                root.Nodes.Add(lightningItemRoot);
-
-                foreach (LightningItemBundle stub in allLightningItems)
+                List<LightningItemBundle> allLightningItems = Program.retrieveLightningItems();
+                if (allLightningItems.Count > 0)
                 {
-                    TreeNode bundleNode = new TreeNode();
-                    bundleNode.Name = stub.Id;
-                    bundleNode.Text = stub.MasterLabel;
-                    bundleNode.Tag = stub;
-                    bundleNode.Checked = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? true : false);
-                    bundleNode.ForeColor = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? Color.Blue : bundleNode.ForeColor);
-                    lightningItemRoot.Nodes.Add(bundleNode);
+                    // Init class nodes
+                    TreeNode lightningItemRoot = initLightningItemRootNode();
+                    root.Nodes.Add(lightningItemRoot);
+
+                    foreach (LightningItemBundle stub in allLightningItems)
+                    {
+                        TreeNode bundleNode = new TreeNode();
+                        bundleNode.Name = stub.Id;
+                        bundleNode.Text = stub.MasterLabel;
+                        bundleNode.Tag = stub;
+                        bundleNode.Checked = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? true : false);
+                        bundleNode.ForeColor = (ShoppingList.projectLightningItems.Contains(stub.MasterLabel) ? Color.Blue : bundleNode.ForeColor);
+                        lightningItemRoot.Nodes.Add(bundleNode);
+                    }
                 }
             }
             // Populate lightning web components
-            List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
-            if (allLwc.Count > 0)
+            if (ShoppingList.metadataToUse.Contains("LightningComponentBundle"))
             {
-                // Init class nodes
-                TreeNode lwcItemRoot = new TreeNode();
-                lwcItemRoot.Name = "LightningComponentBundle";
-                lwcItemRoot.Text = "LightningComponentBundle";
-                lwcItemRoot.ForeColor = (ShoppingList.projectLwcItems.Count > 0) ? Color.Blue : lwcItemRoot.ForeColor;
-                root.Nodes.Add(lwcItemRoot);
-
-                foreach (LightningWebComponentStub stub in allLwc)
+                List<LightningWebComponentStub> allLwc = Program.retrieveLightningWebComponents();
+                if (allLwc.Count > 0)
                 {
-                    TreeNode lwcNode = new TreeNode();
-                    lwcNode.Name = stub.id;
-                    lwcNode.Text = stub.masterLabel;
-                    lwcNode.Tag = stub;
-                    lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
-                    lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
-                    lwcItemRoot.Nodes.Add(lwcNode);
+                    // Init class nodes
+                    TreeNode lwcItemRoot = initLwcItemRootNode();
+                    root.Nodes.Add(lwcItemRoot);
+
+                    foreach (LightningWebComponentStub stub in allLwc)
+                    {
+                        TreeNode lwcNode = new TreeNode();
+                        lwcNode.Name = stub.id;
+                        lwcNode.Text = stub.masterLabel;
+                        lwcNode.Tag = stub;
+                        lwcNode.Checked = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? true : false);
+                        lwcNode.ForeColor = (ShoppingList.projectLwcItems.Contains(stub.masterLabel) ? Color.Blue : lwcNode.ForeColor);
+                        lwcItemRoot.Nodes.Add(lwcNode);
+                    }
                 }
             }
+            // Version 1.6 START ---------------
+            // Populate all other metadata -- START
+            if (Program.getMetadataToUseWithoutDefaults().Count > 0)
+            {
+                // Check for local cache
+                if (!Directory.Exists(ShoppingList.retrieveRootDir + "\\unpackaged"))
+                {
+                    Program.retrieveAllOtherMetadata();
+                    do { } while (!File.Exists(ShoppingList.retrieveRootDir + "\\unpackaged.zip"));
+                    Thread.Sleep(1000);
+                    ZipFile.ExtractToDirectory(ShoppingList.retrieveRootDir + "\\unpackaged.zip", ShoppingList.retrieveRootDir);
+                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged.zip");
+                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged\\package.xml");
+                }
+                foreach (string ddir in Directory.GetDirectories(ShoppingList.retrieveRootDir + "\\unpackaged"))
+                {
+                    // Init other nodes
+                    string rootNodeName = Path.GetFileName(Path.GetDirectoryName(ddir + "\\"));
+                    //if (ShoppingList.metadataToUse.Contains(ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == rootNodeName).Key)) {
+                    if (Program.getMetadataToUseWithoutDefaults().Contains(ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == rootNodeName).Key))
+                    {
+                        TreeNode genericItemRoot = initGenericRootNode(rootNodeName);
+                        root.Nodes.Add(genericItemRoot);
+
+                        foreach (string ffile in Directory.GetFiles(ddir))
+                        {
+                            TreeNode genericNode = new TreeNode();
+                            genericNode.Name = Path.GetFileName(ffile);
+                            genericNode.Text = Path.GetFileNameWithoutExtension(ffile);
+                            genericNode.Tag = File.ReadAllText(ffile);
+                            if (ShoppingList.projectOtherMetadata.ContainsKey(genericItemRoot.Text))
+                            {
+                                genericNode.Checked = (ShoppingList.projectOtherMetadata[genericItemRoot.Text].Contains(genericNode.Text) ? true : false);
+                                genericNode.ForeColor = (ShoppingList.projectOtherMetadata[genericItemRoot.Text].Contains(genericNode.Text) ? Color.Blue : genericNode.ForeColor);
+                                genericItemRoot.ForeColor = Color.Blue;
+                            }
+                            genericItemRoot.Nodes.Add(genericNode);
+                        }
+                    }
+                }
+                if (!ShoppingList.useCache) {Directory.Delete(ShoppingList.retrieveRootDir, true);}
+            }
+            // Populate all other metadata -- END
+            // Version 1.6 END ---------------
             return root;
         }
         private void btnUpdateProject_Click(object sender, EventArgs e)
@@ -372,6 +482,23 @@ namespace SalesforceOrgManager.View
             TreeNode staticResourceRootNode = rootNode.Nodes["StaticResource"];
             TreeNode bundleRootNode = rootNode.Nodes["AuraDefinitionBundle"];
             TreeNode lwcRootNode = rootNode.Nodes["LightningComponentBundle"];
+
+            // Version 1.6 START ---------------
+            List<TreeNode> genericMetadataRootNodes = new List<TreeNode>();
+
+            // Retrieve other stuff and put it into the Shopping List
+            //foreach (string metadataEntry in ShoppingList.metadataBible)
+            //foreach (string metadataEntry in ShoppingList.metadataToUse)
+            foreach (string metadataEntry in Program.getMetadataToUseWithoutDefaults())
+            {
+                List<string> metadataItems = new List<string>();
+                TreeNode other = rootNode.Nodes[metadataEntry];
+                if (other != null)
+                {
+                    genericMetadataRootNodes.Add(other);
+                }
+            }
+            // Version 1.6 END ---------------
 
             if (!nodeResult.GetType().Equals(typeof(System.Reflection.Missing)))
             {
@@ -506,7 +633,6 @@ namespace SalesforceOrgManager.View
                     }
                 }
             }
-
             // Get class names, page names from SF org
             List<ApexClassStub> selectedClasses = new List<ApexClassStub>();
             List<ApexPageStub> selectedPages = new List<ApexPageStub>();
@@ -522,6 +648,26 @@ namespace SalesforceOrgManager.View
             if (bundleRootNode!=null) {foreach (TreeNode node in bundleRootNode.Nodes) {if (node.Checked) {selectedBundles.Add((LightningItemBundle)node.Tag);}}}
             if (lwcRootNode!=null) {foreach (TreeNode node in lwcRootNode.Nodes) {if (node.Checked) {selectedWebComponents.Add((LightningWebComponentStub)node.Tag);}}}
 
+            // Version 1.6 START ---------------
+            Dictionary<string, List<GenericMetadataStub>> selectedGenericMetadata = new Dictionary<string, List<GenericMetadataStub>>();
+            if (genericMetadataRootNodes.Count > 0)
+            {
+                foreach (TreeNode otherRootNode in genericMetadataRootNodes)
+                {
+                    List<GenericMetadataStub> genericMetadataStubs = new List<GenericMetadataStub>();
+                    foreach(TreeNode genericMetadataNode in otherRootNode.Nodes)
+                    {
+                        if (genericMetadataNode.Checked)
+                        {
+                            GenericMetadataStub genericMetadataStub = new GenericMetadataStub(genericMetadataNode.Text, (string)genericMetadataNode.Tag, genericMetadataNode.Name);
+                            genericMetadataStubs.Add(genericMetadataStub);
+                        }
+                    }
+                    if (genericMetadataStubs.Count > 0) {selectedGenericMetadata.Add(otherRootNode.Text, genericMetadataStubs);}
+                }
+            }
+            // Version 1.6 END ---------------
+
             List<ApexClassStub> classesAdder = selectedClasses.Count == 0 ? null : selectedClasses;
             List<ApexPageStub> pagesAdder = selectedPages.Count == 0 ? null : selectedPages;
             List<ApexTriggerStub> triggersAdder = selectedTriggers.Count == 0 ? null : selectedTriggers;
@@ -530,10 +676,10 @@ namespace SalesforceOrgManager.View
             List<LightningWebComponentStub> lwcAdder = selectedWebComponents.Count == 0 ? null : selectedWebComponents;
 
             // Update current project files
-            Program.updateCurrentProject(classesAdder, pagesAdder, triggersAdder, staticResourcesAdder, bundlesAdder, lwcAdder);
+            Program.updateCurrentProject(classesAdder, pagesAdder, triggersAdder, staticResourcesAdder, bundlesAdder, lwcAdder, selectedGenericMetadata);
 
             // Update the package.xml project manifest file
-            Program.updateManifestFile(classesAdder, pagesAdder, triggersAdder, staticResourcesAdder, bundlesAdder, lwcAdder);
+            Program.updateManifestFile(classesAdder, pagesAdder, triggersAdder, staticResourcesAdder, bundlesAdder, lwcAdder, selectedGenericMetadata);
         }
         private void btnSelectAll_Click(object sender, EventArgs e) {this.CheckAllNodes(treeView.Nodes);}
         private void btnSelectNone_Click(object sender, EventArgs e) {this.UncheckAllNodes(treeView.Nodes);}
@@ -601,6 +747,13 @@ namespace SalesforceOrgManager.View
             classRoot.Text = "ApexClass";
             classRoot.ForeColor = (ShoppingList.projectClasses.Count > 0) ? Color.Blue : classRoot.ForeColor;
             return classRoot;
+        }
+        public TreeNode initGenericRootNode(string nodeType)
+        {
+            TreeNode genericRoot = new TreeNode();
+            genericRoot.Name = ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == nodeType).Key;
+            genericRoot.Text = ShoppingList.metadataTranslator.FirstOrDefault(x => x.Value == nodeType).Key;
+            return genericRoot;
         }
         public TreeNode initApexPageRootNode()
         {
@@ -739,6 +892,11 @@ namespace SalesforceOrgManager.View
         private void OrgTree_FormClosing(object sender, FormClosingEventArgs e)
         {
             ShoppingList.principalePointer.Show();
+        }
+        private void btnProjectSettings_Click(object sender, EventArgs e)
+        {
+            BoxProjectSettings bps = new BoxProjectSettings();
+            bps.Show();
         }
         //----------- NON UTILIZZATI: DA DISMETTERE (?) END ---------
     }

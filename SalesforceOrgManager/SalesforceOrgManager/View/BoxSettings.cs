@@ -14,7 +14,6 @@ namespace SalesforceOrgManager.View
         {
             InitializeComponent();
             if (ShoppingList.workspaces != null) {lstWorkspace.Items.AddRange(ShoppingList.workspaces);}
-            lstBoxRight.Items.AddRange(ShoppingList.defaultProjectContent);
             cmbLoginGroup.Items.AddRange(ShoppingList.logins.Keys.ToArray());
 
             if (File.Exists(Application.StartupPath + "\\logins.crypt"))
@@ -28,22 +27,6 @@ namespace SalesforceOrgManager.View
         }
 
         // Events management
-        private void btnLeftToRight_Click(object sender, EventArgs e)
-        {
-            foreach(int index in lstBoxLeft.SelectedIndices)
-            {
-                lstBoxRight.Items.Add(lstBoxLeft.Items[index]);
-                lstBoxLeft.Items.RemoveAt(index);
-            }
-        }
-        private void btnRightToLeft_Click(object sender, EventArgs e)
-        {
-            foreach (int index in lstBoxRight.SelectedIndices)
-            {
-                lstBoxLeft.Items.Add(lstBoxRight.Items[index]);
-                lstBoxRight.Items.RemoveAt(index);
-            }
-        }
         private void btnAddWorkspace_Click(object sender, EventArgs e)
         {
             if (!lstWorkspace.Items.Contains(txtItemName.Text))

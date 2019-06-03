@@ -8,6 +8,8 @@
 login.json
 orgConfig.json
 *.exe.config
+exceptions.txt
+packageDelta.xml
 
 # User-specific files
 *.rsuser
@@ -23,7 +25,7 @@ orgConfig.json
 mono_crash.*
 
 # Build results
-#[Dd]ebug/
+[Dd]ebug/
 [Dd]ebugPublic/
 #[Rr]elease/
 [Rr]eleases/

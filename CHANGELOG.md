@@ -5,10 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Fix DEPLOY TO SERVER functionality
-- Implement local cache for metadata to boost performance on large ORGs
-- Improve static resources management
 - New lightning web component should allow target and target config selections
+
+## [1.6.0] - 2019-06-03
+### Added
+- Org metadata tree can manage all metadata types now
+- Added project metadata configuration form: now you can select which metadata you want to consider in your code project
+- Implemented local cache for metadata to boost performance on large ORGs: in project configuration form you can now choose to use metadata cache in your project (recommended and enabled by default) or not
+
+### Changed
+- Improved static resources management
+- Peformance optimizations
+- If you want download just the executable, you can now simply grab the /Release folder content
+
+### Removed
+- Fix DEPLOY TO SERVER functionality
 
 ## [1.5.1] - 2019-05-16
 ### Changed

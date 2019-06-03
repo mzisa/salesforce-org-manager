@@ -66,6 +66,7 @@
     <Compile Include="Model\ApexDebugLog.cs" />
     <Compile Include="Model\ApexExecutionResult.cs" />
     <Compile Include="Model\ApexStaticResourceStab.cs" />
+    <Compile Include="Model\GenericMetadataStub.cs" />
     <Compile Include="Model\LightningItemStub.cs" />
     <Compile Include="Model\LightningWebComponentStub.cs" />
     <Compile Include="Model\TestOutcome.cs" />
@@ -125,6 +126,12 @@
     </Compile>
     <Compile Include="View\BoxExecuteAnonymous.Designer.cs">
       <DependentUpon>BoxExecuteAnonymous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoxProjectSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxProjectSettings.Designer.cs">
+      <DependentUpon>BoxProjectSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="View\BoxSettings.cs">
       <SubType>Form</SubType>
@@ -193,6 +200,9 @@
     <EmbeddedResource Include="View\BoxExecuteAnonymous.resx">
       <DependentUpon>BoxExecuteAnonymous.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\BoxProjectSettings.resx">
+      <DependentUpon>BoxProjectSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\BoxSettings.resx">
       <DependentUpon>BoxSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +249,7 @@
     <Content Include="ExternalDll\SfTooling.dll" />
     <Content Include="icons8_share_100_llY_icon.ico" />
     <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\architecture.png" />
     <Content Include="img\auth.ico" />
     <Content Include="img\checklist.ico" />
     <Content Include="img\cloud-computing.png" />

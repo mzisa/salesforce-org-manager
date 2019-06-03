@@ -57,7 +57,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnNewLwc = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.btnDeployToServer = new System.Windows.Forms.PictureBox();
+            this.btnProjectSettings = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnDebugLogs = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -76,7 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLightApp)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLwc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeployToServer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnProjectSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDebugLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApiUsage)).BeginInit();
             this.SuspendLayout();
@@ -399,7 +399,7 @@
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.btnNewLwc);
             this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.btnDeployToServer);
+            this.tabPage3.Controls.Add(this.btnProjectSettings);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.btnDebugLogs);
             this.tabPage3.Controls.Add(this.label10);
@@ -439,25 +439,25 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(10, 585);
+            this.label12.Location = new System.Drawing.Point(12, 585);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(126, 15);
+            this.label12.Size = new System.Drawing.Size(124, 15);
             this.label12.TabIndex = 17;
-            this.label12.Text = "DEPLOY TO SERVER";
+            this.label12.Text = "PROJECT SETTINGS";
             // 
-            // btnDeployToServer
+            // btnProjectSettings
             // 
-            this.btnDeployToServer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeployToServer.Image = ((System.Drawing.Image)(resources.GetObject("btnDeployToServer.Image")));
-            this.btnDeployToServer.Location = new System.Drawing.Point(20, 469);
-            this.btnDeployToServer.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDeployToServer.Name = "btnDeployToServer";
-            this.btnDeployToServer.Size = new System.Drawing.Size(106, 114);
-            this.btnDeployToServer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnDeployToServer.TabIndex = 16;
-            this.btnDeployToServer.TabStop = false;
-            this.btnDeployToServer.Click += new System.EventHandler(this.btnDeployToServer_Click);
+            this.btnProjectSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProjectSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectSettings.Image")));
+            this.btnProjectSettings.Location = new System.Drawing.Point(20, 469);
+            this.btnProjectSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.btnProjectSettings.Name = "btnProjectSettings";
+            this.btnProjectSettings.Size = new System.Drawing.Size(106, 114);
+            this.btnProjectSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnProjectSettings.TabIndex = 16;
+            this.btnProjectSettings.TabStop = false;
+            this.btnProjectSettings.Click += new System.EventHandler(this.btnProjectSettings_Click);
             // 
             // label9
             // 
@@ -552,7 +552,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewLwc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDeployToServer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnProjectSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDebugLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnApiUsage)).EndInit();
             this.ResumeLayout(false);
@@ -590,7 +590,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.PictureBox btnApiUsage;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.PictureBox btnDeployToServer;
+        private System.Windows.Forms.PictureBox btnProjectSettings;
         private System.Windows.Forms.PictureBox btnNewClass;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox btnNewLwc;

@@ -10,7 +10,7 @@ namespace SalesforceOrgManager.View
     {
         public Principale()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
         private void Principale_Load(object sender, EventArgs e)
         {
@@ -19,6 +19,10 @@ namespace SalesforceOrgManager.View
         public void mainInit()
         {
             ShoppingList.workspaces = Program.getWorkspaces();
+            // Version 1.6 START ---------------
+            ShoppingList.metadataBible = Program.getMetadataBible();
+            ShoppingList.metadataTranslator = Program.getMetadataTranslator();
+            // Version 1.6 END ---------------
             // Check for workspace existance
             if (ShoppingList.workspaces.Length > 0)
             {
@@ -32,7 +36,6 @@ namespace SalesforceOrgManager.View
                 }
                 ShoppingList.workspaces = tmpDirs.ToArray();
             }
-            ShoppingList.defaultProjectContent = Program.getDefaultProjectContent();
             ShoppingList.logins = Program.getLogins();
             cmbWorkspace.DataSource = ShoppingList.workspaces;
             cmbWorkspace.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -92,11 +95,9 @@ namespace SalesforceOrgManager.View
             {
                 Program.initProject(ShoppingList.workspaceDir + "\\" + (string)txtProjectName.Text);
             }
-            //Form loginForm = new SalesforceOrgManager.frmLogin();
             ShoppingList.LoginPointer = new frmLogin();
             this.Hide();
             ShoppingList.LoginPointer.Show();
-            //loginForm.Show();
         }
         private void picNewProject_Click(object sender, EventArgs e)
         {

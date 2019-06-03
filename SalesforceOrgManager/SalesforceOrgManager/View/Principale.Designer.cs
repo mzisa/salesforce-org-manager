@@ -227,7 +227,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Salesforce Org Manager v. 1.5.1";
+            this.Text = "Salesforce Org Manager v. 1.6";
             this.Load += new System.EventHandler(this.Principale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picNewProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenProject)).EndInit();
