@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - New lightning web component should allow target and target config selections
 
+## [1.6.1] - 2019-06-06
+### Changed
+- Fixed bug on lightning web component creations and retrieve
+
 ## [1.6.0] - 2019-06-03
 ### Added
 - Org metadata tree can manage all metadata types now

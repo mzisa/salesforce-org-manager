@@ -139,7 +139,7 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BoxProjectSettings";
-            this.Text = "BoxProjectSettings";
+            this.Text = "Project settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoxProjectSettings_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

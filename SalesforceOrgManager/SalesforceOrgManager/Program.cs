@@ -1768,7 +1768,7 @@ namespace SalesforceOrgManager
                 "StaticResource",
                 "ApexTrigger",
                 "AuraDefinitionBundle",
-                "LightningItemBundle"
+                "LightningComponentBundle"
             };
             return ShoppingList.metadataToUse.Except(toRemove).ToList();
         }
