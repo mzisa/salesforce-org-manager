@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- New lightning web component should allow target and target config selections
+- Improve cache management
+
+## [1.6.2] - 2019-06-10
+### Changed
+- Fixed bug on cache creation
+- Code optimizations
 
 ## [1.6.1] - 2019-06-06
 ### Changed
