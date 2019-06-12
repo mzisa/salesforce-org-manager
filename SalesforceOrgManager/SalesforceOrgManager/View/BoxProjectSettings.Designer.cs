@@ -35,10 +35,7 @@
             this.lstBoxRight = new System.Windows.Forms.ListBox();
             this.lstBoxLeft = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chkUseCache = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -47,7 +44,7 @@
             this.groupBox1.Controls.Add(this.btnLeftToRight);
             this.groupBox1.Controls.Add(this.lstBoxRight);
             this.groupBox1.Controls.Add(this.lstBoxLeft);
-            this.groupBox1.Location = new System.Drawing.Point(12, 107);
+            this.groupBox1.Location = new System.Drawing.Point(15, 41);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -107,34 +104,11 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Changes are saved automatically after closing this window";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.chkUseCache);
-            this.groupBox2.Location = new System.Drawing.Point(12, 36);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(460, 49);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Cache settings";
-            // 
-            // chkUseCache
-            // 
-            this.chkUseCache.AutoSize = true;
-            this.chkUseCache.Checked = true;
-            this.chkUseCache.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseCache.Location = new System.Drawing.Point(13, 19);
-            this.chkUseCache.Name = "chkUseCache";
-            this.chkUseCache.Size = new System.Drawing.Size(79, 17);
-            this.chkUseCache.TabIndex = 0;
-            this.chkUseCache.Text = "Use Cache";
-            this.chkUseCache.UseVisualStyleBackColor = true;
-            // 
             // BoxProjectSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 449);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(485, 383);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -142,8 +116,6 @@
             this.Text = "Project settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoxProjectSettings_FormClosing);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,7 +129,5 @@
         private System.Windows.Forms.ListBox lstBoxRight;
         private System.Windows.Forms.ListBox lstBoxLeft;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkUseCache;
     }
 }

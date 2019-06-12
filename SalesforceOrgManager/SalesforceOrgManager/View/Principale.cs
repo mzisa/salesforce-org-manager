@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using SalesforceOrgManager.Model;
+using System.Linq;
 
 namespace SalesforceOrgManager.View
 {
@@ -85,6 +86,7 @@ namespace SalesforceOrgManager.View
         }
         private void btnOpenProject_Click(object sender, EventArgs e)
         {
+            //string sfdxPath = ((Dictionary<string, object>)Program.getConfigRecord("orgConfig", null)["sfdxPath"]).Values.ToList()[0].ToString();
             ShoppingList.workspaceDir = Convert.ToString(cmbWorkspace.SelectedItem);
             if (ShoppingList.currentOperation == (int)ShoppingList.currentOp.Open)
             {

@@ -64,6 +64,10 @@ namespace SalesforceOrgManager.View
                 refreshMetadataIndexSyncCaller();
             }
         }
+        private void OrgTree_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ShoppingList.principalePointer.Show();
+        }
         // FORM UI METHODS -- END ----
 
         // PROJECT CONTENT METHODS -- START ---------------------
@@ -229,18 +233,17 @@ namespace SalesforceOrgManager.View
             }
             // Version 1.6 START ---------------
             // Populate all other metadata -- START
-            if (Program.getMetadataToUseWithoutDefaults().Count > 0)
+            List<string> metadataToUseWithoutDefaults = Program.getMetadataToUseWithoutDefaults();
+            if (metadataToUseWithoutDefaults.Count > 0)
             {
                 // Check for local cache
-                if (!Directory.Exists(ShoppingList.retrieveRootDir + "\\unpackaged"))
-                {
-                    Program.retrieveAllOtherMetadata();
-                    do { } while (!File.Exists(ShoppingList.retrieveRootDir + "\\unpackaged.zip"));
-                    Thread.Sleep(1000);
-                    ZipFile.ExtractToDirectory(ShoppingList.retrieveRootDir + "\\unpackaged.zip", ShoppingList.retrieveRootDir);
-                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged.zip");
-                    File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged\\package.xml");
-                }
+                Program.retrieveAllOtherMetadata(metadataToUseWithoutDefaults);
+                do { } while (!File.Exists(ShoppingList.retrieveRootDir + "\\unpackaged.zip"));
+                Thread.Sleep(1000);
+                ZipFile.ExtractToDirectory(ShoppingList.retrieveRootDir + "\\unpackaged.zip", ShoppingList.retrieveRootDir);
+                File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged.zip");
+                File.Delete(ShoppingList.retrieveRootDir + "\\unpackaged\\package.xml");
+            
                 foreach (string ddir in Directory.GetDirectories(ShoppingList.retrieveRootDir + "\\unpackaged"))
                 {
                     // Init other nodes
@@ -267,7 +270,7 @@ namespace SalesforceOrgManager.View
                         }
                     }
                 }
-                if (!ShoppingList.useCache) {Directory.Delete(ShoppingList.retrieveRootDir, true);}
+                Directory.Delete(ShoppingList.retrieveRootDir, true);
             }
             // Populate all other metadata -- END
             // Version 1.6 END ---------------
@@ -503,6 +506,11 @@ namespace SalesforceOrgManager.View
         }
         private void btnSelectAll_Click(object sender, EventArgs e) {this.CheckAllNodes(treeView.Nodes);}
         private void btnSelectNone_Click(object sender, EventArgs e) {this.UncheckAllNodes(treeView.Nodes);}
+        private void btnProjectSettings_Click(object sender, EventArgs e)
+        {
+            BoxProjectSettings bps = new BoxProjectSettings();
+            bps.Show();
+        }
         // PROJECT CONTENT METHODS -- END ---------------------
 
         // TREEVIEW UTILITY METHODS -- START ---------------------
@@ -692,9 +700,6 @@ namespace SalesforceOrgManager.View
         }
         // TREEVIEW UTILITY METHODS -- EBD ---------------------
 
-        //----------- TBD ----------------------- START -------------
-        //----------- TBD ----------------------- END -------------
-
         //----------- NON UTILIZZATI: DA DISMETTERE (?) START ---------
         private TreeNode FindRootNode(TreeNode treeNode)
         {
@@ -708,15 +713,6 @@ namespace SalesforceOrgManager.View
         {
             BoxExecuteAnonymous bea = new BoxExecuteAnonymous();
             bea.Show();
-        }
-        private void OrgTree_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ShoppingList.principalePointer.Show();
-        }
-        private void btnProjectSettings_Click(object sender, EventArgs e)
-        {
-            BoxProjectSettings bps = new BoxProjectSettings();
-            bps.Show();
         }
         //----------- NON UTILIZZATI: DA DISMETTERE (?) END ---------
     }

@@ -65,7 +65,6 @@
             this.cmdCreateNewLoginGroup = new System.Windows.Forms.Button();
             this.cmbLoginGroup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.grpLoginManagement.SuspendLayout();
@@ -127,7 +126,7 @@
             // btnRemoveWorkspace
             // 
             this.btnRemoveWorkspace.Enabled = false;
-            this.btnRemoveWorkspace.Location = new System.Drawing.Point(14, 440);
+            this.btnRemoveWorkspace.Location = new System.Drawing.Point(14, 454);
             this.btnRemoveWorkspace.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveWorkspace.Name = "btnRemoveWorkspace";
             this.btnRemoveWorkspace.Size = new System.Drawing.Size(461, 41);
@@ -145,7 +144,7 @@
             this.groupBox2.Controls.Add(this.lstWorkspace);
             this.groupBox2.Controls.Add(this.btnAddWorkspace);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(9, 6);
+            this.groupBox2.Location = new System.Drawing.Point(12, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(482, 511);
             this.groupBox2.TabIndex = 11;
@@ -402,7 +401,7 @@
             this.grpLoginGroupManagement.Controls.Add(this.cmdCreateNewLoginGroup);
             this.grpLoginGroupManagement.Controls.Add(this.cmbLoginGroup);
             this.grpLoginGroupManagement.Controls.Add(this.label3);
-            this.grpLoginGroupManagement.Location = new System.Drawing.Point(6, 56);
+            this.grpLoginGroupManagement.Location = new System.Drawing.Point(6, 66);
             this.grpLoginGroupManagement.Name = "grpLoginGroupManagement";
             this.grpLoginGroupManagement.Size = new System.Drawing.Size(496, 118);
             this.grpLoginGroupManagement.TabIndex = 13;
@@ -498,10 +497,6 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "-OR-";
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.UserProfile;
-            // 
             // BoxSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -564,6 +559,5 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkIsSandbox;
         private System.Windows.Forms.Button btnSelectPath;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

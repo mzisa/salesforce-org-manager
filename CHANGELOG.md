@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Improve cache management
+## [1.7.0] - 2019-06-13
+### Changed
+- Tailored cache management
+- Sfdx client bin path is now automatically retrieved
+- Code optimizations
+- Bugfixes
 
 ## [1.6.2] - 2019-06-10
 ### Changed

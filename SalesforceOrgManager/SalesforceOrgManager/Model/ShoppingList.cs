@@ -61,7 +61,6 @@ namespace SalesforceOrgManager.Model
         // Version 1.6 START ---------------
         public static Dictionary<string, List<string>> projectOtherMetadata = new Dictionary<string, List<string>>();
         public static List<string> metadataToUse = new List<string>();
-        public static bool useCache = true;
         // Version 1.6 END ---------------
 
         // Pointer(s) to Forms

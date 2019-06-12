@@ -42,19 +42,14 @@ namespace SalesforceOrgManager
             ShoppingList.auraRootDir = ShoppingList.projectOrgContentRootDir + "\\aura";
             ShoppingList.lwcRootDir = ShoppingList.projectOrgContentRootDir + "\\lwc";
             // Version 1.6 START ---------------
-            ShoppingList.retrieveRootDir = ShoppingList.projectRootDir + "\\tmpretrieve";
+            ShoppingList.retrieveRootDir = ShoppingList.projectRootDir + "\\cache";
             // Version 1.6 END ---------------
         }
         public static void createNewProject()
         {
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C sfdx force:project:create --projectname " + ShoppingList.projectName + " --outputdir " + ShoppingList.workspaceDir;
-            using (System.Diagnostics.Process exeProcess = System.Diagnostics.Process.Start(startInfo))
-            {
-                exeProcess.WaitForExit();
-            }
+            string cmdParameters = "/C sfdx force:project:create --projectname " + ShoppingList.projectName + " --outputdir " + ShoppingList.workspaceDir;
+            runShellProcess("cmd.exe", cmdParameters);
+            
             List<string> defaultMetadata = new List<string>()
             {
                 "ApexClass",
@@ -62,14 +57,12 @@ namespace SalesforceOrgManager
                 "StaticResource",
                 "ApexTrigger",
                 "AuraDefinitionBundle",
-                "LightningComponentBundle"
+                "LightningItemBundle"
             };
             Dictionary<string, object> metadataToUse = new Dictionary<string, object>();
             metadataToUse.Add("metadataToUse", defaultMetadata);
-            metadataToUse.Add("useCache", true);
             if (Program.setPrjConfig(metadataToUse)) {
                 ShoppingList.metadataToUse = defaultMetadata;
-                ShoppingList.useCache = true;
             }
         }
         public static void createManifestForNewProject()
@@ -1495,8 +1488,10 @@ namespace SalesforceOrgManager
             box.progressBar1.Style = ProgressBarStyle.Marquee;
             // start the waiting animation --- END
 
-            string output = await Task<string>.Run(() => runShellProcessUI("C:\\Program Files\\Salesforce CLI\\bin\\sfdx.cmd", "force:auth:web:login"));
-            output += await Task<string>.Run(() => runShellProcessUI("C:\\Program Files\\Salesforce CLI\\bin\\sfdx.cmd", "force:mdapi:deploy -c -d " + "\"" + destinationDir + "\" -u \"sf.marco.zisa.01@workshop.ideas\" --wait 1 --verbose"));
+            string cmdParameters = "/C sfdx force:auth:web:login";
+            string output = await Task<string>.Run(() => runShellProcessUI("cmd.exe", cmdParameters));
+            cmdParameters = "/C sfdx force: mdapi: deploy -c -d " + "\"" + destinationDir + "\" -u \"sf.marco.zisa.01@workshop.ideas\" --wait 1 --verbose";
+            output += await Task<string>.Run(() => runShellProcessUI("cmd.exe", cmdParameters));
 
             // end the waiting animation --- START
             box.btnRunDeploy.Enabled = true;
@@ -1557,7 +1552,7 @@ namespace SalesforceOrgManager
 
             return result;
         }
-        private static Dictionary<string, object> getConfigRecord(string strRecordName, string encryptKey)
+        public static Dictionary<string, object> getConfigRecord(string strRecordName, string encryptKey)
         {
             string encKey = (encryptKey == null) ? "" : encryptKey;
             bool encryptAgain = false;
@@ -1749,15 +1744,19 @@ namespace SalesforceOrgManager
             Dictionary<string, string> configRecord = ((Dictionary<string, object>)jss.DeserializeObject(File.ReadAllText(Application.StartupPath + "\\metadataTranslator.json"))).ToDictionary(k => k.Key, k => k.Value.ToString());
             return configRecord;
         }
-        // Version 1.6 END ---------------
-        public static async void retrieveAllOtherMetadata()
+        public static async void retrieveAllOtherMetadata(List<string> metadataToUseWithoutDefaults)
         {
             // Create destination directory
-            string destinationDir = ShoppingList.projectRootDir + "\\tmpretrieve";
-            Directory.CreateDirectory(destinationDir);
-            string packageSourceFile = Application.StartupPath + "\\packageDelta.xml";
-            string cmdParameters = "force:mdapi:retrieve -r \"" + destinationDir + "\" -k \"" + packageSourceFile + "\" -u " + ShoppingList.orgUserName + " --wait 5 --verbose";
-            await Task<string>.Run(() => runShellProcessUI(@"C:\Users\zisa\AppData\Local\sfdx\client\bin\sfdx.cmd", cmdParameters));
+            string destinationDir = ShoppingList.projectRootDir + "\\cache";
+
+            if (!Directory.Exists(destinationDir))
+            {
+                Directory.CreateDirectory(destinationDir);
+            }
+            string packageSourceFile = destinationDir + "\\packageDelta.xml";
+            Program.updateCacheManifest(metadataToUseWithoutDefaults, packageSourceFile);
+            string cmdParameters = "/C sfdx force:mdapi:retrieve -r \"" + destinationDir + "\" -k \"" + packageSourceFile + "\" -u " + ShoppingList.orgUserName + " --wait 5 --verbose";
+            await Task<string>.Run(() => runShellProcessUI("cmd.exe", cmdParameters));
         }
         public static List<string> getMetadataToUseWithoutDefaults()
         {
@@ -1772,6 +1771,40 @@ namespace SalesforceOrgManager
             };
             return ShoppingList.metadataToUse.Except(toRemove).ToList();
         }
+        private static void updateCacheManifest(List<string> metadataToUseWithoutDefaults, string packageSourceFile)
+        {
+            string xmlContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+            xmlContent += "\n<Package xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
+            xmlContent += "\n\t<version>45.0</version>";
+            xmlContent += "</Package>";
+            File.WriteAllText(packageSourceFile, xmlContent);
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(packageSourceFile);
+
+            foreach (string key in metadataToUseWithoutDefaults)
+            {
+                XmlNode generic = xmlDocument.CreateNode(XmlNodeType.Element, "types", "");
+                XmlNode genericRoot = xmlDocument.DocumentElement.AppendChild(generic);
+                List<string> genericItemNames = new List<string>();
+                
+                XmlNode nodeMembers = xmlDocument.CreateNode(XmlNodeType.Element, "members", "");
+                nodeMembers.InnerText = "*";
+                genericRoot.AppendChild(nodeMembers);
+                
+                XmlNode genericNodeName = xmlDocument.CreateNode(XmlNodeType.Element, "name", "");
+                genericNodeName.InnerText = key;
+                genericRoot.AppendChild(genericNodeName);
+            }
+            // Save changes to manifest file
+            xmlDocument.InnerXml = xmlDocument.InnerXml.Replace(" xmlns=\"\"", "");
+            using (var writer = new XmlTextWriter(packageSourceFile, new UTF8Encoding(false)))
+            {
+                writer.Formatting = Formatting.Indented;
+                xmlDocument.Save(writer);
+            }
+        }
+        // Version 1.6 END ---------------
         //--------- GENERAL UTILITY METHODS -- END ----
     }
 }

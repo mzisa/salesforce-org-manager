@@ -26,7 +26,6 @@ namespace SalesforceOrgManager.View
                 select x;
 
             lstBoxLeft.Items.AddRange(metadataToKeep.ToArray());
-            chkUseCache.Checked = ShoppingList.useCache;
         }
         private void btnLeftToRight_Click(object sender, EventArgs e)
         {
@@ -54,10 +53,8 @@ namespace SalesforceOrgManager.View
         {
             Dictionary<string, object> metadataToUse = new Dictionary<string, object>();
             metadataToUse.Add("metadataToUse", lstBoxRight.Items.OfType<string>().ToList());
-            metadataToUse.Add("useCache", chkUseCache.Checked);
             if (Program.setPrjConfig(metadataToUse)) {
                 ShoppingList.metadataToUse = lstBoxRight.Items.OfType<string>().ToList();
-                ShoppingList.useCache = chkUseCache.Checked;
             }
         }
     }

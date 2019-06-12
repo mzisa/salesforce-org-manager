@@ -24,6 +24,7 @@ namespace SalesforceOrgManager.View
             {
                 chkUseEncryption.Checked = false;
             }
+            //string sfdxPath = ((Dictionary<string, object>)Program.getConfigRecord("orgConfig", null)["sfdxPath"]).Values.ToList()[0].ToString();
         }
 
         // Events management
