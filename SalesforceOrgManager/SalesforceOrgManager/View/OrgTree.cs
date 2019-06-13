@@ -66,7 +66,9 @@ namespace SalesforceOrgManager.View
         }
         private void OrgTree_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ShoppingList.destroy();
             ShoppingList.principalePointer.Show();
+            ShoppingList.principalePointer.picOpenProject_Click(this, null);
         }
         // FORM UI METHODS -- END ----
 

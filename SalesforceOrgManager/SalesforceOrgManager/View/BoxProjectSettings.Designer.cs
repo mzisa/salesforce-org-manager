@@ -35,7 +35,10 @@
             this.lstBoxRight = new System.Windows.Forms.ListBox();
             this.lstBoxLeft = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkShowAllMetadata = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -44,18 +47,18 @@
             this.groupBox1.Controls.Add(this.btnLeftToRight);
             this.groupBox1.Controls.Add(this.lstBoxRight);
             this.groupBox1.Controls.Add(this.lstBoxLeft);
-            this.groupBox1.Location = new System.Drawing.Point(15, 41);
+            this.groupBox1.Location = new System.Drawing.Point(15, 89);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(461, 329);
+            this.groupBox1.Size = new System.Drawing.Size(461, 283);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Metadata to show for this project by these controls";
             // 
             // btnRightToLeft
             // 
-            this.btnRightToLeft.Location = new System.Drawing.Point(191, 179);
+            this.btnRightToLeft.Location = new System.Drawing.Point(191, 129);
             this.btnRightToLeft.Margin = new System.Windows.Forms.Padding(2);
             this.btnRightToLeft.Name = "btnRightToLeft";
             this.btnRightToLeft.Size = new System.Drawing.Size(75, 36);
@@ -66,7 +69,7 @@
             // 
             // btnLeftToRight
             // 
-            this.btnLeftToRight.Location = new System.Drawing.Point(191, 119);
+            this.btnLeftToRight.Location = new System.Drawing.Point(191, 69);
             this.btnLeftToRight.Margin = new System.Windows.Forms.Padding(2);
             this.btnLeftToRight.Name = "btnLeftToRight";
             this.btnLeftToRight.Size = new System.Drawing.Size(75, 36);
@@ -82,7 +85,7 @@
             this.lstBoxRight.Margin = new System.Windows.Forms.Padding(2);
             this.lstBoxRight.Name = "lstBoxRight";
             this.lstBoxRight.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstBoxRight.Size = new System.Drawing.Size(167, 290);
+            this.lstBoxRight.Size = new System.Drawing.Size(167, 238);
             this.lstBoxRight.TabIndex = 9;
             // 
             // lstBoxLeft
@@ -92,7 +95,7 @@
             this.lstBoxLeft.Margin = new System.Windows.Forms.Padding(2);
             this.lstBoxLeft.Name = "lstBoxLeft";
             this.lstBoxLeft.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstBoxLeft.Size = new System.Drawing.Size(167, 290);
+            this.lstBoxLeft.Size = new System.Drawing.Size(167, 238);
             this.lstBoxLeft.TabIndex = 6;
             // 
             // label1
@@ -104,11 +107,33 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Changes are saved automatically after closing this window";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chkShowAllMetadata);
+            this.groupBox2.Location = new System.Drawing.Point(15, 38);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(461, 46);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Cache settings";
+            // 
+            // chkShowAllMetadata
+            // 
+            this.chkShowAllMetadata.AutoSize = true;
+            this.chkShowAllMetadata.Location = new System.Drawing.Point(13, 19);
+            this.chkShowAllMetadata.Name = "chkShowAllMetadata";
+            this.chkShowAllMetadata.Size = new System.Drawing.Size(113, 17);
+            this.chkShowAllMetadata.TabIndex = 0;
+            this.chkShowAllMetadata.Text = "Show all metadata";
+            this.chkShowAllMetadata.UseVisualStyleBackColor = true;
+            this.chkShowAllMetadata.CheckedChanged += new System.EventHandler(this.chkShowAllMetadata_CheckedChanged);
+            // 
             // BoxProjectSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(485, 383);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -116,6 +141,8 @@
             this.Text = "Project settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoxProjectSettings_FormClosing);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,5 +156,7 @@
         private System.Windows.Forms.ListBox lstBoxRight;
         private System.Windows.Forms.ListBox lstBoxLeft;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chkShowAllMetadata;
     }
 }

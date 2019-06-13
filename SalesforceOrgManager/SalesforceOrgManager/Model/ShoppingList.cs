@@ -104,6 +104,9 @@ namespace SalesforceOrgManager.Model
             ShoppingList.toolingService = null;
             ShoppingList.toolingApiLoginUri = null;
             ShoppingList.workspaceDir = null;
+
+            ShoppingList.projectOtherMetadata = new Dictionary<string, List<string>>();
+            ShoppingList.metadataToUse = new List<string>();
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SalesforceOrgManager.View
                 }
             }
         }
-        private void picOpenProject_Click(object sender, EventArgs e)
+        public void picOpenProject_Click(object sender, EventArgs e)
         {
             ShoppingList.currentOperation = (int) ShoppingList.currentOp.Open;
             btnOpenProject.Text = "OPEN";

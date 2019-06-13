@@ -1633,7 +1633,7 @@ namespace SalesforceOrgManager
             }
             return configRecord;
         }
-        private static Dictionary<string, object> getPrjConfig()
+        public static Dictionary<string, object> getPrjConfig()
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
             jss.MaxJsonLength = Int32.MaxValue;
@@ -1760,7 +1760,11 @@ namespace SalesforceOrgManager
         }
         public static List<string> getMetadataToUseWithoutDefaults()
         {
-            List<string> toRemove = new List<string>()
+            return ShoppingList.metadataToUse.Except(getProgrammingMetadata()).ToList();
+        }
+        public static List<string> getProgrammingMetadata()
+        {
+            List<string> programmingMetadata = new List<string>()
             {
                 "ApexClass",
                 "ApexPage",
@@ -1769,7 +1773,11 @@ namespace SalesforceOrgManager
                 "AuraDefinitionBundle",
                 "LightningComponentBundle"
             };
-            return ShoppingList.metadataToUse.Except(toRemove).ToList();
+            return programmingMetadata;
+        }
+        public static List<string> getNonProgrammingMetadata()
+        {
+            return ShoppingList.metadataBible.Except(getProgrammingMetadata()).ToList();
         }
         private static void updateCacheManifest(List<string> metadataToUseWithoutDefaults, string packageSourceFile)
         {
