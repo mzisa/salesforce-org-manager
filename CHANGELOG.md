@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.2] - 2019-07-01
+### Changed
+- Fixed bug while creating a new project
+
 ## [1.7.1] - 2019-06-14
 ### Changed
 - Improved cache management: in project configuration form you can now choose to use only programming metadata (**recommended**) or all metadata

@@ -57,7 +57,7 @@ namespace SalesforceOrgManager
                 "StaticResource",
                 "ApexTrigger",
                 "AuraDefinitionBundle",
-                "LightningItemBundle"
+                "LightningComponentBundle"
             };
             Dictionary<string, object> metadataToUse = new Dictionary<string, object>();
             metadataToUse.Add("metadataToUse", defaultMetadata);
