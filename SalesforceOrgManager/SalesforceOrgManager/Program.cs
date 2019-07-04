@@ -61,6 +61,7 @@ namespace SalesforceOrgManager
             };
             Dictionary<string, object> metadataToUse = new Dictionary<string, object>();
             metadataToUse.Add("metadataToUse", defaultMetadata);
+            metadataToUse.Add("fullCache", false); //...//
             if (Program.setPrjConfig(metadataToUse)) {
                 ShoppingList.metadataToUse = defaultMetadata;
             }
@@ -1755,7 +1756,7 @@ namespace SalesforceOrgManager
             }
             string packageSourceFile = destinationDir + "\\packageDelta.xml";
             Program.updateCacheManifest(metadataToUseWithoutDefaults, packageSourceFile);
-            string cmdParameters = "/C sfdx force:mdapi:retrieve -r \"" + destinationDir + "\" -k \"" + packageSourceFile + "\" -u " + ShoppingList.orgUserName + " --wait 5 --verbose";
+            string cmdParameters = "/C sfdx force:mdapi:retrieve -r \"" + destinationDir + "\" -k \"" + packageSourceFile + "\" -u " + ShoppingList.orgUserName + " --wait 1 --verbose";
             await Task<string>.Run(() => runShellProcessUI("cmd.exe", cmdParameters));
         }
         public static List<string> getMetadataToUseWithoutDefaults()

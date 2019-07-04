@@ -116,6 +116,7 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cache settings";
+            this.groupBox2.Visible = false;
             // 
             // chkShowAllMetadata
             // 
