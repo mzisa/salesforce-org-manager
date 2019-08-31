@@ -16,7 +16,14 @@ namespace SalesforceOrgManager.View
         }
         private void btnCreateItem_Click(object sender, EventArgs e)
         {
-            Program.createApexClassAsync(this);
+            if (String.IsNullOrWhiteSpace(txtItemName.Text))
+            {
+                MessageBox.Show("Name cannnot be empty", "Class item creation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Program.createApexClassAsync(this);
+            }
         }
     }
 }

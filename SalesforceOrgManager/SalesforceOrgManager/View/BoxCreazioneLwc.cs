@@ -18,7 +18,14 @@ namespace SalesforceOrgManager.View
         }
         private void btnCreateItem_Click(object sender, EventArgs e)
         {
-            Program.createLwcAsync(this);
+            if (String.IsNullOrWhiteSpace(txtItemName.Text) || String.IsNullOrWhiteSpace(txtItemDescription.Text))
+            {
+                MessageBox.Show("Name or description cannnot be empty", "Lightning web item creation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            { 
+                Program.createLwcAsync(this);
+            }
         }
         private void btnCancelItem_Click(object sender, EventArgs e)
         {

@@ -16,7 +16,14 @@ namespace SalesforceOrgManager.View
         }
         private void btnCreateItem_Click(object sender, EventArgs e)
         {
-            Program.createApexPageAsync(this);
+            if (String.IsNullOrWhiteSpace(txtItemName.Text))
+            {
+                MessageBox.Show("Name cannnot be empty", "Trigger creation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Program.createApexPageAsync(this);
+            }
         }
     }
 }

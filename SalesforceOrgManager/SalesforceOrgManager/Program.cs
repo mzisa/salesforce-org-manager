@@ -70,7 +70,7 @@ namespace SalesforceOrgManager
         {
             string manifestTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
             manifestTemplate += "<Package xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
-            manifestTemplate += "<version>45.0</version>";
+            manifestTemplate += "<version>46.0</version>";
             manifestTemplate += "</Package>";
 
             File.AppendAllText(ShoppingList.orgManifest, manifestTemplate);
@@ -163,7 +163,7 @@ namespace SalesforceOrgManager
                 Directory.CreateDirectory(ShoppingList.classesRootDir);
                 string classesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 classesMetadataTemplate += "<ApexClass xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
-                classesMetadataTemplate += "<apiVersion>45.0</apiVersion>";
+                classesMetadataTemplate += "<apiVersion>46.0</apiVersion>";
                 classesMetadataTemplate += "<status>Active</status>";
                 classesMetadataTemplate += "</ApexClass>";
 
@@ -186,7 +186,7 @@ namespace SalesforceOrgManager
                 Directory.CreateDirectory(ShoppingList.pagesRootDir);
                 string pagesMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 pagesMetadataTemplate += "<ApexPage xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
-                pagesMetadataTemplate += "<apiVersion>45.0</apiVersion>";
+                pagesMetadataTemplate += "<apiVersion>46.0</apiVersion>";
                 pagesMetadataTemplate += "<availableInTouch>false</availableInTouch>";
                 pagesMetadataTemplate += "<confirmationTokenRequired>false</confirmationTokenRequired>";
                 pagesMetadataTemplate += "<label>XXXPAGEXXX</label>";
@@ -213,7 +213,7 @@ namespace SalesforceOrgManager
                 Directory.CreateDirectory(ShoppingList.triggersRootDir);
                 string triggersMetadataTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
                 triggersMetadataTemplate += "<ApexTrigger xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
-                triggersMetadataTemplate += "<apiVersion>45.0</apiVersion>";
+                triggersMetadataTemplate += "<apiVersion>46.0</apiVersion>";
                 triggersMetadataTemplate += "<status>active</status>";
                 triggersMetadataTemplate += "</ApexTrigger>";
 
@@ -464,7 +464,7 @@ namespace SalesforceOrgManager
             }
             // Version 1.6 END ------------------
 
-            nodeVersion.InnerText = "45.0";
+            nodeVersion.InnerText = "46.0";
             xmlDocument.DocumentElement.AppendChild(nodeVersion);
 
             // Add class nodes
@@ -1050,7 +1050,7 @@ namespace SalesforceOrgManager
 
             LightningComponentBundle metadata = new LightningComponentBundle();
             metadata.masterLabel = bc.txtItemName.Text;
-            metadata.apiVersion = 45.0;
+            metadata.apiVersion = 46.0;
             metadata.description = bc.txtItemDescription.Text;
             metadata.isExposed = true;
             metadata.targets = new string[] {"lightning__AppPage","lightning__HomePage","lightning__RecordPage"};
@@ -1209,7 +1209,7 @@ namespace SalesforceOrgManager
             string retVal = "";
             retVal += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
             retVal += "\t<LightningComponentBundle xmlns=\"http://soap.sforce.com/2006/04/metadata\" fqn=\"" + labelName + "\">\n";
-            retVal += "\t<apiVersion>45.0</apiVersion>\n";
+            retVal += "\t<apiVersion>46.0</apiVersion>\n";
             retVal += "\t<isExposed>true</isExposed>\n";
             retVal += "\t<targets>\n";
             retVal += "\t<target>lightning__AppPage</target>\n";
@@ -1378,7 +1378,7 @@ namespace SalesforceOrgManager
         {
             // Login to tooling API
             SforceServiceService toolingService = new SforceServiceService();
-            toolingService.Url = (isSandbox) ? "https://test.salesforce.com/services/Soap/T/45.0" : "https://login.salesforce.com/services/Soap/T/45.0";
+            toolingService.Url = (isSandbox) ? "https://test.salesforce.com/services/Soap/T/46.0" : "https://login.salesforce.com/services/Soap/T/46.0";
             LoginResult lr = null;
 
             try
@@ -1401,8 +1401,8 @@ namespace SalesforceOrgManager
                 ShoppingList.orgUserName = username;
                 ShoppingList.orgPassword = password;
                 ShoppingList.serverUrl = lr.serverUrl;
-                ShoppingList.restServicesBaseUri = "https://" + new Uri(lr.serverUrl).Host + "/services/data/v45.0/tooling";
-                ShoppingList.toolingApiLoginUri = "https://" + new Uri(lr.serverUrl).Host + "/services/data/v45.0";
+                ShoppingList.restServicesBaseUri = "https://" + new Uri(lr.serverUrl).Host + "/services/data/v46.0/tooling";
+                ShoppingList.toolingApiLoginUri = "https://" + new Uri(lr.serverUrl).Host + "/services/data/v46.0";
                 return true;
             }
             else
@@ -1509,7 +1509,7 @@ namespace SalesforceOrgManager
         {
             // Login to tooling API
             SforceServiceService toolingService = new SforceServiceService();
-            toolingService.Url = "https://login.salesforce.com/services/Soap/T/45.0";
+            toolingService.Url = "https://login.salesforce.com/services/Soap/T/46.0";
             LoginResult lr = toolingService.login(username, password);
 
             if (!String.IsNullOrEmpty(lr.sessionId))
@@ -1526,7 +1526,7 @@ namespace SalesforceOrgManager
         {
             // Retrieve Apex Log ID
             List<string> retValue = new List<string>();
-            string retrieveQuery = "SELECT Id FROM ApexLog WHERE Request='Api' AND Operation = '/services/data/v45.0/tooling/executeAnonymous/' ORDER BY SystemModStamp DESC LIMIT 1";
+            string retrieveQuery = "SELECT Id FROM ApexLog WHERE Request='Api' AND Operation = '/services/data/v46.0/tooling/executeAnonymous/' ORDER BY SystemModStamp DESC LIMIT 1";
             Dictionary<string, object> temp = Program.getApiRecords(false, "/query/?q=" + retrieveQuery);
             object[] records = (object[])temp["records"];
             ShoppingList.testClasses.Clear();
@@ -1784,7 +1784,7 @@ namespace SalesforceOrgManager
         {
             string xmlContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
             xmlContent += "\n<Package xmlns=\"http://soap.sforce.com/2006/04/metadata\">";
-            xmlContent += "\n\t<version>45.0</version>";
+            xmlContent += "\n\t<version>46.0</version>";
             xmlContent += "</Package>";
             File.WriteAllText(packageSourceFile, xmlContent);
 

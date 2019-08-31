@@ -81,7 +81,7 @@
             // 
             // btnCancelItem
             // 
-            this.btnCancelItem.Location = new System.Drawing.Point(222, 299);
+            this.btnCancelItem.Location = new System.Drawing.Point(237, 299);
             this.btnCancelItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelItem.Name = "btnCancelItem";
             this.btnCancelItem.Size = new System.Drawing.Size(209, 59);
@@ -97,7 +97,7 @@
             this.txtLog.Margin = new System.Windows.Forms.Padding(2);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(422, 71);
+            this.txtLog.Size = new System.Drawing.Size(438, 71);
             this.txtLog.TabIndex = 12;
             // 
             // label2
@@ -214,10 +214,11 @@
             "42",
             "43",
             "44",
-            "45"});
+            "45",
+            "46"});
             this.cmbVersions.Location = new System.Drawing.Point(8, 263);
             this.cmbVersions.Name = "cmbVersions";
-            this.cmbVersions.Size = new System.Drawing.Size(408, 28);
+            this.cmbVersions.Size = new System.Drawing.Size(438, 28);
             this.cmbVersions.TabIndex = 9;
             this.cmbVersions.Text = "Version...";
             // 
@@ -225,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 452);
+            this.ClientSize = new System.Drawing.Size(455, 451);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbVersions);
             this.Controls.Add(this.groupBoxBundleType);

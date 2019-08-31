@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.4] - 2019-08-31
+### Changed
+- Added support for api version 46
+- All metadata are now created with api version 46 by default
+- Lightning components version is set to 46 in the creation form but can be changed to a lower one
+- Fixed: It was possible to run the creation of: Classes, Visualforce pages, Lightning components, LWC, Static resources and Triggers with empty name or description
+- In Lightning items creation form the options CONTROLLER, HELPER, STYLE are now selected by default since most of the components are created with this configuration
+
+
 ## [1.7.3] - 2019-07-04
 ### Changed
 - All metadata project configuration has been removed for the time being for troubles while working on developer orgs
